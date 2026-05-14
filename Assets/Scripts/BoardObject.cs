@@ -7,6 +7,9 @@ public abstract class BoardObject : MonoBehaviour
     public Tile currentTile;
     public Player player;
     public BoardSystem board;
+    public bool isHightlight;
+    public Player owner;
+    public Material[] Mat; //0 = default, 1 = hightlighted
 
     public int x
     {
@@ -33,6 +36,28 @@ public abstract class BoardObject : MonoBehaviour
         player.selectedObj = null;
     }
 
-    public abstract void Move();
+    public virtual void Move()
+    {
+
+    }
+    
+    public virtual void Attack()
+    {
+        
+    }
+    
+
+    public virtual void ToggleHightlight()
+    {
+        if (isHightlight)
+        {
+            Material self = GetComponent<MeshRenderer>().material = Mat[0];
+            isHightlight = false;
+        } else
+        {
+            Material self = GetComponent<MeshRenderer>().material = Mat[1];
+            isHightlight = true;
+        }
+    }
 
 }

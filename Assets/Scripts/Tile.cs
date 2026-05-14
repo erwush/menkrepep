@@ -9,6 +9,8 @@ public class Tile : MonoBehaviour
     public GameObject outline;
     public bool isHighlighted;
     public Material[] outMat;
+    public BoardObject activeObj;
+    private bool isHover;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -22,9 +24,10 @@ public class Tile : MonoBehaviour
         if (isHighlighted) outline.SetActive(true);
         else outline.SetActive(false);
 
-        if (player.isMoving) outline.GetComponent<Renderer>().material = outMat[1];
+        if (player.actState == ActionState.Move && !isHover) outline.GetComponent<Renderer>().material = outMat[1];
+        else if(player.actState == ActionState.Attack && !isHover) outline.GetComponent<Renderer>().material = outMat[2];
         else outline.GetComponent<Renderer>().material = outMat[0];
-        
+
     }
 
     public void Setup(int x, int y)
@@ -35,27 +38,41 @@ public class Tile : MonoBehaviour
 
     public void TileSelect()
     {
-        if (!isOccupied && player.selectedObj != null && !player.isMoving)
+        if (player.actState == ActionState.Move)
         {
-            GameObject obj = Instantiate(player.selectedObj, new Vector3(transform.position.x, transform.position.y + 1.5f, transform.position.z), Quaternion.identity);
-            Zombie zombie = obj.GetComponent<Zombie>();
-            zombie.currentTile = this;
-            isOccupied = true;
-            player.selectedObj = null;
-        } else if (!isOccupied && player.selectedObj != null && player.isMoving)
+            
+            if (!isOccupied && player.selectedObj != null && player.actState == ActionState.Move)
+            {
+                isOccupied = true;
+                activeObj = player.selectedObj.GetComponent<BoardObject>();
+                player.selectedTile = this;
+                player.selectedObj.GetComponent<BoardObject>().Move();
+            }
+        }
+        else if (player.actState == ActionState.Place)
         {
-            player.selectedTile = this;
-            player.selectedObj.GetComponent<BoardObject>().Move();
+            if (!isOccupied && player.selectedObj != null && player.actState == ActionState.Place)
+            {
+                GameObject obj = Instantiate(player.selectedObj, new Vector3(transform.position.x, transform.position.y + 1.5f, transform.position.z), Quaternion.identity);
+                Zombie zombie = obj.GetComponent<Zombie>();
+                zombie.currentTile = this;
+                isOccupied = true;
+                activeObj = obj.GetComponent<BoardObject>();
+                player.selectedObj = null;
+                player.ChangeState("Idle");
+            }
         }
     }
 
     public void HoverEnter()
     {
-        if(!player.isMoving) isHighlighted = true;
+        isHover = true;
+        if (!player.actState.Equals(ActionState.Move) && player.actState != ActionState.Attack && !isOccupied) isHighlighted = true;
     }
 
     public void HoverExit()
     {
-        if(!player.isMoving) isHighlighted = false;
+        isHover = false;
+        if (!player.actState.Equals(ActionState.Move) && player.actState != ActionState.Attack) isHighlighted = false;
     }
 }

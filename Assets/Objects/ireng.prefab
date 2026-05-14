@@ -131,7 +131,9 @@ MonoBehaviour:
   isHighlighted: 0
   outMat:
   - {fileID: 2100000, guid: e20cbcd3b917eda4481316d5b616d2fc, type: 2}
+  - {fileID: 2100000, guid: d98e9937444c9bf47929424fd12d368c, type: 2}
   - {fileID: 2100000, guid: 5bcdf64bc297aff46975e695324f889d, type: 2}
+  activeObj: {fileID: 0}
 --- !u!114 &3416480412313841845
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -20,6 +20,7 @@ public class Inventory : MonoBehaviour
     {
         if(player.selectedObj != null && player.activeUnits.Contains(player.selectedObj)) player.selectedObj.GetComponent<BoardObject>().UnselectThis();
         player.selectedObj = obj;
+        player.ChangeState("Place");
         
     }
 }
