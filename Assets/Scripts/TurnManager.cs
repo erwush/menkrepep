@@ -6,12 +6,14 @@ public class TurnManager : MonoBehaviour
     public Player[] players;
     public Player activePlayer;
     public int currentIndex;
+    public BoardManager board;
 
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        board = BoardManager.Instance;
         
     }
 
@@ -25,11 +27,24 @@ public class TurnManager : MonoBehaviour
     {
 
     }
-    
+
     public void NextTurn()
     {
         currentIndex++;
         if (currentIndex >= players.Length) currentIndex = 0;
+        foreach(var player in players)
+        {
+            player.ChangeState("Idle");
+            player.selectedObj = null;
+            player.selectedTile = null;  
+        };
+        
         activePlayer = players[currentIndex];
+        foreach (var tile in board.tiles) tile.player = activePlayer;
+    }
+    
+    public void ChangeState(string stateName) 
+    {
+        activePlayer.ChangeState(stateName);
     }
 }

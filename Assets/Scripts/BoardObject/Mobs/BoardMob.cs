@@ -18,4 +18,9 @@ public abstract class BoardMob : BoardObject
         if (hp < 0) hp = 0;
     }
 
+        public virtual void Attack(BoardMob target)
+    {
+        
+    }
+
 }

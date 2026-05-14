@@ -126,8 +126,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tile: {fileID: 0}
   currentTile: {fileID: 0}
-  player: {fileID: 0}
   board: {fileID: 0}
+  isHightlight: 0
+  owner: {fileID: 0}
+  Mat:
+  - {fileID: 2100000, guid: 03b0d9705d3c3e94981ab07ba3ed1ecd, type: 2}
+  - {fileID: 2100000, guid: 5bcdd2dc2a40a684ba9154649c3e04bd, type: 2}
+  hp: 20
   maxHp: 20
   atk: 2
   validTiles: []

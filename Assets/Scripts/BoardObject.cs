@@ -5,8 +5,7 @@ public abstract class BoardObject : MonoBehaviour
 
     public Tile tile;
     public Tile currentTile;
-    public Player player;
-    public BoardSystem board;
+    public BoardManager board;
     public bool isHightlight;
     public Player owner;
     public Material[] Mat; //0 = default, 1 = hightlighted
@@ -28,12 +27,12 @@ public abstract class BoardObject : MonoBehaviour
 
     public virtual void SelectThis()
     {
-        player.selectedObj = gameObject;
+        owner.selectedObj = gameObject;
     }
 
     public virtual void UnselectThis()
     {
-        player.selectedObj = null;
+        owner.selectedObj = null;
     }
 
     public virtual void Move()
@@ -41,10 +40,7 @@ public abstract class BoardObject : MonoBehaviour
 
     }
     
-    public virtual void Attack()
-    {
-        
-    }
+
     
 
     public virtual void ToggleHightlight()

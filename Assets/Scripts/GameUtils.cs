@@ -4,8 +4,9 @@ using System.Collections.Generic;
 
 public static class GameUtils
 {
-    public static List<Tile> GetValidTiles(BoardSystem board, Tile currentTile, Vector2Int[] directions)
+    public static List<Tile> GetValidTiles(Tile currentTile, Vector2Int[] directions)
     {
+        BoardManager board = BoardManager.Instance;
         List<Tile> validTiles = new List<Tile>();
 
         foreach (var dir in directions)
@@ -25,8 +26,9 @@ public static class GameUtils
         return validTiles;
     }
 
-    public static List<Tile> GetValidTargets(BoardSystem board, Tile currentTile, Vector2Int[] directions)
+    public static List<Tile> GetValidTargets(Tile currentTile, Vector2Int[] directions)
     {
+        BoardManager board = BoardManager.Instance;
         List<Tile> validTiles = new List<Tile>();
 
         foreach (var dir in directions)

@@ -28,76 +28,95 @@ public class Zombie : BoardMob
     };
 
     public List<Tile> validTiles = new List<Tile>();
+    public List<BoardObject> validTarget = new List<BoardObject>();
+    private TurnManager turn = TurnManager.Instance;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        board = GameObject.FindWithTag("System").GetComponent<BoardSystem>();
-        player = GameObject.FindWithTag("Player").GetComponent<Player>();
-        player.activeUnits.Add(this.gameObject);
-        
+        board = BoardManager.Instance;
+        owner = TurnManager.Instance.activePlayer;
+        owner.activeUnits.Add(this.gameObject);
+
+
 
     }
     public override void Move()
     {
-        if (validTiles.Count > 0 && validTiles.Contains(player.selectedTile))
+        if (validTiles.Count > 0 && validTiles.Contains(owner.selectedTile))
         {
             foreach (var dir in moveDir)
             {
                 board.tiles[currentTile.x + dir.x, currentTile.y + dir.y].isHighlighted = false;
             }
             currentTile.isOccupied = false;
-            player.selectedTile.isOccupied = true;
-            player.ChangeState("Idle");
-            transform.position = new Vector3(player.selectedTile.transform.position.x, player.selectedTile.transform.position.y + 1.5f, player.selectedTile.transform.position.z);
-            currentTile = player.selectedTile;
-            player.selectedTile = null;
+            owner.selectedTile.isOccupied = true;
+            owner.ChangeState("Idle");
+            transform.position = new Vector3(owner.selectedTile.transform.position.x, owner.selectedTile.transform.position.y + 1.5f, owner.selectedTile.transform.position.z);
+            currentTile = owner.selectedTile;
+            owner.selectedTile = null;
             ResetTiles();
         }
     }
 
-    public override void Attack()
+    public override void Attack(BoardMob target)
     {
-        if(validTiles.Count > 0 && validTiles.Contains(player.selectedTile))
+
+        if (validTarget.Contains(target))
         {
-            BoardMob target = player.selectedTile.activeObj.GetComponent<BoardMob>();
+            
             target.ChangeHealth(-atk);
 
-            player.ChangeState("Idle");
+            owner.ChangeState("Idle");
 
-            player.selectedTile = null;
+            owner.selectedTile = null;
             ResetTiles();
         }
+        
     }
 
 
     public override void SelectThis()
     {
+     
         ResetTiles();
-        if (player.actState == ActionState.Move)
+        if (turn.activePlayer == owner)
         {
             
-            if (player.selectedObj != gameObject && player.activeUnits.Contains(player.selectedObj)) player.selectedObj.GetComponent<BoardObject>().UnselectThis();
-            player.selectedObj = gameObject;
-            validTiles = Utils.GetValidTiles(board, currentTile, moveDir);
+            if (owner.actState == ActionState.Move)
+            {
 
-        }
-        else if (player.actState == ActionState.Attack)
+                if (owner.selectedObj != gameObject && owner.activeUnits.Contains(owner.selectedObj)) owner.selectedObj.GetComponent<BoardObject>().UnselectThis();
+                owner.selectedObj = gameObject;
+                validTiles = Utils.GetValidTiles(currentTile, moveDir);
+
+            }
+            else if (owner.actState == ActionState.Attack)
+            {
+                if (owner.selectedObj != gameObject && owner.activeUnits.Contains(owner.selectedObj)) owner.selectedObj.GetComponent<BoardObject>().UnselectThis();
+                owner.selectedObj = gameObject;
+                validTiles = Utils.GetValidTargets(currentTile, atkDir);
+                foreach(var tile in validTiles) if(tile.isOccupied) validTarget.Add(tile.activeObj);
+
+            }
+        } else
         {
-            if (player.selectedObj != gameObject && player.activeUnits.Contains(player.selectedObj)) player.selectedObj.GetComponent<BoardObject>().UnselectThis();
-            player.selectedObj = gameObject;
-            validTiles = Utils.GetValidTargets(board, currentTile, atkDir);
-
+            
+            if(turn.activePlayer.actState == ActionState.Attack && turn.activePlayer.selectedObj != null)
+            {
+      
+                turn.activePlayer.selectedObj.GetComponent<Zombie>().Attack(this);
+            }
         }
 
     }
-    
+
     public void ResetTiles()
     {
         foreach (var tile in validTiles)
         {
             tile.isHighlighted = false;
-            if(player.prevState == ActionState.Attack) if(tile.isOccupied && tile.activeObj.isHightlight) tile.activeObj.ToggleHightlight();
+            if (owner.prevState == ActionState.Attack) if (tile.isOccupied && tile.activeObj.isHightlight) tile.activeObj.ToggleHightlight();
         }
         validTiles.Clear();
 
@@ -107,11 +126,11 @@ public class Zombie : BoardMob
         foreach (var tile in validTiles)
         {
             tile.isHighlighted = false;
-            if (player.actState == ActionState.Attack) if (tile.isOccupied) tile.activeObj.ToggleHightlight();
+            if (owner.actState == ActionState.Attack) if (tile.isOccupied) tile.activeObj.ToggleHightlight();
         }
         ResetTiles();
-        player.selectedObj = null;
-        
+        owner.selectedObj = null;
+
     }
 
 

@@ -1,8 +1,9 @@
 using UnityEngine;
 
-public class BoardSystem : MonoBehaviour
+public class BoardManager : MonoBehaviour
 {
 
+    public static BoardManager Instance;    
     public int width;
     public int height;
 
@@ -20,6 +21,11 @@ public class BoardSystem : MonoBehaviour
     void Update()
     {
 
+    }
+
+    void Awake()
+    {
+        Instance = this;
     }
 
     void CreateBoard()

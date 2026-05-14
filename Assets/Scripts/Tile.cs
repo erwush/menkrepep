@@ -14,7 +14,7 @@ public class Tile : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        player = TurnManager.Instance.activePlayer;
         outline.SetActive(false);
     }
 
@@ -55,6 +55,7 @@ public class Tile : MonoBehaviour
             {
                 GameObject obj = Instantiate(player.selectedObj, new Vector3(transform.position.x, transform.position.y + 1.5f, transform.position.z), Quaternion.identity);
                 Zombie zombie = obj.GetComponent<Zombie>();
+                zombie.owner = player;
                 zombie.currentTile = this;
                 isOccupied = true;
                 activeObj = obj.GetComponent<BoardObject>();
