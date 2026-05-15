@@ -35,13 +35,10 @@ public abstract class BoardObject : MonoBehaviour
         owner.selectedObj = null;
     }
 
-    public virtual void Move()
-    {
 
-    }
-    
 
-    
+
+
 
     public virtual void ToggleHightlight()
     {
@@ -49,11 +46,14 @@ public abstract class BoardObject : MonoBehaviour
         {
             Material self = GetComponent<MeshRenderer>().material = Mat[0];
             isHightlight = false;
-        } else
+        }
+        else
         {
             Material self = GetComponent<MeshRenderer>().material = Mat[1];
             isHightlight = true;
         }
     }
+    
+    
 
 }

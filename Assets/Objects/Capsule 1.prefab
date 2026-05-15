@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3349425115231286542}
   - component: {fileID: 2912481153634171889}
   - component: {fileID: 6019293019989988838}
-  - component: {fileID: 4485452157469816375}
+  - component: {fileID: 1978170597405829655}
   - component: {fileID: 4391234817484042943}
   m_Layer: 0
   m_Name: Capsule 1
@@ -112,7 +112,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4485452157469816375
+--- !u!114 &1978170597405829655
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2454648222406771679}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86285d45a852df0449727d0cd20d1765, type: 3}
+  m_Script: {fileID: 11500000, guid: cebd3c2c94d4ab140b9f5a0c2f592f85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tile: {fileID: 0}
@@ -132,10 +132,12 @@ MonoBehaviour:
   Mat:
   - {fileID: 2100000, guid: 03b0d9705d3c3e94981ab07ba3ed1ecd, type: 2}
   - {fileID: 2100000, guid: 5bcdd2dc2a40a684ba9154649c3e04bd, type: 2}
+  data: {fileID: 11400000, guid: 93b0b21a547e1a94295824bcea26ac64, type: 2}
   hp: 20
-  maxHp: 20
-  atk: 2
+  atk: 1
+  atkRange: 0
   validTiles: []
+  validTarget: []
 --- !u!114 &4391234817484042943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,8 +155,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4485452157469816375}
-          m_TargetAssemblyTypeName: Zombie, Assembly-CSharp
+        - m_Target: {fileID: 1978170597405829655}
+          m_TargetAssemblyTypeName: Skeleton, Assembly-CSharp
           m_MethodName: SelectThis
           m_Mode: 1
           m_Arguments:

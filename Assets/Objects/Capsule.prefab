@@ -132,10 +132,12 @@ MonoBehaviour:
   Mat:
   - {fileID: 2100000, guid: 9637a2168a543384a9de3eea3c5630a1, type: 2}
   - {fileID: 2100000, guid: 5bcdd2dc2a40a684ba9154649c3e04bd, type: 2}
+  data: {fileID: 11400000, guid: f623d062a527dc949b18d5b09298f34f, type: 2}
   hp: 20
-  maxHp: 20
   atk: 2
+  atkRange: 0
   validTiles: []
+  validTarget: []
 --- !u!114 &4391234817484042943
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -46,7 +46,7 @@ public class Tile : MonoBehaviour
                 isOccupied = true;
                 activeObj = player.selectedObj.GetComponent<BoardObject>();
                 player.selectedTile = this;
-                player.selectedObj.GetComponent<BoardObject>().Move();
+                player.selectedObj.GetComponent<BoardMob>().Move();
             }
         }
         else if (player.actState == ActionState.Place)
@@ -54,9 +54,9 @@ public class Tile : MonoBehaviour
             if (!isOccupied && player.selectedObj != null && player.actState == ActionState.Place)
             {
                 GameObject obj = Instantiate(player.selectedObj, new Vector3(transform.position.x, transform.position.y + 1.5f, transform.position.z), Quaternion.identity);
-                Zombie zombie = obj.GetComponent<Zombie>();
-                zombie.owner = player;
-                zombie.currentTile = this;
+                BoardMob mob = obj.GetComponent<BoardMob>();
+                mob.owner = player;
+                mob.currentTile = this;
                 isOccupied = true;
                 activeObj = obj.GetComponent<BoardObject>();
                 player.selectedObj = null;
