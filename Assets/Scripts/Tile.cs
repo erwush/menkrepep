@@ -56,15 +56,19 @@ public class Tile : MonoBehaviour
         {
             if (!isOccupied && player.selectedObj != null && player.actState == ActionState.Place)
             {
-                GameObject obj = Instantiate(player.selectedObj, new Vector3(transform.position.x, transform.position.y + 1.5f, transform.position.z), Quaternion.identity);
-                BoardObject unit = obj.GetComponent<BoardObject>();
-                unit.owner = player;
-                unit.currentTile = this;
-                isOccupied = true;
-                activeObj = obj.GetComponent<BoardObject>();
-                player.activeUnits.Add(obj);
-                player.selectedObj = null;
-                player.EndAction();
+                if (player.star >= player.selectedObj.GetComponent<BoardObject>().cost)
+                {
+                    GameObject obj = Instantiate(player.selectedObj, new Vector3(transform.position.x, transform.position.y + 1.5f, transform.position.z), Quaternion.identity);
+                    BoardObject unit = obj.GetComponent<BoardObject>();
+                    unit.owner = player;
+                    player.star -= player.selectedObj.GetComponent<BoardObject>().cost;
+                    unit.currentTile = this;
+                    isOccupied = true;
+                    activeObj = obj.GetComponent<BoardObject>();
+                    player.activeUnits.Add(obj);
+                    player.selectedObj = null;
+                    player.EndAction();
+                }
             }
         }
     }

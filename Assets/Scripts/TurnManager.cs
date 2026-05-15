@@ -14,6 +14,7 @@ public class TurnManager : MonoBehaviour
     void Start()
     {
         board = BoardManager.Instance;
+        foreach(var player in players) player.star = 6;
         
     }
 
@@ -32,14 +33,17 @@ public class TurnManager : MonoBehaviour
     {
         currentIndex++;
         if (currentIndex >= players.Length) currentIndex = 0;
+        foreach(var unit in activePlayer.activeUnits) unit.GetComponent<BoardObject>().OnTurnEnd();
         foreach(var player in players)
         {
+            player.star++;
             player.EndAction();
             player.selectedObj = null;
             player.selectedTile = null;  
         };
-        
+
         activePlayer = players[currentIndex];
+        foreach(var unit in activePlayer.activeUnits) unit.GetComponent<BoardObject>().OnTurnStart();
         foreach (var tile in board.tiles) tile.player = activePlayer;
     }
     

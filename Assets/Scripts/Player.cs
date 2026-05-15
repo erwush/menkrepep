@@ -58,7 +58,7 @@ public class Player : MonoBehaviour
         {
             unit.GetComponent<BoardObject>().UnselectThis();
 
-            if (unit.GetComponent<BoardObject>().type == UnitType.Block) unit.GetComponent<BoardObject>().OnActionEnd();
+            if (unit.GetComponent<BoardObject>().type == UnitType.Block) unit.GetComponent<BoardObject>().OnActionDone();
             else if (unit.GetComponent<BoardObject>().type == UnitType.Mob) unit.GetComponent<BoardMob>().Recalculate();
         }
     }

@@ -41,10 +41,57 @@ public abstract class BoardBlock : BoardObject
         }
     }
 
-    // public bool CheckTarget()
+    // public bool TryGetMob(Tile tile, out BoardMob mob)
     // {
+    //     mob = null;
 
+    //     if (!tile.isOccupied)
+    //         return false;
+
+    //     BoardObject unit = tile.activeObj.GetComponent<BoardObject>();
+
+    //     if (unit.owner != owner)
+    //         return false;
+
+    //     mob = unit as BoardMob;
+
+    //     return mob != null;
     // }
+
+    // public bool TryGetBlock(Tile tile, out BoardBlock block)
+    // {
+    //     block = null;
+
+    //     if (!tile.isOccupied)
+    //         return false;
+
+    //     BoardObject unit = tile.activeObj.GetComponent<BoardObject>();
+
+    //     if (unit.owner != owner)
+    //         return false;
+
+    //     block = unit as BoardBlock;
+
+    //     return block != null;
+    // }
+
+    //? t itu intinya kek bebas atau bisa diisi variable sedangkan bagian where T : () itu berarti T harus turunan atau childboardobject
+    //? where semacam pembatas
+    public bool TryGetUnit<T>(Tile tile, out T result) where T : BoardObject
+    {
+        result = null;
+
+        if (!tile.isOccupied)
+            return false;
+
+        BoardObject unit = tile.activeObj;
+
+
+        result = unit as T;
+
+        return result != null;
+    }
+
 
 
 

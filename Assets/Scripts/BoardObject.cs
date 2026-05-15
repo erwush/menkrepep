@@ -5,6 +5,7 @@ public abstract class BoardObject : MonoBehaviour
 
     public Tile tile;
     public Tile currentTile;
+    public int cost;
 
     public bool isHightlight;
     public Player owner;
@@ -75,7 +76,7 @@ public abstract class BoardObject : MonoBehaviour
 
     }
 
-    public virtual void OnActionEnd()
+    public virtual void OnActionDone()
     {
         
     }

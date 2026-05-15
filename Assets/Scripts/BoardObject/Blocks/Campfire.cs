@@ -1,17 +1,10 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class SmithingTable : BoardBlock
+public class Campfire : BoardBlock
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public override void Start()
-    {
-        base.Start();
-        // OnActionEnd();
-
-    }
-
-    public override void OnActionDone()
+    public override void OnTurnStart()
     {
         List<BoardMob> currentTargets = new();
         foreach (var tile in targetTiles)
@@ -20,37 +13,24 @@ public class SmithingTable : BoardBlock
             {
 
                 if (mob.owner != owner) continue;
-
-
-
                 currentTargets.Add(mob);
-
                 if (!targetUnits.Contains(mob))
                 {
                     targetUnits.Add(mob);
-                    mob.bonusAtk += 5;
-                    mob.Recalculate();
-
-                }
+                }       
             }
         }
-
-
         for (int i = targetUnits.Count - 1; i >= 0; i--)
         {
             if (targetUnits[i] is BoardMob mob)
             {
-
                 if (!currentTargets.Contains(mob))
                 {
-                    mob.bonusAtk -= 5;
-
-                    mob.Recalculate();
                     targetUnits.RemoveAt(i);
                 }
             }
 
         }
+        foreach(var mob in currentTargets) mob.ChangeHealth(5);
     }
 }
-

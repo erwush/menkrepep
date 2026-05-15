@@ -5,7 +5,7 @@ public class MobData : ScriptableObject
 {
     public string mobName;
     public float maxHp, atk;
-    public int atkRange, moveRange, cost;
+    public int atkRange, moveRange, cost = 1;
     public Category category;
     public Vector2Int[] moveDir = new Vector2Int[]{
         new (0, 1),   // atas

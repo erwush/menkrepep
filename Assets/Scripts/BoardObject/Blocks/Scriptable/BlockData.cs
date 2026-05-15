@@ -4,7 +4,7 @@ using UnityEngine;
 public class BlockData : ScriptableObject
 {
     public string blockName;
-    public int effectRange, cost;
+    public int effectRange, cost = 1;
 
     public Vector2Int[] effectDir = new Vector2Int[]{
         new (0, 1),   // atas
