@@ -34,7 +34,7 @@ public class TurnManager : MonoBehaviour
         if (currentIndex >= players.Length) currentIndex = 0;
         foreach(var player in players)
         {
-            player.ChangeState("Idle");
+            player.EndAction();
             player.selectedObj = null;
             player.selectedTile = null;  
         };

@@ -6,22 +6,28 @@ using Utils = GameUtils;
 public abstract class BoardMob : BoardObject
 {
     public MobData data;
-    public float hp, atk;
-    public int atkRange;
+    public float hp, bonusAtk, atk, finalAtk;
+    public int atkRange, moveRange;
     public List<Tile> validTiles = new List<Tile>();
     public List<BoardObject> validTarget = new List<BoardObject>();
-    private TurnManager turn = TurnManager.Instance;
+
 
     public virtual void Start()
     {
+        turn = TurnManager.Instance;
         board = BoardManager.Instance;
         owner = TurnManager.Instance.activePlayer;
-        owner.activeUnits.Add(this.gameObject);
+        // owner.activeUnits.Add(this.gameObject);
         hp = data.maxHp;
         atk = data.atk;
         atkRange = data.atkRange;
+        moveRange = data.moveRange;
+        type = UnitType.Mob;
+        // owner.EndAction();
+        Recalculate();
 
     }
+    
 
     public virtual void ChangeHealth(float amount)
     {
@@ -30,31 +36,45 @@ public abstract class BoardMob : BoardObject
         if (hp < 0) hp = 0;
     }
 
+    public virtual void Recalculate()
+    {
+        finalAtk = atk + bonusAtk;
+    }
+    
+    public void ResetStats()
+    {
+        
+    }
+
     public virtual void Attack(BoardMob target)
     {
         if (validTarget.Contains(target))
         {
 
-            target.ChangeHealth(-atk);
+            target.ChangeHealth(-finalAtk);
 
-            owner.ChangeState("Idle");
+            owner.EndAction();
 
             owner.selectedTile = null;
             ResetTiles();
         }
     }
 
+    
     public virtual void Move()
     {
+
         if (validTiles.Count > 0 && validTiles.Contains(owner.selectedTile))
         {
-            foreach (var dir in data.moveDir)
+
+            foreach (var tile in validTiles)
             {
-                board.tiles[currentTile.x + dir.x, currentTile.y + dir.y].isHighlighted = false;
+                board.tiles[tile.x, tile.y].isHighlighted = false;
             }
             currentTile.isOccupied = false;
+            currentTile.activeObj = null;
             owner.selectedTile.isOccupied = true;
-            owner.ChangeState("Idle");
+            owner.EndAction();
             transform.position = new Vector3(owner.selectedTile.transform.position.x, owner.selectedTile.transform.position.y + 1.5f, owner.selectedTile.transform.position.z);
             currentTile = owner.selectedTile;
             owner.selectedTile = null;
@@ -62,6 +82,8 @@ public abstract class BoardMob : BoardObject
         }
     }
 
+
+    //? > Ketika state berubah tile atau unit yang kehighlight akan direset dan mengikuti kondisi
     public void ResetTiles()
     {
         foreach (var tile in validTiles)
@@ -69,38 +91,36 @@ public abstract class BoardMob : BoardObject
             tile.isHighlighted = false;
             if (owner.prevState == ActionState.Attack) if (tile.isOccupied && tile.activeObj.isHightlight) tile.activeObj.ToggleHightlight();
         }
-        if(validTarget.Count > 0) validTarget.Clear();
+        if (validTarget.Count > 0) validTarget.Clear();
         validTiles.Clear();
 
     }
+    
 
     public override void SelectThis()
     {
-
+        
         ResetTiles();
         if (turn.activePlayer == owner)
         {
-
             if (owner.actState == ActionState.Move)
             {
-
                 if (owner.selectedObj != gameObject && owner.activeUnits.Contains(owner.selectedObj)) owner.selectedObj.GetComponent<BoardObject>().UnselectThis();
                 owner.selectedObj = gameObject;
-                validTiles = Utils.GetValidTiles(currentTile, data.moveDir);
+                validTiles = Utils.GetValidTiles(currentTile, data.moveDir, moveRange, true);
 
             }
             else if (owner.actState == ActionState.Attack)
             {
                 if (owner.selectedObj != gameObject && owner.activeUnits.Contains(owner.selectedObj)) owner.selectedObj.GetComponent<BoardObject>().UnselectThis();
                 owner.selectedObj = gameObject;
-                validTiles = Utils.GetValidTargets(currentTile, data.atkDir, data.atkRange);
+                validTiles = Utils.GetValidTargets(currentTile, data.atkDir, atkRange, true);
                 foreach (var tile in validTiles) if (tile.isOccupied) validTarget.Add(tile.activeObj);
-
             }
         }
         else
         {
-
+            //? kalau unitnya beda owner dengna turn sekarang berarti pengen nyerang dan bukan select
             if (turn.activePlayer.actState == ActionState.Attack && turn.activePlayer.selectedObj != null)
             {
 

@@ -5,7 +5,8 @@ public class MobData : ScriptableObject
 {
     public string mobName;
     public float maxHp, atk;
-    public int atkRange;
+    public int atkRange, moveRange, cost;
+    public Category category;
     public Vector2Int[] moveDir = new Vector2Int[]{
         new (0, 1),   // atas
         new (0, -1),  // bawah
@@ -34,4 +35,16 @@ public class MobData : ScriptableObject
         mobName = name;
     }
 
+
+
+}
+
+public enum Category
+{
+    Undead,
+    Illager,
+    Nether,
+    Aquatic,
+    Animal,
+    Alien
 }

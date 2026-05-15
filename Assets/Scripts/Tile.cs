@@ -25,7 +25,7 @@ public class Tile : MonoBehaviour
         else outline.SetActive(false);
 
         if (player.actState == ActionState.Move && !isHover) outline.GetComponent<Renderer>().material = outMat[1];
-        else if(player.actState == ActionState.Attack && !isHover) outline.GetComponent<Renderer>().material = outMat[2];
+        else if (player.actState == ActionState.Attack && !isHover) outline.GetComponent<Renderer>().material = outMat[2];
         else outline.GetComponent<Renderer>().material = outMat[0];
 
     }
@@ -40,13 +40,16 @@ public class Tile : MonoBehaviour
     {
         if (player.actState == ActionState.Move)
         {
-            
+
             if (!isOccupied && player.selectedObj != null && player.actState == ActionState.Move)
             {
-                isOccupied = true;
-                activeObj = player.selectedObj.GetComponent<BoardObject>();
-                player.selectedTile = this;
-                player.selectedObj.GetComponent<BoardMob>().Move();
+                if (player.selectedObj.GetComponent<BoardObject>().type == UnitType.Mob)
+                {
+                    isOccupied = true;
+                    activeObj = player.selectedObj.GetComponent<BoardObject>();
+                    player.selectedTile = this;
+                    player.selectedObj.GetComponent<BoardMob>().Move();
+                }
             }
         }
         else if (player.actState == ActionState.Place)
@@ -54,13 +57,14 @@ public class Tile : MonoBehaviour
             if (!isOccupied && player.selectedObj != null && player.actState == ActionState.Place)
             {
                 GameObject obj = Instantiate(player.selectedObj, new Vector3(transform.position.x, transform.position.y + 1.5f, transform.position.z), Quaternion.identity);
-                BoardMob mob = obj.GetComponent<BoardMob>();
-                mob.owner = player;
-                mob.currentTile = this;
+                BoardObject unit = obj.GetComponent<BoardObject>();
+                unit.owner = player;
+                unit.currentTile = this;
                 isOccupied = true;
                 activeObj = obj.GetComponent<BoardObject>();
+                player.activeUnits.Add(obj);
                 player.selectedObj = null;
-                player.ChangeState("Idle");
+                player.EndAction();
             }
         }
     }

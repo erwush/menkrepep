@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI; 
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public ActionState actState;
     public ActionState prevState;
     public Button[] actBtn;
+    public int star;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -31,7 +32,7 @@ public class Player : MonoBehaviour
         {
             prevState = actState;
             actState = newState;
-            if(activeUnits.Contains(selectedObj) && (prevState == ActionState.Move || prevState == ActionState.Attack) ) selectedObj.GetComponent<BoardObject>().SelectThis();
+            if (activeUnits.Contains(selectedObj) && (prevState == ActionState.Move || prevState == ActionState.Attack)) selectedObj.GetComponent<BoardObject>().SelectThis();
             for (int i = 0; i < actBtn.Length; i++)
             {
                 if (actBtn[i].name.Equals(actState.ToString()))
@@ -47,6 +48,18 @@ public class Player : MonoBehaviour
                     }
                 }
             }
+        }
+    }
+
+    public void EndAction()
+    {
+        ChangeState("Idle");
+        foreach (var unit in activeUnits)
+        {
+            unit.GetComponent<BoardObject>().UnselectThis();
+
+            if (unit.GetComponent<BoardObject>().type == UnitType.Block) unit.GetComponent<BoardObject>().OnActionEnd();
+            else if (unit.GetComponent<BoardObject>().type == UnitType.Mob) unit.GetComponent<BoardMob>().Recalculate();
         }
     }
 }

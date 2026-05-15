@@ -50,13 +50,13 @@ public class Skeleton : BoardMob
             int dice = Random.Range(1, 10);
             if (dice == 1 || dice == 9)
             {
-                target.ChangeHealth(-atk * 3);
+                target.ChangeHealth(-finalAtk * 3);
             }
             else
             {
-                target.ChangeHealth(-atk);
+                target.ChangeHealth(-finalAtk);
             }
-            owner.ChangeState("Idle");
+            owner.EndAction();
 
             owner.selectedTile = null;
             ResetTiles();

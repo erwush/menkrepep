@@ -16,6 +16,9 @@ MonoBehaviour:
   maxHp: 20
   atk: 5
   atkRange: 1
+  moveRange: 1
+  cost: 0
+  category: 0
   moveDir:
   - {x: 0, y: 1}
   - {x: 0, y: -1}

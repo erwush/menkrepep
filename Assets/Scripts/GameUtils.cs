@@ -4,46 +4,53 @@ using System.Collections.Generic;
 
 public static class GameUtils
 {
-    public static List<Tile> GetValidTiles(Tile currentTile, Vector2Int[] directions)
+    public static List<Tile> GetValidTiles(Tile currentTile, Vector2Int[] directions, int range, bool hightlight, bool ignoreOccupied = false)
     {
         BoardManager board = BoardManager.Instance;
         List<Tile> validTiles = new List<Tile>();
 
         foreach (var dir in directions)
         {
-            Tile tile = board.GetTile(
-                currentTile.x + dir.x,
-                currentTile.y + dir.y
-            );
-
-            if (tile != null)
+   
+             //? biar scalable sama range dan gk perlu nambahin satu2 di array
+            for (int i = 1; i <= range; i++)
             {
-                validTiles.Add(tile);
-                tile.isHighlighted = true;
+                
+                Tile tile = board.GetTile(
+                currentTile.x + dir.x * i,
+                currentTile.y + dir.y * i
+                );
+
+                if (tile != null && (!tile.isOccupied || ignoreOccupied))
+                {
+                    validTiles.Add(tile);
+                    if(hightlight)tile.isHighlighted = true;
+                }
             }
         }
 
         return validTiles;
     }
 
-    public static List<Tile> GetValidTargets(Tile currentTile, Vector2Int[] directions, int range)
+    public static List<Tile> GetValidTargets(Tile currentTile, Vector2Int[] directions, int range, bool highlight)
     {
         BoardManager board = BoardManager.Instance;
         List<Tile> validTiles = new List<Tile>();
 
         foreach (var dir in directions)
         {
+            //? biar scalable sama range dan gk perlu nambahin satu2 di array
             for (int i = 1; i <= range; i++)
             {
                 Tile tile = board.GetTile(
-               currentTile.x + dir.x * i,
-               currentTile.y + dir.y * i
-           );
+                currentTile.x + dir.x * i,
+                currentTile.y + dir.y * i
+                );
 
                 if (tile != null)
                 {
                     validTiles.Add(tile);
-                    tile.isHighlighted = true;
+                    if(highlight) tile.isHighlighted = true;
                     if (tile.isOccupied) break;
                 }
 
@@ -53,7 +60,7 @@ public static class GameUtils
 
         foreach (var tile in validTiles)
         {
-            if (tile.isOccupied && !tile.activeObj.isHightlight) tile.activeObj.ToggleHightlight();
+            if (tile.isOccupied && !tile.activeObj.isHightlight && highlight) tile.activeObj.ToggleHightlight();
         }
 
         return validTiles;

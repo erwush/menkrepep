@@ -5,10 +5,13 @@ public abstract class BoardObject : MonoBehaviour
 
     public Tile tile;
     public Tile currentTile;
-    public BoardManager board;
+
     public bool isHightlight;
     public Player owner;
     public Material[] Mat; //0 = default, 1 = hightlighted
+    public BoardManager board;
+    public TurnManager turn;
+    public UnitType type;
 
     public int x
     {
@@ -53,7 +56,36 @@ public abstract class BoardObject : MonoBehaviour
             isHightlight = true;
         }
     }
-    
-    
 
+
+
+    public virtual void ApplyEffect(BoardObject target)
+    {
+
+    }
+
+    //*ON-(CONDITION) EFFECT
+    public virtual void OnTurnEnd()
+    {
+
+    }
+
+    public virtual void OnTurnStart()
+    {
+
+    }
+
+    public virtual void OnActionEnd()
+    {
+        
+    }
+
+
+}
+
+
+public enum UnitType
+{
+    Block,
+    Mob
 }
