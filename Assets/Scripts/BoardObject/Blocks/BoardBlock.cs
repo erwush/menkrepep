@@ -19,7 +19,7 @@ public abstract class BoardBlock : BoardObject
         // owner.activeUnits.Add(this.gameObject);
         turn = TurnManager.Instance;
         owner = TurnManager.Instance.activePlayer;
-        targetTiles = Utils.GetValidTiles(currentTile, data.effectDir, effectRange, false, true);
+        
         type = UnitType.Block;
 
         owner.EndAction();

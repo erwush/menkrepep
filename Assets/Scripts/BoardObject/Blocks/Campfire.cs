@@ -1,8 +1,17 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Utils = GameUtils;
 
 public class Campfire : BoardBlock
 {
+
+    public override void Start()
+    {
+        effectRange = data.effectRange;
+        targetTiles = Utils.GetAreaTiles(currentTile, effectRange, false, true);
+        base.Start();
+
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void OnTurnStart()
     {
@@ -17,7 +26,7 @@ public class Campfire : BoardBlock
                 if (!targetUnits.Contains(mob))
                 {
                     targetUnits.Add(mob);
-                }       
+                }
             }
         }
         for (int i = targetUnits.Count - 1; i >= 0; i--)
@@ -31,6 +40,6 @@ public class Campfire : BoardBlock
             }
 
         }
-        foreach(var mob in currentTargets) mob.ChangeHealth(5);
+        foreach (var mob in currentTargets) mob.ChangeHealth(5);
     }
 }
