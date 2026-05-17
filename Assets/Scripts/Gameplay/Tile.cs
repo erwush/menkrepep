@@ -65,7 +65,7 @@ public class Tile : MonoBehaviour
                     unit.currentTile = this;
                     isOccupied = true;
                     activeObj = obj.GetComponent<BoardObject>();
-                    player.activeUnits.Add(obj);
+                    player.RegisterUnit(obj);
                     player.selectedObj = null;
                     player.EndAction();
                 }

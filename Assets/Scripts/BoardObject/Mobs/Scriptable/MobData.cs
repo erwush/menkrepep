@@ -7,6 +7,7 @@ public class MobData : ScriptableObject
     public float maxHp, atk;
     public int atkRange, moveRange, cost = 1;
     public Category category;
+    public Sprite sprite;
     public Vector2Int[] moveDir = new Vector2Int[]{
         new (0, 1),   // atas
         new (0, -1),  // bawah

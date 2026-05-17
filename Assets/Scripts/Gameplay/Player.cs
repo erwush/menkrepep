@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
     public Inventory inv;
     public GameObject selectedObj;
+    public string playerName;
     public Tile selectedTile;
 
     public List<GameObject> activeUnits;
@@ -13,12 +15,18 @@ public class Player : MonoBehaviour
     public ActionState prevState;
     public Button[] actBtn;
     public int star;
-    public UnitDisplay display;
+    public GameObject displayObj;
+    public GameObject displayParent;
+    public Dictionary<BoardMob, UnitDisplay> displays;
+    public TextMeshProUGUI starText, nameText;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         actState = ActionState.Idle;
         prevState = ActionState.Idle;
+        displays = new Dictionary<BoardMob, UnitDisplay>();
+        RefreshDisplay();
     }
 
     // Update is called once per frame
@@ -52,10 +60,10 @@ public class Player : MonoBehaviour
         }
     }
 
-    
+
     public void EndAction()
     {
-        
+
         ChangeState("Idle");
         foreach (var unit in activeUnits)
         {
@@ -64,8 +72,44 @@ public class Player : MonoBehaviour
             if (unit.GetComponent<BoardObject>().type == UnitType.Block) unit.GetComponent<BoardObject>().OnActionDone();
             else if (unit.GetComponent<BoardObject>().type == UnitType.Mob) unit.GetComponent<BoardMob>().Recalculate();
         }
-        // display.UpdateUI();
-        
+
+        foreach (var player in TurnManager.Instance.players) player.RefreshDisplay();
+
+    }
+
+
+    public void RefreshDisplay()
+    {
+        if (displays.Count > 0)
+        {
+            foreach (var disp in displays)
+            {
+                disp.Value.UpdateUI();
+            }
+        }
+        starText.text = star.ToString();
+        nameText.text = playerName;
+    }
+
+    public void RegisterUnit(GameObject obj)
+    {
+        activeUnits.Add(obj);
+        Debug.Log(obj.name);
+        BoardObject unit = obj.GetComponent<BoardObject>();
+        if (unit is BoardMob mob)
+        {
+            mob.owner = this;
+            mob.Recalculate();
+            UnitDisplay disp = Instantiate(displayObj, displayParent.transform).GetComponent<UnitDisplay>();
+            disp.Setup(mob);
+            displays.Add(mob, disp);
+            disp.UpdateUI();
+        }
+    }
+
+    public void UnregisterUnit(BoardObject obj)
+    {
+
     }
 }
 

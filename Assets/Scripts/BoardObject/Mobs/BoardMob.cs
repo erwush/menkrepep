@@ -38,6 +38,7 @@ public abstract class BoardMob : BoardObject
 
     public virtual void Recalculate()
     {
+        atk = data.atk;
         finalAtk = atk + bonusAtk;
         
     }
