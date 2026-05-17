@@ -7,7 +7,7 @@ public class Campfire : BoardBlock
 
     public override void Start()
     {
-        effectRange = data.effectRange;
+        effectRange = Data.effectRange;
         targetTiles = Utils.GetAreaTiles(currentTile, effectRange, false, true);
         base.Start();
 
@@ -41,5 +41,7 @@ public class Campfire : BoardBlock
 
         }
         foreach (var mob in currentTargets) mob.ChangeHealth(5);
+        base.OnTurnStart();
     }
+    
 }

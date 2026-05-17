@@ -5,23 +5,25 @@ using Utils = GameUtils;
 
 public abstract class BoardMob : BoardObject
 {
-    public MobData data;
+    
     public float hp, bonusAtk, atk, finalAtk;
     public int atkRange, moveRange;
     public List<Tile> validTiles = new List<Tile>();
     public List<BoardObject> validTarget = new List<BoardObject>();
+    public MobData Data => data as MobData;
 
 
     public virtual void Start()
     {
+        cost = Data.cost;
         turn = TurnManager.Instance;
         board = BoardManager.Instance;
         owner = TurnManager.Instance.activePlayer;
         // owner.activeUnits.Add(this.gameObject);
-        hp = data.maxHp;
-        atk = data.atk;
-        atkRange = data.atkRange;
-        moveRange = data.moveRange;
+        hp = Data.maxHp;
+        atk = Data.atk;
+        atkRange = Data.atkRange;
+        moveRange = Data.moveRange;
         type = UnitType.Mob;
         // owner.EndAction();
         Recalculate();
@@ -32,13 +34,13 @@ public abstract class BoardMob : BoardObject
     public virtual void ChangeHealth(float amount)
     {
         hp += amount;
-        if (hp > data.maxHp) hp = data.maxHp;
+        if (hp > Data.maxHp) hp = Data.maxHp;
         if (hp < 0) hp = 0;
     }
 
     public virtual void Recalculate()
     {
-        atk = data.atk;
+        atk = Data.atk;
         finalAtk = atk + bonusAtk;
         
     }
@@ -109,14 +111,14 @@ public abstract class BoardMob : BoardObject
             {
                 if (owner.selectedObj != gameObject && owner.activeUnits.Contains(owner.selectedObj)) owner.selectedObj.GetComponent<BoardObject>().UnselectThis();
                 owner.selectedObj = gameObject;
-                validTiles = Utils.GetValidTiles(currentTile, data.moveDir, moveRange, true);
+                validTiles = Utils.GetValidTiles(currentTile, Data.moveDir, moveRange, true);
 
             }
             else if (owner.actState == ActionState.Attack)
             {
                 if (owner.selectedObj != gameObject && owner.activeUnits.Contains(owner.selectedObj)) owner.selectedObj.GetComponent<BoardObject>().UnselectThis();
                 owner.selectedObj = gameObject;
-                validTiles = Utils.GetValidTargets(currentTile, data.atkDir, atkRange, true);
+                validTiles = Utils.GetValidTargets(currentTile, Data.atkDir, atkRange, true);
                 foreach (var tile in validTiles) if (tile.isOccupied) validTarget.Add(tile.activeObj);
             }
         }

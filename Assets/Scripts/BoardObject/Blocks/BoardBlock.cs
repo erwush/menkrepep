@@ -5,16 +5,18 @@ using Utils = GameUtils;
 public abstract class BoardBlock : BoardObject
 {
 
-    public BlockData data;
+    
     public int effectRange;
     public List<Tile> targetTiles = new();
     public List<BoardObject> targetUnits = new();
+    public BlockData Data => data as BlockData;
 
 
 
     public virtual void Start()
     {
-        effectRange = data.effectRange;
+        cost = Data.cost;
+        effectRange = Data.effectRange;
         board = BoardManager.Instance;
         // owner.activeUnits.Add(this.gameObject);
         turn = TurnManager.Instance;

@@ -1,10 +1,10 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "BlockData", menuName = "Block")]
-public class BlockData : ScriptableObject
+public class BlockData : ObjectData
 {
     public string blockName;
-    public int effectRange, cost = 1;
+    public int effectRange;
 
     public Vector2Int[] effectDir = new Vector2Int[]{
         new (0, 1),   // atas

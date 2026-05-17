@@ -7,8 +7,8 @@ public class SmithingTable : BoardBlock
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
     {
-        effectRange = data.effectRange;
-        targetTiles = Utils.GetValidTiles(currentTile, data.effectDir, effectRange, false, true);
+        effectRange = Data.effectRange;
+        targetTiles = Utils.GetValidTiles(currentTile, Data.effectDir, effectRange, false, true);
         base.Start();
         // OnActionEnd();
 

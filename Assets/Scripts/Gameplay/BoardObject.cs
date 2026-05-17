@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using UnityEngine;
 
 public abstract class BoardObject : MonoBehaviour
@@ -13,7 +14,13 @@ public abstract class BoardObject : MonoBehaviour
     public BoardManager board;
     public TurnManager turn;
     public UnitType type;
+    public ObjectData data;
 
+    public virtual void Awake()
+    {
+        cost = data.cost;
+
+    }
     public int x
     {
         get
@@ -62,23 +69,27 @@ public abstract class BoardObject : MonoBehaviour
 
     public virtual void ApplyEffect(BoardObject target)
     {
-
+        
+        foreach(var player in TurnManager.Instance.players) player.RefreshDisplay();
     }
 
     //*ON-(CONDITION) EFFECT
     public virtual void OnTurnEnd()
     {
-
+        
+        foreach(var player in TurnManager.Instance.players) player.RefreshDisplay();
     }
 
     public virtual void OnTurnStart()
     {
-
+        
+        foreach(var player in TurnManager.Instance.players) player.RefreshDisplay();
     }
 
     public virtual void OnActionDone()
     {
         
+        foreach(var player in TurnManager.Instance.players) player.RefreshDisplay();
     }
 
 

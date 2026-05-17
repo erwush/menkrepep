@@ -1,11 +1,11 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "MobData", menuName = "Mob")]
-public class MobData : ScriptableObject
+public class MobData : ObjectData
 {
     public string mobName;
     public float maxHp, atk;
-    public int atkRange, moveRange, cost = 1;
+    public int atkRange, moveRange;
     public Category category;
     public Sprite sprite;
     public Vector2Int[] moveDir = new Vector2Int[]{

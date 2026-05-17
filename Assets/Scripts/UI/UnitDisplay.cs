@@ -24,8 +24,8 @@ public class UnitDisplay : MonoBehaviour
 
     public void UpdateUI()
     {
-        healthBar.value = data.hp / data.data.maxHp;
-        healthText.text = data.hp.ToString() + "/" + data.data.maxHp.ToString();
+        healthBar.value = data.hp / data.Data.maxHp;
+        healthText.text = data.hp.ToString() + "/" + data.Data.maxHp.ToString();
         atkText.text = data.atk.ToString();
         bonusAtkText.text = data.bonusAtk.ToString();
     }
@@ -36,6 +36,8 @@ public class UnitDisplay : MonoBehaviour
         player = obj.GetComponent<BoardObject>().owner;
         UpdateUI();
     }
+
+   
 
     
 }

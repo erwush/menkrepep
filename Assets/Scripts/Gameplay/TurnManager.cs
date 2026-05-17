@@ -36,7 +36,7 @@ public class TurnManager : MonoBehaviour
         foreach(var unit in activePlayer.activeUnits) unit.GetComponent<BoardObject>().OnTurnEnd();
         foreach(var player in players)
         {
-            player.star++;
+            player.ChangeStar(1);
             player.EndAction();
             player.selectedObj = null;
             player.selectedTile = null;  

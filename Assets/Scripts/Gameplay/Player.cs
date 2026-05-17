@@ -14,9 +14,8 @@ public class Player : MonoBehaviour
     public ActionState actState;
     public ActionState prevState;
     public Button[] actBtn;
-    public int star;
-    public GameObject displayObj;
-    public GameObject displayParent;
+    public int star, maxStar;
+    public GameObject displayObj, displayParent, displayPanel;
     public Dictionary<BoardMob, UnitDisplay> displays;
     public TextMeshProUGUI starText, nameText;
 
@@ -94,23 +93,40 @@ public class Player : MonoBehaviour
     public void RegisterUnit(GameObject obj)
     {
         activeUnits.Add(obj);
+        
         Debug.Log(obj.name);
         BoardObject unit = obj.GetComponent<BoardObject>();
         if (unit is BoardMob mob)
         {
-            mob.owner = this;
+            ChangeStar(-mob.data.cost);
+
             mob.Recalculate();
             UnitDisplay disp = Instantiate(displayObj, displayParent.transform).GetComponent<UnitDisplay>();
             disp.Setup(mob);
             displays.Add(mob, disp);
             disp.UpdateUI();
+
         }
+        else if (unit is BoardBlock block)
+        {
+            ChangeStar(-block.data.cost);
+        }
+        unit.owner = this;
     }
 
     public void UnregisterUnit(BoardObject obj)
     {
 
     }
+
+    public void ChangeStar(int amount)
+    {
+        star += amount;
+        if (star > maxStar) star = maxStar;
+        if(star < 0) star = 0;
+    }
+
+    
 }
 
 public enum ActionState
