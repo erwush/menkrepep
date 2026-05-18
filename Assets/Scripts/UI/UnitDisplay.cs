@@ -24,8 +24,8 @@ public class UnitDisplay : MonoBehaviour
 
     public void UpdateUI()
     {
-        healthBar.value = data.hp / data.Data.maxHp;
-        healthText.text = data.hp.ToString() + "/" + data.Data.maxHp.ToString();
+        healthBar.value = data.hp / data.maxHp;
+        healthText.text = data.hp.ToString() + "/" + data.maxHp.ToString();
         atkText.text = data.atk.ToString();
         bonusAtkText.text = data.bonusAtk.ToString();
     }

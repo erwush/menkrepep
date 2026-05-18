@@ -5,36 +5,47 @@ using Utils = GameUtils;
 
 public abstract class BoardMob : BoardObject
 {
-    
-    public float hp, bonusAtk, atk, finalAtk;
+
+    public float maxHp, hp, bonusAtk, atk, finalAtk, spd;
     public int atkRange, moveRange;
     public List<Tile> validTiles = new List<Tile>();
     public List<BoardObject> validTarget = new List<BoardObject>();
     public MobData Data => data as MobData;
+    public Item heldItem;
 
 
     public virtual void Start()
     {
+        
+        owner = TurnManager.Instance.activePlayer;
+        // owner.activeUnits.Add(this.gameObject);
+        
+        // owner.EndAction();
+        Recalculate();
+
+    }
+
+    public override void Awake()
+    {
+        base.Awake();
         cost = Data.cost;
         turn = TurnManager.Instance;
         board = BoardManager.Instance;
-        owner = TurnManager.Instance.activePlayer;
-        // owner.activeUnits.Add(this.gameObject);
         hp = Data.maxHp;
+        maxHp = Data.maxHp;
         atk = Data.atk;
         atkRange = Data.atkRange;
         moveRange = Data.moveRange;
         type = UnitType.Mob;
-        // owner.EndAction();
-        Recalculate();
-
+        spd = Data.speed;
     }
     
 
     public virtual void ChangeHealth(float amount)
     {
+        Mathf.Round(amount);
         hp += amount;
-        if (hp > Data.maxHp) hp = Data.maxHp;
+        if (hp > maxHp) hp = maxHp;
         if (hp < 0) hp = 0;
     }
 
@@ -99,6 +110,11 @@ public abstract class BoardMob : BoardObject
         validTiles.Clear();
 
     }
+
+    public void SetItem(Item target)
+    {
+        
+    }
     
 
     public override void SelectThis()
@@ -120,7 +136,7 @@ public abstract class BoardMob : BoardObject
                 owner.selectedObj = gameObject;
                 validTiles = Utils.GetValidTargets(currentTile, Data.atkDir, atkRange, true);
                 foreach (var tile in validTiles) if (tile.isOccupied) validTarget.Add(tile.activeObj);
-            }
+            } else if(owner.actState == ActionState.Place && owner.selectedObj.GetComponent<BoardObject>().type == UnitType.Item) owner.selectedObj.GetComponent<Item>().SetItem(this);
         }
         else
         {

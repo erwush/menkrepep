@@ -1,11 +1,11 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ItemData", menuName = "Item")]
-public class ItemData : ScriptableObject
+public class ItemData : ObjectData
 {
     public string itemName, itemDesc;
-    public Sprite icon;
-    public int cost;
+
+
 
 
     void OnValidate()

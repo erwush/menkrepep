@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: def1becef4638bf458567b23c08eba2e, type: 3}
   m_Name: Zombie
   m_EditorClassIdentifier: 
+  cost: 2
   mobName: Zombie
   maxHp: 20
   atk: 5
   atkRange: 1
   moveRange: 1
-  cost: 0
   category: 0
+  sprite: {fileID: 0}
   moveDir:
   - {x: 0, y: 1}
   - {x: 0, y: -1}

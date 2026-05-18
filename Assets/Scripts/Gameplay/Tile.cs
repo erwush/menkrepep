@@ -54,6 +54,7 @@ public class Tile : MonoBehaviour
         }
         else if (player.actState == ActionState.Place)
         {
+            if (player.selectedObj.GetComponent<BoardObject>().type == UnitType.Item) return;
             if (!isOccupied && player.selectedObj != null && player.actState == ActionState.Place)
             {
                 if (player.star >= player.selectedObj.GetComponent<BoardObject>().data.cost)

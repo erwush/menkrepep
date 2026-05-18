@@ -5,7 +5,7 @@ using Utils = GameUtils;
 public abstract class BoardBlock : BoardObject
 {
 
-    
+
     public int effectRange;
     public List<Tile> targetTiles = new();
     public List<BoardObject> targetUnits = new();
@@ -15,16 +15,24 @@ public abstract class BoardBlock : BoardObject
 
     public virtual void Start()
     {
-        cost = Data.cost;
+
+
+
+        owner = TurnManager.Instance.activePlayer;
+
+
+
+        owner.EndAction();
+    }
+
+    public override void Awake()
+    {
+        type = UnitType.Block;
         effectRange = Data.effectRange;
+        cost = Data.cost;
         board = BoardManager.Instance;
         // owner.activeUnits.Add(this.gameObject);
         turn = TurnManager.Instance;
-        owner = TurnManager.Instance.activePlayer;
-        
-        type = UnitType.Block;
-
-        owner.EndAction();
     }
 
     public virtual void WhenHoverEnter()

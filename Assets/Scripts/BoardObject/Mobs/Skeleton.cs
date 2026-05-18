@@ -4,6 +4,7 @@ using Utils = GameUtils;
 
 public class Skeleton : BoardMob
 {
+    public HashSet<int> validRolls = new HashSet<int>();
 
     // public override Vector2Int[] atkDir =>
     //     new Vector2Int[]
@@ -36,11 +37,11 @@ public class Skeleton : BoardMob
     //     new (-1, -1), // kiri bawah
     // };
 
-    public override void Start()
+    public override void Awake()
     {
-        base.Start();
-        
-
+        base.Awake();
+        validRolls.Add(1);
+        validRolls.Add(9);
     }
     public override void Attack(BoardMob target)
     {
@@ -48,7 +49,7 @@ public class Skeleton : BoardMob
         if (validTarget.Contains(target))
         {
             int dice = Random.Range(1, 10);
-            if (dice == 1 || dice == 9)
+            if (validRolls.Contains(dice))
             {
                 target.ChangeHealth(-finalAtk * 3);
             }

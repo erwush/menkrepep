@@ -18,7 +18,9 @@ public abstract class BoardObject : MonoBehaviour
 
     public virtual void Awake()
     {
-        cost = data.cost;
+        if(data != null) cost = data.cost;
+        board = BoardManager.Instance;
+        turn = TurnManager.Instance;
 
     }
     public int x
@@ -99,5 +101,6 @@ public abstract class BoardObject : MonoBehaviour
 public enum UnitType
 {
     Block,
-    Mob
+    Mob,
+    Item,
 }

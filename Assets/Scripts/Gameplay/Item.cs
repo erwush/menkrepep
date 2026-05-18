@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public abstract class Item : MonoBehaviour
+public abstract class Item : BoardObject
 {
-
+    public int amount;
     public BoardMob holder;
-    public ItemData data;
+    public ItemData Data => data as ItemData;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -17,18 +17,19 @@ public abstract class Item : MonoBehaviour
 
     }
 
-    public virtual void OnTurnEnd()
+    public virtual void SetItem(BoardMob target)
+    {
+        
+    }
+
+    public virtual void OnHeld()
+    {
+       
+    }
+    
+    public virtual void OnThrown()
     {
 
     }
 
-    public virtual void OnTurnStart()
-    {
-
-    }
-
-    public virtual void OnActionDone()
-    {
-
-    }
 }

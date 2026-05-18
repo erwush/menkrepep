@@ -5,7 +5,7 @@ public class MobData : ObjectData
 {
     public string mobName;
     public float maxHp, atk;
-    public int atkRange, moveRange;
+    public int atkRange, moveRange, speed;
     public Category category;
     public Sprite sprite;
     public Vector2Int[] moveDir = new Vector2Int[]{
