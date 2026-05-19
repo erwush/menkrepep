@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfc0dceb96a934b4194fecb100cecec9, type: 3}
   m_Name: Phantasm
   m_EditorClassIdentifier: 
-  skillName: Supersonic Flight
-  skillDesc: Haunt
-  cost: 2
-  cooldown: 8
+  skillName: Phantasm
+  skillDesc: +1 Cooldown Reduction, Enhance Haunt and Membrane Skin. 20 Turns Duration
+  cost: 6
+  cooldown: 0

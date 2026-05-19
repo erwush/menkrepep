@@ -4,7 +4,7 @@ public class Haunt : MobSkill
 {
 
     public int hauntDur;
-      public Haunt(BoardMob owner)
+    public Haunt(BoardMob owner)
     {
         this.owner = owner;
         
@@ -15,17 +15,22 @@ public class Haunt : MobSkill
         cooldown = data.cooldown;
         hauntDur = 4;
         
+        
     }
-
     public override void ApplyEffect(BoardMob target)
     {
-        if (duration <= 0)
+        if (duration <= 0 && owner.owner.star >= cost)
         {
-            target.ChangeHealth(GameUtils.CalculateMobDamage(owner, target));
+            float demeg = GameUtils.CalculateMobDamage(owner, target);
+            target.ChangeHealth(-demeg);
             owner.owner.ChangeStar(-cost);
-            target.statusEffects.Add(new Haunted(hauntDur));
-            target.ApplyEffect(new Haunted(hauntDur), owner);
+            target.ApplyEffect(new Haunted(hauntDur, target), owner);
             duration = cooldown - owner.cdReduction;
+            
+            
+        } else
+        {
+            return;
         }
     }
 

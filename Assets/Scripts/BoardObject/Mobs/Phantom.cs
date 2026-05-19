@@ -9,12 +9,17 @@ public class Phantom : BoardMob
     public bool isPhantasm;
     //**skill data index0 = haunt, 1 = supersonic flight, 2 = ultimate: Phantasm
 
-    public override void Start()
+    public override void Awake()
     {
+        skills.Add(new Haunt(this));
         skills.Add(new SupersonicFlight(this));
-        base.Start();
+        skills.Add(new Phantasm(this));
+        base.Awake();
+        
 
     }
+
+
 
 
     public override void ChangeHealth(float amount)
@@ -22,15 +27,21 @@ public class Phantom : BoardMob
         if (amount < 0)
         {
             //?ternary operator, if phantasm, 0.75, if not then 0.5
-            if (Mathf.Abs(amount) > maxHp) Mathf.Ceil(amount *= isPhantasm ? 0.75f : 0.5f);
-            //? new supaya instancenya gk sama di semua char jdi durasinya terpisah dll
-            MembraneSkin membraneSkin = new MembraneSkin();
-            if (!statusEffects.Contains(membraneSkin)) statusEffects.Add(membraneSkin);
-            else membraneSkin.ResetEffect();
-            if (!isPhantasm)
+            if (Mathf.Abs(amount) > maxHp)
             {
-                bonusAtk -= 4;
+                Mathf.Ceil(amount *= isPhantasm ? 0.75f : 0.5f);
+                MembraneSkin membraneSkin = new MembraneSkin();
+                if (!statusEffects.Contains(membraneSkin)) statusEffects.Add(membraneSkin);
+                else membraneSkin.ResetEffect();
+                if (!isPhantasm)
+                {
+                    bonusAtk -= 4;
+                }
             }
+
+            //? new supaya instancenya gk sama di semua char jdi durasinya terpisah dll
+
+
         }
         base.ChangeHealth(amount);
 

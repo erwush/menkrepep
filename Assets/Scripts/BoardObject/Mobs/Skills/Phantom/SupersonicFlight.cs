@@ -15,14 +15,25 @@ public class SupersonicFlight : MobSkill
         cooldown = data.cooldown;
     }
 
+    public override void OnSelected()
+    {
+        owner.owner.isTargeting = true;
+    }
+
+    public override void OnUnselected()
+    {
+        owner.owner.isTargeting = false;
+    }
+
     public override void ApplyEffect(BoardMob target)
     {
-        if (duration <= 0)
+        if (duration <= 0 && owner.owner.star >= cost)
         {
             owner.owner.ChangeStar(-cost);
             owner.bonusSpd += 3;
             duration = cooldown - owner.cdReduction;
             used = true;
+            owner.owner.isTargeting = false;
         }
     }
 

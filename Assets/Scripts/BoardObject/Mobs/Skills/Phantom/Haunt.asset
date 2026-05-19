@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Haunt
   m_EditorClassIdentifier: 
   skillName: Haunt
-  skillDesc: Haunt
+  skillDesc: damage and haunt target
   cost: 3
   cooldown: 8

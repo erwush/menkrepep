@@ -14,9 +14,10 @@ public abstract class BoardObject : MonoBehaviour
     public Material[] Mat; //0 = default, 1 = hightlighted
     public BoardManager board;
     public TurnManager turn;
+    public UiManager menu;
     public UnitType type;
     public ObjectData data;
-    public List<StatusEffect> statusEffects;
+    public List<StatusEffect> statusEffects = new List<StatusEffect>();
     public List<EffectTag> Immunities;
 
     public virtual void Awake()
@@ -25,6 +26,7 @@ public abstract class BoardObject : MonoBehaviour
         if(data != null) cost = data.cost;
         board = BoardManager.Instance;
         turn = TurnManager.Instance;
+        menu = UiManager.Instance;
 
     }
     public int x

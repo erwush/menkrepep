@@ -46,15 +46,17 @@ public class Skeleton : BoardMob
     }
     public override void Attack(BoardMob target)
     {
-
+        Debug.Log("tar" + target);
         if (validTarget.Contains(target))
         {
+            Debug.Log("Attack Skeleton");
             int dice = Random.Range(1, 10);
             float dmg = finalAtk;
             if (validRolls.Contains(dice))
             {
                 dmg *= critValue;
             }
+            Debug.Log("Skeletond");
             dmg = Utils.CalculateMobDamage(this, target);
             target.ChangeHealth(-dmg);
             owner.EndAction();

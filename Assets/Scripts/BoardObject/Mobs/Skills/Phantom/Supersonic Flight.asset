@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Supersonic Flight
   m_EditorClassIdentifier: 
   skillName: Supersonic Flight
-  skillDesc: Haunt
+  skillDesc: +3 speed
   cost: 2
   cooldown: 8

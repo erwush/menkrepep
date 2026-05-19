@@ -13,32 +13,44 @@ public class Phantasm : MobSkill
         cooldown = data.cooldown;
     }
 
+    public override void OnSelected()
+    {
+        owner.owner.isTargeting = true;
+    }
+
+    public override void OnUnselected()
+    {
+        owner.owner.isTargeting = false;
+    }
+
     public override void ApplyEffect(BoardMob target)
     {
-        if (owner.owner.ultStar >= 20 && !owner.canUlt)
+        if (owner.owner.ultStar >= 20 && owner.canUlt && owner.owner.star >= cost)
         {
-            owner.owner.ChangeStar(-6);
+            owner.owner.ChangeStar(-data.cost);
             owner.owner.ChangeUltStar(-20);
             owner.cdReduction += 1;
             Phantom phantom = owner as Phantom;
             phantom.isPhantasm = true;
-            foreach(var skill in phantom.skills)
+            foreach (var skill in phantom.skills)
             {
-                if(skill is Haunt haunt) haunt.hauntDur += 2;
+                if (skill is Haunt haunt) haunt.hauntDur += 2;
             }
             duration = 20;
             owner.canUlt = false;
+            owner.owner.isTargeting = false;
         }
     }
 
 
     public override void OnTurnFinish()
     {
-        if (duration > 0)
+        if (duration > 0 && (owner as Phantom).isPhantasm)
         {
             duration--;
+            if (duration <= 0) RemoveEffect(owner);
         }
-        if(duration <= 0) RemoveEffect(owner);
+
     }
 
     public override void RemoveEffect(BoardMob target)

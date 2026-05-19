@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 {
     public Inventory inv;
     public GameObject selectedObj, targetObj;
+    public MobSkill selectedSkill;
     public string playerName;
     public Tile selectedTile;
 
@@ -16,8 +17,12 @@ public class Player : MonoBehaviour
     public Button[] actBtn;
     public int star, maxStar, ultStar, maxUltStar;
     public GameObject displayObj, displayParent, displayPanel;
+    public GameObject skillDisplay, skillParent, skillPanel;
     public Dictionary<BoardMob, UnitDisplay> displays;
     public TextMeshProUGUI starText, nameText;
+    public UiManager menu;
+    public bool isTargeting;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -27,12 +32,23 @@ public class Player : MonoBehaviour
         displays = new Dictionary<BoardMob, UnitDisplay>();
         RefreshDisplay();
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    public void Awake()
     {
-
+        menu = UiManager.Instance;
     }
+
+    public void ConfirmAttack(){
+        if (actState == ActionState.Attack)
+        {
+            if (isTargeting)
+            {
+                selectedSkill.ApplyEffect(selectedObj.GetComponent<BoardMob>());
+            }
+        }
+        selectedObj.GetComponent<BoardMob>().FinishAttack();
+    }
+
 
     public void ChangeState(string stateName)
     {
@@ -94,7 +110,7 @@ public class Player : MonoBehaviour
     {
         activeUnits.Add(obj);
         
-        Debug.Log(obj.name);
+        // Debug.Log(obj.name);
         BoardObject unit = obj.GetComponent<BoardObject>();
         if (unit is BoardMob mob)
         {
@@ -118,6 +134,36 @@ public class Player : MonoBehaviour
     {
 
     }
+
+    public void SelectMobSkill(BoardMob mob)
+    {
+        foreach (var disp in menu.selectedDisplay)
+        {
+            Destroy(disp.gameObject);
+        }
+        menu.selectedDisplay.Clear();
+        SkillDisplay display = Instantiate(skillDisplay, skillParent.transform).GetComponent<SkillDisplay>();
+        display.Setup(null);
+        menu.selectedDisplay.Add(display);
+        foreach (var skill in mob.skills)
+        {
+            SkillDisplay disp = Instantiate(skillDisplay, skillParent.transform).GetComponent<SkillDisplay>();
+            disp.Setup(skill);
+            menu.selectedDisplay.Add(disp);
+        }
+        menu.selectedDisplay[0].SelectSkill();
+    }
+
+    
+
+    public void UnselectMob()
+    {
+        foreach (var disp in menu.selectedDisplay) Destroy(disp.gameObject); 
+        menu.selectedDisplay.Clear();
+        
+    }
+    
+    
 
     public void ChangeStar(int amount)
     {

@@ -17,11 +17,7 @@ public class BoardManager : MonoBehaviour
         CreateBoard();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
 
-    }
 
     void Awake()
     {

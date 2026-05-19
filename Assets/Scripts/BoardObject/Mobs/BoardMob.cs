@@ -13,6 +13,7 @@ public abstract class BoardMob : BoardObject
     public MobData Data => data as MobData;
     public Item heldItem;
     public List<MobSkill> skills = new List<MobSkill>();
+    
     public SkillData[] skillData;
     public bool canUlt;
 
@@ -86,10 +87,16 @@ public abstract class BoardMob : BoardObject
         {
             float dmg = Utils.CalculateMobDamage(this, target);
             target.ChangeHealth(-dmg);
-            owner.EndAction();
-            owner.selectedTile = null;
-            ResetTiles();
+            FinishAttack();
         }
+    }
+    
+    public virtual void FinishAttack()
+    {
+        owner.EndAction();
+        owner.selectedTile = null;
+        owner.selectedObj = null;
+        ResetTiles();
     }
 
 
@@ -136,10 +143,12 @@ public abstract class BoardMob : BoardObject
 
     public override void SelectThis()
     {
-
+        if(statusEffects.Count > 0) foreach (var status in statusEffects) Debug.Log("status: " + status);
         ResetTiles();
+        
         if (turn.activePlayer == owner)
         {
+            if(statusEffects.Count > 0) foreach (var status in statusEffects) Debug.Log("status: " + status);
             if (owner.actState == ActionState.Move)
             {
                 if (owner.selectedObj != gameObject && owner.activeUnits.Contains(owner.selectedObj)) owner.selectedObj.GetComponent<BoardObject>().UnselectThis();
@@ -151,8 +160,10 @@ public abstract class BoardMob : BoardObject
             {
                 if (owner.selectedObj != gameObject && owner.activeUnits.Contains(owner.selectedObj)) owner.selectedObj.GetComponent<BoardObject>().UnselectThis();
                 owner.selectedObj = gameObject;
+                
                 validTiles = Utils.GetValidTargets(currentTile, Data.atkDir, atkRange, true);
                 foreach (var tile in validTiles) if (tile.isOccupied) validTarget.Add(tile.activeObj);
+                owner.SelectMobSkill(this);
             }
             else if (owner.actState == ActionState.Place && owner.selectedObj.GetComponent<BoardObject>().type == UnitType.Item) owner.selectedObj.GetComponent<Item>().SetItem(this);
         }
@@ -162,13 +173,20 @@ public abstract class BoardMob : BoardObject
             if (turn.activePlayer.actState == ActionState.Attack && turn.activePlayer.selectedObj != null)
             {
 
-                turn.activePlayer.selectedObj.GetComponent<BoardMob>().Attack(this);
+                if (turn.activePlayer.selectedSkill == null) turn.activePlayer.selectedObj.GetComponent<BoardMob>().Attack(this);
+                else
+                {
+                    turn.activePlayer.selectedSkill.ApplyEffect(this);
+                    turn.activePlayer.selectedObj.GetComponent<BoardMob>().FinishAttack();
+                }
+                
             }
         }
     }
 
     public override void UnselectThis()
     {
+        owner.UnselectMob();
         foreach (var tile in validTiles)
         {
             tile.isHighlighted = false;
@@ -181,29 +199,29 @@ public abstract class BoardMob : BoardObject
 
     public override void OnActionDone()
     {
-        foreach (var status in statusEffects) status.OnActionDone();
-        foreach (var skill in skills) skill.OnActionDone();
+        if(statusEffects.Count > 0) for(int i = statusEffects.Count - 1; i >= 0; i--) statusEffects[i].OnActionDone();
+        if(skills.Count > 0) foreach (var skill in skills) skill.OnActionDone();
         base.OnActionDone();
     }
 
     public override void OnTurnStart()
     {
-        foreach (var status in statusEffects) status.OnTurnStart();
-        foreach (var skill in skills) skill.OnTurnStart();
+        if(statusEffects.Count > 0) for(int i = statusEffects.Count - 1; i >= 0; i--) statusEffects[i].OnTurnStart();
+        if(skills.Count > 0) foreach (var skill in skills) skill.OnTurnStart();
         base.OnTurnStart();
     }
 
     public override void OnTurnEnd()
     {
-        foreach (var status in statusEffects) status.OnTurnEnd();
-        foreach (var skill in skills) skill.OnTurnEnd();
+        if(statusEffects.Count > 0) for(int i = statusEffects.Count - 1; i >= 0; i--) statusEffects[i].OnTurnEnd();
+        if(skills.Count > 0) foreach (var skill in skills) skill.OnTurnEnd();
         base.OnTurnEnd();
     }
 
     public override void OnTurnFinish()
     {
-        foreach (var status in statusEffects) status.OnTurnFinish();
-        foreach (var skill in skills) skill.OnTurnFinish();
+        if(statusEffects.Count > 0) for(int i = statusEffects.Count - 1; i >= 0; i--) statusEffects[i].OnTurnFinish();
+        if (skills.Count > 0) foreach (var skill in skills) skill.OnTurnFinish();
         base.OnTurnFinish();
     }
 

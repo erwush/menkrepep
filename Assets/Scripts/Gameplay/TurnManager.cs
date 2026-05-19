@@ -3,6 +3,7 @@ using UnityEngine;
 public class TurnManager : MonoBehaviour
 {
     public static TurnManager Instance;
+    public UiManager menu;
     public Player[] players;
     public Player activePlayer;
     public int currentIndex;
@@ -13,6 +14,7 @@ public class TurnManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        menu = UiManager.Instance;
         board = BoardManager.Instance;
         foreach(var player in players) player.star = 6;
         
@@ -20,14 +22,16 @@ public class TurnManager : MonoBehaviour
 
     void Awake()
     {
+
         Instance = this;
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    public void ConfirmAttack()
     {
-
+        activePlayer.ConfirmAttack();
     }
+
+
 
     public void NextTurn()
     {
@@ -49,6 +53,13 @@ public class TurnManager : MonoBehaviour
         activePlayer = players[currentIndex];
         foreach(var unit in activePlayer.activeUnits) unit.GetComponent<BoardObject>().OnTurnStart();
         foreach (var tile in board.tiles) tile.player = activePlayer;
+        if(menu.selectedDisplay.Count > 0) foreach(var disp in menu.selectedDisplay)
+            {
+                Debug.Log("aweweo");
+                Destroy(disp.gameObject);
+            }
+
+        menu.selectedDisplay.Clear();
     }
     
     public void ChangeState(string stateName) 

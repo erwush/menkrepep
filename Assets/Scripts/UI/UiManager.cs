@@ -10,11 +10,13 @@ public class UiManager : MonoBehaviour
     public static UiManager Instance;
     public TurnManager turn = TurnManager.Instance;
     public GameObject displayPanel;
+    public List<SkillDisplay> selectedDisplay;
 
     public Dictionary<string, bool> displayUi = new Dictionary<string, bool>();
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        selectedDisplay = new List<SkillDisplay>();
         displayUi.Add("isRotated", false);
         displayUi.Add("isOpen", true);
 
@@ -25,11 +27,8 @@ public class UiManager : MonoBehaviour
         Instance = this;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+   
+    
 
 
     public void RotateUi()

@@ -20,5 +20,9 @@ public abstract class MobSkill
 
     public virtual void ResetEffect() { }
 
+    public virtual void OnSelected() { }
+    
+    public virtual void OnUnselected() {}
+
 
 }
