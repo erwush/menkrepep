@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     public Inventory inv;
-    public GameObject selectedObj;
+    public GameObject selectedObj, targetObj;
     public string playerName;
     public Tile selectedTile;
 
@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     public ActionState actState;
     public ActionState prevState;
     public Button[] actBtn;
-    public int star, maxStar;
+    public int star, maxStar, ultStar, maxUltStar;
     public GameObject displayObj, displayParent, displayPanel;
     public Dictionary<BoardMob, UnitDisplay> displays;
     public TextMeshProUGUI starText, nameText;
@@ -123,7 +123,14 @@ public class Player : MonoBehaviour
     {
         star += amount;
         if (star > maxStar) star = maxStar;
-        if(star < 0) star = 0;
+        if (star < 0) star = 0;
+    }
+    
+    public void ChangeUltStar(int amount)
+    {
+        ultStar += amount;
+        if (ultStar > maxUltStar) ultStar = maxUltStar;
+        if (ultStar < 0) ultStar = 0;
     }
 
     

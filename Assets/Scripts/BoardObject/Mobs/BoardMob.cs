@@ -6,20 +6,23 @@ using Utils = GameUtils;
 public abstract class BoardMob : BoardObject
 {
 
-    public float maxHp, hp, bonusAtk, atk, finalAtk, spd;
-    public int atkRange, moveRange;
+    public float maxHp, hp, bonusAtk, atk, finalAtk, spd, bonusSpd, finalSpd;
+    public int atkRange, moveRange, moveCounter, cdReduction;
     public List<Tile> validTiles = new List<Tile>();
     public List<BoardObject> validTarget = new List<BoardObject>();
     public MobData Data => data as MobData;
     public Item heldItem;
+    public List<MobSkill> skills = new List<MobSkill>();
+    public SkillData[] skillData;
+    public bool canUlt;
 
 
     public virtual void Start()
     {
-        
+        canUlt = true;
         owner = TurnManager.Instance.activePlayer;
         // owner.activeUnits.Add(this.gameObject);
-        
+
         // owner.EndAction();
         Recalculate();
 
@@ -39,11 +42,18 @@ public abstract class BoardMob : BoardObject
         type = UnitType.Mob;
         spd = Data.speed;
     }
-    
+
 
     public virtual void ChangeHealth(float amount)
     {
         Mathf.Round(amount);
+        if (amount < 0)
+        {
+            foreach (var status in statusEffects)
+            {
+                amount = status.ModifyValue(ModifyType.DamageTaken, amount);
+            }
+        }
         hp += amount;
         if (hp > maxHp) hp = maxHp;
         if (hp < 0) hp = 0;
@@ -53,29 +63,36 @@ public abstract class BoardMob : BoardObject
     {
         atk = Data.atk;
         finalAtk = atk + bonusAtk;
-        
+
     }
-    
+
     public void ResetStats()
     {
-        
+
+    }
+
+    public void ApplyEffect(StatusEffect effect, BoardObject source)
+    {
+        if (Immunities.Contains(effect.effectTag)) return;
+        statusEffects.Add(effect);
+        effect.ApplyEffect(this);
+        effect.owner = this;
+        effect.source = source;
     }
 
     public virtual void Attack(BoardMob target)
     {
         if (validTarget.Contains(target))
         {
-
-            target.ChangeHealth(-finalAtk);
-
+            float dmg = Utils.CalculateMobDamage(this, target);
+            target.ChangeHealth(-dmg);
             owner.EndAction();
-
             owner.selectedTile = null;
             ResetTiles();
         }
     }
 
-    
+
     public virtual void Move()
     {
 
@@ -113,13 +130,13 @@ public abstract class BoardMob : BoardObject
 
     public void SetItem(Item target)
     {
-        
+
     }
-    
+
 
     public override void SelectThis()
     {
-        
+
         ResetTiles();
         if (turn.activePlayer == owner)
         {
@@ -136,7 +153,8 @@ public abstract class BoardMob : BoardObject
                 owner.selectedObj = gameObject;
                 validTiles = Utils.GetValidTargets(currentTile, Data.atkDir, atkRange, true);
                 foreach (var tile in validTiles) if (tile.isOccupied) validTarget.Add(tile.activeObj);
-            } else if(owner.actState == ActionState.Place && owner.selectedObj.GetComponent<BoardObject>().type == UnitType.Item) owner.selectedObj.GetComponent<Item>().SetItem(this);
+            }
+            else if (owner.actState == ActionState.Place && owner.selectedObj.GetComponent<BoardObject>().type == UnitType.Item) owner.selectedObj.GetComponent<Item>().SetItem(this);
         }
         else
         {
@@ -159,5 +177,36 @@ public abstract class BoardMob : BoardObject
         ResetTiles();
         owner.selectedObj = null;
     }
+
+
+    public override void OnActionDone()
+    {
+        foreach (var status in statusEffects) status.OnActionDone();
+        foreach (var skill in skills) skill.OnActionDone();
+        base.OnActionDone();
+    }
+
+    public override void OnTurnStart()
+    {
+        foreach (var status in statusEffects) status.OnTurnStart();
+        foreach (var skill in skills) skill.OnTurnStart();
+        base.OnTurnStart();
+    }
+
+    public override void OnTurnEnd()
+    {
+        foreach (var status in statusEffects) status.OnTurnEnd();
+        foreach (var skill in skills) skill.OnTurnEnd();
+        base.OnTurnEnd();
+    }
+
+    public override void OnTurnFinish()
+    {
+        foreach (var status in statusEffects) status.OnTurnFinish();
+        foreach (var skill in skills) skill.OnTurnFinish();
+        base.OnTurnFinish();
+    }
+
+
 
 }

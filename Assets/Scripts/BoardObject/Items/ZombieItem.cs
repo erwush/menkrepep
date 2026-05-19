@@ -14,7 +14,7 @@ public class ZombieItem : Item
         }
         target.owner.star -= data.cost;
         int dice = Random.Range(1, 10);
-        if (dice <= 9)
+        if (dice == 9)
         {
             
             ZombieItem item = target.AddComponent<ZombieItem>();

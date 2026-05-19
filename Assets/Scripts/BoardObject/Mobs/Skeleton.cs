@@ -5,6 +5,7 @@ using Utils = GameUtils;
 public class Skeleton : BoardMob
 {
     public HashSet<int> validRolls = new HashSet<int>();
+    public int critValue;
 
     // public override Vector2Int[] atkDir =>
     //     new Vector2Int[]
@@ -49,14 +50,13 @@ public class Skeleton : BoardMob
         if (validTarget.Contains(target))
         {
             int dice = Random.Range(1, 10);
+            float dmg = finalAtk;
             if (validRolls.Contains(dice))
             {
-                target.ChangeHealth(-finalAtk * 3);
+                dmg *= critValue;
             }
-            else
-            {
-                target.ChangeHealth(-finalAtk);
-            }
+            dmg = Utils.CalculateMobDamage(this, target);
+            target.ChangeHealth(-dmg);
             owner.EndAction();
 
             owner.selectedTile = null;

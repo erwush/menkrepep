@@ -71,7 +71,7 @@ public static class GameUtils
                 if (tile != null)
                 {
                     validTiles.Add(tile);
-                    if(highlight) tile.isHighlighted = true;
+                    if (highlight) tile.isHighlighted = true;
                     if (tile.isOccupied) break;
                 }
 
@@ -85,5 +85,15 @@ public static class GameUtils
         }
 
         return validTiles;
+    }
+    
+    public static float CalculateMobDamage(BoardMob source, BoardMob target)
+    {
+        float damage = source.finalAtk;
+        foreach (var status in source.statusEffects)
+        {
+            damage = status.ModifyValue(ModifyType.DamageDealt, damage);
+        }
+        return damage;
     }
 }

@@ -31,13 +31,17 @@ public class TurnManager : MonoBehaviour
 
     public void NextTurn()
     {
+        
         currentIndex++;
         if (currentIndex >= players.Length) currentIndex = 0;
         foreach(var unit in activePlayer.activeUnits) unit.GetComponent<BoardObject>().OnTurnEnd();
         foreach(var player in players)
         {
+
             player.ChangeStar(1);
+            player.ChangeUltStar(1);
             player.EndAction();
+            foreach(var unit in player.activeUnits) unit.GetComponent<BoardObject>().OnTurnFinish();
             player.selectedObj = null;
             player.selectedTile = null;  
         };

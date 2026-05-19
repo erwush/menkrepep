@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using UnityEngine;
+using System.Collections.Generic;
 
 public abstract class BoardObject : MonoBehaviour
 {
@@ -15,9 +16,12 @@ public abstract class BoardObject : MonoBehaviour
     public TurnManager turn;
     public UnitType type;
     public ObjectData data;
+    public List<StatusEffect> statusEffects;
+    public List<EffectTag> Immunities;
 
     public virtual void Awake()
     {
+         new List<StatusEffect>();
         if(data != null) cost = data.cost;
         board = BoardManager.Instance;
         turn = TurnManager.Instance;
@@ -67,8 +71,6 @@ public abstract class BoardObject : MonoBehaviour
         }
     }
 
-
-
     public virtual void ApplyEffect(BoardObject target)
     {
         
@@ -90,8 +92,13 @@ public abstract class BoardObject : MonoBehaviour
 
     public virtual void OnActionDone()
     {
-        
-        foreach(var player in TurnManager.Instance.players) player.RefreshDisplay();
+
+        foreach (var player in TurnManager.Instance.players) player.RefreshDisplay();
+    }
+    
+    public virtual void OnTurnFinish()
+    {
+        foreach (var player in TurnManager.Instance.players) player.RefreshDisplay();
     }
 
 
@@ -103,4 +110,11 @@ public enum UnitType
     Block,
     Mob,
     Item,
+}
+
+public enum EffectTag
+{
+    Block,
+    Debuff,
+    Buff,
 }
