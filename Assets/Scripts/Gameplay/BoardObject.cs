@@ -59,18 +59,18 @@ public abstract class BoardObject : MonoBehaviour
 
 
 
-    public virtual void ToggleHightlight()
+    public virtual void ToggleHighlight()
     {
-        if (isHightlight)
-        {
-            Material self = GetComponent<MeshRenderer>().material = Mat[0];
-            isHightlight = false;
-        }
-        else
-        {
-            Material self = GetComponent<MeshRenderer>().material = Mat[1];
-            isHightlight = true;
-        }
+        // if (isHightlight)
+        // {
+        //     Material self = GetComponent<MeshRenderer>().material = Mat[0];
+        //     isHightlight = false;
+        // }
+        // else
+        // {
+        //     Material self = GetComponent<MeshRenderer>().material = Mat[1];
+        //     isHightlight = true;
+        // }
     }
 
     public virtual void ApplyEffect(BoardObject target)

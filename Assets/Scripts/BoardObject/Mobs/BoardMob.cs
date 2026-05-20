@@ -6,8 +6,9 @@ using Utils = GameUtils;
 public abstract class BoardMob : BoardObject
 {
 
-    public float maxHp, hp, bonusAtk, atk, finalAtk, spd, bonusSpd, finalSpd;
+    public float maxHp, hp, bonusAtk, atk, finalAtk, spd, bonusSpd, finalSpd, armor, bonusArmor, finalArmor;
     public int atkRange, moveRange, moveCounter, cdReduction, moveCost;
+    //?moveCounter to count how many speed is used each turn
     public List<Tile> validTiles = new List<Tile>();
     public List<BoardObject> validTarget = new List<BoardObject>();
     public MobData Data => data as MobData;
@@ -43,6 +44,8 @@ public abstract class BoardMob : BoardObject
         moveRange = Data.moveRange;
         type = UnitType.Mob;
         spd = Data.speed;
+        armor = Data.armor;
+        moveCost = 1;
     }
 
 
@@ -65,6 +68,7 @@ public abstract class BoardMob : BoardObject
     {
         atk = Data.atk;
         finalAtk = atk + bonusAtk;
+        finalSpd = (spd + bonusSpd)-moveCounter;
 
     }
 
@@ -103,13 +107,18 @@ public abstract class BoardMob : BoardObject
 
     public virtual void Move()
     {
-        if (owner.star > moveCost || finalSpd > moveCost)
+        if (owner.star >= moveCost || finalSpd >= moveCost)
         {
 
             if (validTiles.Count > 0 && validTiles.Contains(owner.selectedTile))
             {
-                if (finalSpd > 0) finalSpd--;
-                else owner.star--;
+                if (finalSpd >= moveCost)
+                {
+                    finalSpd -= moveCost;
+                    moveCounter++;
+                }
+                else owner.star -= moveCost;
+
                 foreach (var tile in validTiles)
                 {
                     board.tiles[tile.x, tile.y].isHighlighted = false;
@@ -133,7 +142,7 @@ public abstract class BoardMob : BoardObject
         foreach (var tile in validTiles)
         {
             tile.isHighlighted = false;
-            if (owner.prevState == ActionState.Attack) if (tile.isOccupied && tile.activeObj.isHightlight) tile.activeObj.ToggleHightlight();
+            if (owner.prevState == ActionState.Attack) if (tile.isOccupied && tile.activeObj.isHightlight) tile.activeObj.ToggleHighlight();
         }
         if (validTarget.Count > 0) validTarget.Clear();
         validTiles.Clear();
@@ -195,7 +204,7 @@ public abstract class BoardMob : BoardObject
         foreach (var tile in validTiles)
         {
             tile.isHighlighted = false;
-            if (owner.actState == ActionState.Attack) if (tile.isOccupied) tile.activeObj.ToggleHightlight();
+            if (owner.actState == ActionState.Attack) if (tile.isOccupied) tile.activeObj.ToggleHighlight();
         }
         ResetTiles();
         owner.selectedObj = null;
@@ -220,7 +229,8 @@ public abstract class BoardMob : BoardObject
     {
         if (statusEffects.Count > 0) for (int i = statusEffects.Count - 1; i >= 0; i--) statusEffects[i].OnTurnEnd();
         if (skills.Count > 0) foreach (var skill in skills) skill.OnTurnEnd();
-        finalSpd = spd + bonusSpd;
+        moveCounter = 0;
+        finalSpd = (spd + bonusSpd);
         base.OnTurnEnd();
     }
 

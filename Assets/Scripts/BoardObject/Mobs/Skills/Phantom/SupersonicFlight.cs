@@ -49,7 +49,7 @@ public class SupersonicFlight : MobSkill
     {
         if (used)
         {
-            RemoveEffect(owner.owner.selectedObj.GetComponent<BoardMob>());
+            RemoveEffect(owner);
             used = false;
         }
     }

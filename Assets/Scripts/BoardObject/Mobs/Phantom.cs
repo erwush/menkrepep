@@ -33,16 +33,16 @@ public class Phantom : BoardMob
     {
         if (amount < 0)
         {
-            //?ternary operator, if phantasm, 0.75, if not then 0.5
             if (Mathf.Abs(amount) > maxHp)
             {
-                Mathf.Ceil(amount *= isPhantasm ? 0.75f : 0.5f);
-                MembraneSkin membraneSkin = new MembraneSkin();
-                if (!statusEffects.Contains(membraneSkin)) statusEffects.Add(membraneSkin);
-                else membraneSkin.ResetEffect();
+                //?0.25 means it is 75% damage reduction so * 0.25
+                //?ternary operator, if phantasm, 0.75, if not then 0.5
+                Mathf.Ceil(amount *= isPhantasm ? 0.25f : 0.5f);
                 if (!isPhantasm)
                 {
-                    bonusAtk -= 4;
+                    MembraneSkin membraneSkin = new MembraneSkin();
+                    if (!statusEffects.Contains(membraneSkin)) ApplyEffect(membraneSkin, this);
+                    else membraneSkin.ResetEffect();
                 }
             }
 
@@ -55,7 +55,11 @@ public class Phantom : BoardMob
     }
     public override void OnTurnStart()
     {
-        if (doNothing) owner.ChangeStar(1);
+        if (doNothing)
+        {
+            owner.ChangeStar(1);
+            if(isPhantasm) owner.ChangeUltStar(1);
+        }
         costCounter = owner.star;
         base.OnTurnStart();
 

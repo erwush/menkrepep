@@ -48,9 +48,11 @@ public class Phantasm : MobSkill
 
     public override void OnTurnFinish()
     {
+      
         if (duration > 0 && (owner as Phantom).isPhantasm)
         {
             duration--;
+              Debug.Log("duration: " + duration);
             if (duration <= 0) RemoveEffect(owner);
         }
 

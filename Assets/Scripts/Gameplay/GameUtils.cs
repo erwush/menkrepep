@@ -81,7 +81,7 @@ public static class GameUtils
 
         foreach (var tile in validTiles)
         {
-            if (tile.isOccupied && !tile.activeObj.isHightlight && highlight) tile.activeObj.ToggleHightlight();
+            if (tile.isOccupied && !tile.activeObj.isHightlight && highlight) tile.activeObj.ToggleHighlight();
         }
 
         return validTiles;

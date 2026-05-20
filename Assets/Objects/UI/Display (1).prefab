@@ -1384,6 +1384,7 @@ MonoBehaviour:
   healthText: {fileID: 1308365848569819789}
   atkText: {fileID: 3243896105219556978}
   bonusAtkText: {fileID: 6452703858182168597}
+  iconImg: {fileID: 1017251931511674987}
   displayUi: {fileID: 6683551428504862704}
   player: {fileID: 0}
 --- !u!1 &6817067832180175604

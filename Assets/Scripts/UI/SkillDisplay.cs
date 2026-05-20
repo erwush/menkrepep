@@ -8,7 +8,6 @@ public class SkillDisplay : MonoBehaviour
     public BoardMob data;
     public MobSkill skill;
     public TextMeshProUGUI nameText, descText;
-    public int index;
     public GameObject displayUi;
     public Sprite[] sprite; //0: normal, 1: selected
     public Image img;

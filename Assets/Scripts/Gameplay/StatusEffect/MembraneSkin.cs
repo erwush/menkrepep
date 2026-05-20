@@ -5,6 +5,7 @@ public class MembraneSkin : StatusEffect
 
 
     public BoardMob Owner => owner as BoardMob;
+    public bool isReducing;
 
     public MembraneSkin()
     {
@@ -22,13 +23,13 @@ public class MembraneSkin : StatusEffect
 
     public override void RemoveEffect()
     {
-        Owner.bonusAtk += 3;
+        Owner.bonusAtk += 4;
         owner.statusEffects.Remove(this);
     }
 
     public override void ApplyEffect(BoardMob target)
     {
-        Owner.bonusAtk -= 3;
+        Owner.bonusAtk -= 4;
         turnDuration = 3;
     }
 
