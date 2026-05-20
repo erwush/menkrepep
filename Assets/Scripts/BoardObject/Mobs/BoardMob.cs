@@ -7,13 +7,13 @@ public abstract class BoardMob : BoardObject
 {
 
     public float maxHp, hp, bonusAtk, atk, finalAtk, spd, bonusSpd, finalSpd;
-    public int atkRange, moveRange, moveCounter, cdReduction;
+    public int atkRange, moveRange, moveCounter, cdReduction, moveCost;
     public List<Tile> validTiles = new List<Tile>();
     public List<BoardObject> validTarget = new List<BoardObject>();
     public MobData Data => data as MobData;
     public Item heldItem;
     public List<MobSkill> skills = new List<MobSkill>();
-    
+
     public SkillData[] skillData;
     public bool canUlt;
 
@@ -25,6 +25,7 @@ public abstract class BoardMob : BoardObject
         // owner.activeUnits.Add(this.gameObject);
 
         // owner.EndAction();
+        finalSpd = spd + bonusSpd;
         Recalculate();
 
     }
@@ -90,7 +91,7 @@ public abstract class BoardMob : BoardObject
             FinishAttack();
         }
     }
-    
+
     public virtual void FinishAttack()
     {
         owner.EndAction();
@@ -102,22 +103,26 @@ public abstract class BoardMob : BoardObject
 
     public virtual void Move()
     {
-
-        if (validTiles.Count > 0 && validTiles.Contains(owner.selectedTile))
+        if (owner.star > moveCost || finalSpd > moveCost)
         {
 
-            foreach (var tile in validTiles)
+            if (validTiles.Count > 0 && validTiles.Contains(owner.selectedTile))
             {
-                board.tiles[tile.x, tile.y].isHighlighted = false;
+                if (finalSpd > 0) finalSpd--;
+                else owner.star--;
+                foreach (var tile in validTiles)
+                {
+                    board.tiles[tile.x, tile.y].isHighlighted = false;
+                }
+                currentTile.isOccupied = false;
+                currentTile.activeObj = null;
+                owner.selectedTile.isOccupied = true;
+                owner.EndAction();
+                transform.position = new Vector3(owner.selectedTile.transform.position.x, owner.selectedTile.transform.position.y + 1.5f, owner.selectedTile.transform.position.z);
+                currentTile = owner.selectedTile;
+                owner.selectedTile = null;
+                ResetTiles();
             }
-            currentTile.isOccupied = false;
-            currentTile.activeObj = null;
-            owner.selectedTile.isOccupied = true;
-            owner.EndAction();
-            transform.position = new Vector3(owner.selectedTile.transform.position.x, owner.selectedTile.transform.position.y + 1.5f, owner.selectedTile.transform.position.z);
-            currentTile = owner.selectedTile;
-            owner.selectedTile = null;
-            ResetTiles();
         }
     }
 
@@ -143,12 +148,12 @@ public abstract class BoardMob : BoardObject
 
     public override void SelectThis()
     {
-        if(statusEffects.Count > 0) foreach (var status in statusEffects) Debug.Log("status: " + status);
+        if (statusEffects.Count > 0) foreach (var status in statusEffects) Debug.Log("status: " + status);
         ResetTiles();
-        
+
         if (turn.activePlayer == owner)
         {
-            if(statusEffects.Count > 0) foreach (var status in statusEffects) Debug.Log("status: " + status);
+            if (statusEffects.Count > 0) foreach (var status in statusEffects) Debug.Log("status: " + status);
             if (owner.actState == ActionState.Move)
             {
                 if (owner.selectedObj != gameObject && owner.activeUnits.Contains(owner.selectedObj)) owner.selectedObj.GetComponent<BoardObject>().UnselectThis();
@@ -160,7 +165,7 @@ public abstract class BoardMob : BoardObject
             {
                 if (owner.selectedObj != gameObject && owner.activeUnits.Contains(owner.selectedObj)) owner.selectedObj.GetComponent<BoardObject>().UnselectThis();
                 owner.selectedObj = gameObject;
-                
+
                 validTiles = Utils.GetValidTargets(currentTile, Data.atkDir, atkRange, true);
                 foreach (var tile in validTiles) if (tile.isOccupied) validTarget.Add(tile.activeObj);
                 owner.SelectMobSkill(this);
@@ -179,7 +184,7 @@ public abstract class BoardMob : BoardObject
                     turn.activePlayer.selectedSkill.ApplyEffect(this);
                     turn.activePlayer.selectedObj.GetComponent<BoardMob>().FinishAttack();
                 }
-                
+
             }
         }
     }
@@ -199,28 +204,29 @@ public abstract class BoardMob : BoardObject
 
     public override void OnActionDone()
     {
-        if(statusEffects.Count > 0) for(int i = statusEffects.Count - 1; i >= 0; i--) statusEffects[i].OnActionDone();
-        if(skills.Count > 0) foreach (var skill in skills) skill.OnActionDone();
+        if (statusEffects.Count > 0) for (int i = statusEffects.Count - 1; i >= 0; i--) statusEffects[i].OnActionDone();
+        if (skills.Count > 0) foreach (var skill in skills) skill.OnActionDone();
         base.OnActionDone();
     }
 
     public override void OnTurnStart()
     {
-        if(statusEffects.Count > 0) for(int i = statusEffects.Count - 1; i >= 0; i--) statusEffects[i].OnTurnStart();
-        if(skills.Count > 0) foreach (var skill in skills) skill.OnTurnStart();
+        if (statusEffects.Count > 0) for (int i = statusEffects.Count - 1; i >= 0; i--) statusEffects[i].OnTurnStart();
+        if (skills.Count > 0) foreach (var skill in skills) skill.OnTurnStart();
         base.OnTurnStart();
     }
 
     public override void OnTurnEnd()
     {
-        if(statusEffects.Count > 0) for(int i = statusEffects.Count - 1; i >= 0; i--) statusEffects[i].OnTurnEnd();
-        if(skills.Count > 0) foreach (var skill in skills) skill.OnTurnEnd();
+        if (statusEffects.Count > 0) for (int i = statusEffects.Count - 1; i >= 0; i--) statusEffects[i].OnTurnEnd();
+        if (skills.Count > 0) foreach (var skill in skills) skill.OnTurnEnd();
+        finalSpd = spd + bonusSpd;
         base.OnTurnEnd();
     }
 
     public override void OnTurnFinish()
     {
-        if(statusEffects.Count > 0) for(int i = statusEffects.Count - 1; i >= 0; i--) statusEffects[i].OnTurnFinish();
+        if (statusEffects.Count > 0) for (int i = statusEffects.Count - 1; i >= 0; i--) statusEffects[i].OnTurnFinish();
         if (skills.Count > 0) foreach (var skill in skills) skill.OnTurnFinish();
         base.OnTurnFinish();
     }

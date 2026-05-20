@@ -16,16 +16,18 @@ public class Phantasm : MobSkill
     public override void OnSelected()
     {
         owner.owner.isTargeting = true;
+        owner.owner.RefreshButton();
     }
 
     public override void OnUnselected()
     {
         owner.owner.isTargeting = false;
+        owner.owner.RefreshButton();
     }
 
     public override void ApplyEffect(BoardMob target)
     {
-        if (owner.owner.ultStar >= 20 && owner.canUlt && owner.owner.star >= cost)
+        if (owner.owner.ultStar >= 20 && owner.canUlt && owner.owner.star >= cost && owner.heldItem is PhantomItem)
         {
             owner.owner.ChangeStar(-data.cost);
             owner.owner.ChangeUltStar(-20);
@@ -39,6 +41,7 @@ public class Phantasm : MobSkill
             duration = 20;
             owner.canUlt = false;
             owner.owner.isTargeting = false;
+            owner.owner.RefreshButton();
         }
     }
 

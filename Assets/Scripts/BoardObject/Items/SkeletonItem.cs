@@ -4,9 +4,10 @@ using UnityEngine;
 public class SkeletonItem : Item
 {
 
-    
+
     public override void SetItem(BoardMob target)
     {
+        if (target.heldItem != null) return;
         if (target is not Skeleton)
         {
             target.owner.selectedObj = null;
@@ -16,7 +17,7 @@ public class SkeletonItem : Item
         int dice = Random.Range(1, 10);
         if (dice == 9)
         {
-            
+
             SkeletonItem item = target.AddComponent<SkeletonItem>();
             item.data = Data;
             item.type = UnitType.Item;

@@ -15,8 +15,15 @@ public class Phantom : BoardMob
         skills.Add(new SupersonicFlight(this));
         skills.Add(new Phantasm(this));
         base.Awake();
-        
 
+
+
+    }
+
+    public override void Start()
+    {
+        base.Start();
+        costCounter = -1;
     }
 
 
@@ -57,6 +64,7 @@ public class Phantom : BoardMob
     public override void OnTurnEnd()
     {
         if (costCounter == owner.star) doNothing = true;
+        else doNothing = false;
         base.OnTurnEnd();
     }
 }

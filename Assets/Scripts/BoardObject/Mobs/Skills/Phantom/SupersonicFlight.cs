@@ -18,11 +18,13 @@ public class SupersonicFlight : MobSkill
     public override void OnSelected()
     {
         owner.owner.isTargeting = true;
+        owner.owner.RefreshButton();
     }
 
     public override void OnUnselected()
     {
         owner.owner.isTargeting = false;
+        owner.owner.RefreshButton();
     }
 
     public override void ApplyEffect(BoardMob target)
@@ -34,6 +36,7 @@ public class SupersonicFlight : MobSkill
             duration = cooldown - owner.cdReduction;
             used = true;
             owner.owner.isTargeting = false;
+            owner.owner.RefreshButton();
         }
     }
 

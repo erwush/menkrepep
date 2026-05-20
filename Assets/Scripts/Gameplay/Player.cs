@@ -19,9 +19,10 @@ public class Player : MonoBehaviour
     public GameObject displayObj, displayParent, displayPanel;
     public GameObject skillDisplay, skillParent, skillPanel;
     public Dictionary<BoardMob, UnitDisplay> displays;
-    public TextMeshProUGUI starText, nameText;
+    public TextMeshProUGUI nameText, starText, ultText;
     public UiManager menu;
     public bool isTargeting;
+    public Button confirmBtn;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -75,6 +76,21 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void RefreshButton()
+    {
+        if (isTargeting)
+        {
+            confirmBtn.interactable = true;
+            confirmBtn.GetComponent<Image>().color = new Vector4(1, 1, 1, 1);
+        } else
+        {
+            confirmBtn.interactable = false;
+            confirmBtn.GetComponent<Image>().color = new Vector4(1, 1, 1, 0.5f);
+        }
+    }
+
+    
+
 
     public void EndAction()
     {
@@ -89,7 +105,6 @@ public class Player : MonoBehaviour
         }
 
         foreach (var player in TurnManager.Instance.players) player.RefreshDisplay();
-
     }
 
 
@@ -103,7 +118,9 @@ public class Player : MonoBehaviour
             }
         }
         starText.text = star.ToString();
+        ultText.text = ultStar.ToString();
         nameText.text = playerName;
+        RefreshButton();
     }
 
     public void RegisterUnit(GameObject obj)

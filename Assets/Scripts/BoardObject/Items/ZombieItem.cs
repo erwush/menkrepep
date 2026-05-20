@@ -7,6 +7,8 @@ public class ZombieItem : Item
 
     public override void SetItem(BoardMob target)
     {
+        if (target.heldItem != null) return;
+
         if (target is not Zombie)
         {
             target.owner.selectedObj = null;
@@ -16,7 +18,7 @@ public class ZombieItem : Item
         int dice = Random.Range(1, 10);
         if (dice == 9)
         {
-            
+
             ZombieItem item = target.AddComponent<ZombieItem>();
             item.data = Data;
             item.type = UnitType.Item;

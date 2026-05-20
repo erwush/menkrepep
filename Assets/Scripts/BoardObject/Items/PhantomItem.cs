@@ -5,6 +5,7 @@ public class PhantomItem : Item
 {
     public override void SetItem(BoardMob target)
     {
+        if (target.heldItem != null) return;
         if (target is not Phantom)
         {
             target.owner.selectedObj = null;
