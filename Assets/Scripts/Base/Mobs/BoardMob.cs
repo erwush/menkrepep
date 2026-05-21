@@ -176,8 +176,6 @@ public abstract class BoardMob : BoardObject
                 owner.selectedObj = gameObject;
 
                 owner.SelectMobSkill(this);
-                validTiles = Utils.GetValidTargets(currentTile, Data.atkDir, atkRange, true);
-                foreach (var tile in validTiles) if (tile.isOccupied) validTarget.Add(tile.activeObj);
             }
             else if (owner.actState == ActionState.Place && owner.selectedObj.GetComponent<BoardObject>().type == UnitType.Item) owner.selectedObj.GetComponent<Item>().SetItem(this);
         }
@@ -187,25 +185,31 @@ public abstract class BoardMob : BoardObject
             if (turn.activePlayer.actState == ActionState.Attack && turn.activePlayer.selectedObj != null)
             {
 
-                if (turn.activePlayer.selectedSkill == null) turn.activePlayer.selectedObj.GetComponent<BoardMob>().Attack(this);
-                else
-                {
+                
+                
+                
                     turn.activePlayer.selectedSkill.ApplyEffect(this);
                     turn.activePlayer.selectedObj.GetComponent<BoardMob>().FinishAttack();
-                }
+                
 
             }
         }
     }
 
+    public virtual void HighlightTarget()
+    {
+        foreach (var tile in validTiles) if (tile.isOccupied)
+            {
+                validTarget.Add(tile.activeObj);
+                tile.activeObj.ToggleHighlight();
+            }
+        
+    }
+
     public override void UnselectThis()
     {
+        if(owner.selectedSkill != null) owner.selectedSkill.OnUnselected();
         owner.UnselectMob();
-        foreach (var tile in validTiles)
-        {
-            tile.isHighlighted = false;
-            if (owner.actState == ActionState.Attack) if (tile.isOccupied) tile.activeObj.ToggleHighlight();
-        }
         ResetTiles();
         owner.selectedObj = null;
     }

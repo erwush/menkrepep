@@ -43,13 +43,13 @@ public class SkillDisplay : MonoBehaviour
 
     public void SelectSkill()
     {
-        foreach (var disp in player.menu.selectedDisplay) if (disp != this) disp.Unselect();
+        foreach (var disp in player.menu.selectedDisplay) if (disp != this) disp.UnselectSkill();
         player.selectedSkill = skill;
         if (player.selectedSkill != null) player.selectedSkill.OnSelected();
         img.sprite = sprite[1];
     }
 
-    public void Unselect()
+    public void UnselectSkill()
     {
         img.sprite = sprite[0];
         if(skill != null) skill.OnUnselected();
