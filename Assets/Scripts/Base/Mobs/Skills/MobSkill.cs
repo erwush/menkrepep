@@ -4,7 +4,7 @@ public abstract class MobSkill
 {
 
     public BoardMob owner;
-    public int cost, cooldown, duration;
+    public int cost, ultCost, cooldown, duration;
     public string skillName, skillDesc;
     public SkillData data;
     public bool used;

@@ -5,8 +5,8 @@ public class SkillData : ScriptableObject
 {
 
     public string skillName, skillDesc;
-    public int cost, cooldown;
-    public int atkRange = 1;
+    public int cost, ultCost, cooldown;
+    public int atkRange;
     public RangeType rangeType;
     public Vector2Int[] atkDir = new Vector2Int[]{
         new (0, 1),   // atas

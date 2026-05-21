@@ -87,9 +87,10 @@ public static class GameUtils
         return validTiles;
     }
     
-    public static float CalculateMobDamage(BoardMob source, BoardMob target)
+    public static float CalculateMobDamage(BoardMob source, BoardMob target, bool ignoreArmor = false)
     {
         float damage = source.finalAtk;
+        if(!ignoreArmor) damage -= target.armor;
         foreach (var status in source.statusEffects)
         {
             damage = status.ModifyValue(ModifyType.DamageDealt, damage);

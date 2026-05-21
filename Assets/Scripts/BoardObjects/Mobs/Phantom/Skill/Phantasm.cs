@@ -10,6 +10,7 @@ public class Phantasm : MobSkill
         skillName = data.skillName;
         skillDesc = data.skillDesc;
         cost = data.cost;
+        ultCost = data.ultCost;
         cooldown = data.cooldown;
     }
 
@@ -27,10 +28,10 @@ public class Phantasm : MobSkill
 
     public override void ApplyEffect(BoardMob target)
     {
-        if (owner.owner.ultStar >= 20 && owner.canUlt && owner.owner.star >= cost && owner.heldItem is PhantomItem)
+        if (owner.owner.ultStar >= ultCost && owner.canUlt && owner.owner.star >= cost && owner.heldItem is PhantomItem)
         {
             owner.owner.ChangeStar(-data.cost);
-            owner.owner.ChangeUltStar(-20);
+            owner.owner.ChangeUltStar(-ultCost);
             owner.cdReduction += 1;
             Phantom phantom = owner as Phantom;
             phantom.isPhantasm = true;

@@ -43,6 +43,7 @@ public class Skeleton : BoardMob
         base.Awake();
         skills.Add(new NormalAttack(this));
         skills.Add(new ChargedShot(this));
+        skills.Add(new OverchargedShot(this));
         validRolls.Add(1);
         validRolls.Add(9);
         critValue = 3;

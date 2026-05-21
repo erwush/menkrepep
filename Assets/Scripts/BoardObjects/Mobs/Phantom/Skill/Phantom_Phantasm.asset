@@ -15,4 +15,16 @@ MonoBehaviour:
   skillName: Phantasm
   skillDesc: +1 Cooldown Reduction, Enhance Haunt and Membrane Skin. 20 Turns Duration
   cost: 6
+  ultCost: 20
   cooldown: 0
+  atkRange: 0
+  rangeType: 0
+  atkDir:
+  - {x: 0, y: 1}
+  - {x: 0, y: -1}
+  - {x: 1, y: 0}
+  - {x: -1, y: 0}
+  - {x: 1, y: 1}
+  - {x: 1, y: -1}
+  - {x: -1, y: 1}
+  - {x: -1, y: -1}

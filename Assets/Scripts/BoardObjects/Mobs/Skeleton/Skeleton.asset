@@ -23,8 +23,12 @@ MonoBehaviour:
   moveRange: 1
   speed: 0
   moveCost: 1
-  category: 0
   sprite: {fileID: 21300000, guid: 4586413ff75e2264daaa815b778b4061, type: 3}
+  category: 0
+  skillData:
+  - {fileID: 11400000, guid: fa041e2126db61d4286ed13ac866d307, type: 2}
+  - {fileID: 11400000, guid: 2adb63656051b7d4998fb24942add47f, type: 2}
+  - {fileID: 11400000, guid: 214aec2d36cbbe54392181cc9733e5ed, type: 2}
   moveDir:
   - {x: 0, y: 1}
   - {x: 0, y: -1}

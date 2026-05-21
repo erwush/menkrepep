@@ -13,6 +13,14 @@ MonoBehaviour:
   m_Name: Skeleton_Charged Shot
   m_EditorClassIdentifier: 
   skillName: Charged Shot
-  skillDesc: deal 175% attack with quadruple damage when crit
+  skillDesc: deal 175% attack with quadruple damage when crit. has a +1 attack range
   cost: 3
+  ultCost: 0
   cooldown: 0
+  atkRange: 1
+  rangeType: 0
+  atkDir:
+  - {x: 0, y: 1}
+  - {x: 0, y: -1}
+  - {x: 1, y: 0}
+  - {x: -1, y: 0}
