@@ -159,9 +159,6 @@ public class Player : MonoBehaviour
             Destroy(disp.gameObject);
         }
         menu.selectedDisplay.Clear();
-        SkillDisplay display = Instantiate(skillDisplay, skillParent.transform).GetComponent<SkillDisplay>();
-        display.Setup(null);
-        menu.selectedDisplay.Add(display);
         foreach (var skill in mob.skills)
         {
             SkillDisplay disp = Instantiate(skillDisplay, skillParent.transform).GetComponent<SkillDisplay>();
