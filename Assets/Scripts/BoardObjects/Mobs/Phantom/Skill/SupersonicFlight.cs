@@ -13,6 +13,8 @@ public class SupersonicFlight : MobSkill
         skillDesc = data.skillDesc;
         cost = data.cost;
         cooldown = data.cooldown;
+        costDesc = "Cost: " + GameUtils.NBSP + cost + GameUtils.NBSP + " Star" + " | " +
+                    "Cooldown: " + GameUtils.NBSP + cooldown + GameUtils.NBSP + "Turns";
     }
 
     public override void OnSelected()

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public static class GameUtils
 {
+    //?nbsp  = non breaking space, bair textnya gk kepisah pindah baris. kalau pindah bakaln 1 kalimat
+    public const string NBSP = "\u00A0";
     public static List<Tile> GetValidTiles(Tile currentTile, Vector2Int[] directions, int range, bool hightlight, bool ignoreOccupied = false)
     {
         BoardManager board = BoardManager.Instance;

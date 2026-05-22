@@ -17,8 +17,6 @@ public class Phantom : BoardMob
         skills.Add(new SupersonicFlight(this));
         skills.Add(new Phantasm(this));
 
-
-
     }
 
     public override void Start()

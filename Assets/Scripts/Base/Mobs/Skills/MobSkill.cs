@@ -5,9 +5,11 @@ public abstract class MobSkill
 
     public BoardMob owner;
     public int cost, ultCost, cooldown, duration;
-    public string skillName, skillDesc;
+    public string skillName, skillDesc, costDesc;
     public SkillData data;
     public bool used;
+    
+    // protected string nbsp = "\u00A0";
 
 
 
@@ -33,8 +35,6 @@ public abstract class MobSkill
             owner.validTiles = GameUtils.GetAreaTiles(owner.currentTile, range, true);
         }
         owner.HighlightTarget();
-
-
     }
 
     public virtual void OnUnselected()
@@ -46,5 +46,6 @@ public abstract class MobSkill
         }
     }
 
+    public virtual void RefreshCost() {}
 
 }

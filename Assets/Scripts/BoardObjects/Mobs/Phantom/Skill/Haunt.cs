@@ -14,6 +14,9 @@ public class Haunt : MobSkill
         cost = data.cost;
         cooldown = data.cooldown;
         hauntDur = 4;
+        //? result: Cost: 1 Star
+        costDesc = "Cost: " + GameUtils.NBSP + cost + GameUtils.NBSP + " Star" + " | " +
+                    "Cooldown: " + GameUtils.NBSP + cooldown + GameUtils.NBSP + "Turns";
 
 
     }
@@ -46,5 +49,7 @@ public class Haunt : MobSkill
             duration--;
         }
     }
+
+    
 
 }

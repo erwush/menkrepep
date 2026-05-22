@@ -57,6 +57,7 @@ public class Player : MonoBehaviour
         {
             prevState = actState;
             actState = newState;
+            if (prevState == ActionState.Attack) UnselectMob();
             if (activeUnits.Contains(selectedObj) && (prevState == ActionState.Move || prevState == ActionState.Attack)) selectedObj.GetComponent<BoardObject>().SelectThis();
             for (int i = 0; i < actBtn.Length; i++)
             {

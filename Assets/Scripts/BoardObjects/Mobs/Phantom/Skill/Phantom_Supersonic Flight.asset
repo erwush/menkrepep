@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Phantom_Supersonic Flight
   m_EditorClassIdentifier: 
   skillName: Supersonic Flight
-  skillDesc: +3 speed
+  skillDesc: Gain 3 SPD that will be removed at the end of current user's turn.
   cost: 2
+  ultCost: 0
   cooldown: 8
   atkRange: 0
   rangeType: 0

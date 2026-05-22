@@ -12,6 +12,8 @@ public class Phantasm : MobSkill
         cost = data.cost;
         ultCost = data.ultCost;
         cooldown = data.cooldown;
+        costDesc = "Cost: " + GameUtils.NBSP + cost + GameUtils.NBSP + " Star" + " | " +
+                    "Ult: " + GameUtils.NBSP + ultCost + GameUtils.NBSP + " Ult Star";
     }
 
     public override void OnSelected()

@@ -14,6 +14,8 @@ public class OverchargedShot : MobSkill
         cost = data.cost;
         ultCost = data.ultCost;
         cooldown = data.cooldown;
+        costDesc = "Cost: " + GameUtils.NBSP + cost + GameUtils.NBSP + " Star" + " | " +
+                    "Ult: " + GameUtils.NBSP + ultCost + GameUtils.NBSP + " Ult Star";
 
 
     }

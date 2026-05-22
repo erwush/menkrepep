@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
-
+using TMPro;
 
 public class UiManager : MonoBehaviour
 {
@@ -9,8 +9,10 @@ public class UiManager : MonoBehaviour
 
     public static UiManager Instance;
     public TurnManager turn = TurnManager.Instance;
-    public GameObject displayPanel;
+    public GameObject displayPanel, detailUi;
+    public TextMeshProUGUI nameDetail, descDetail, costDetail;
     public List<SkillDisplay> selectedDisplay;
+    public bool detailOpen;
 
     public Dictionary<string, bool> displayUi = new Dictionary<string, bool>();
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -57,6 +59,11 @@ public class UiManager : MonoBehaviour
         Animator anim = turn.activePlayer.displayPanel.GetComponent<Animator>();
         if (displayUi["isRotated"]) anim.Play("Close");
         else anim.Play("Open");
+    }
 
+    public void CloseDetail()
+    {
+        detailUi.SetActive(false);
+        detailOpen = false;
     }
 }

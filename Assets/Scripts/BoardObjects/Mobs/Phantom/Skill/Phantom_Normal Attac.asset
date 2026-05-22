@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Phantom_Normal Attac
   m_EditorClassIdentifier: 
   skillName: Normal Attack
-  skillDesc: deal 100% attack
+  skillDesc: Deals damage equal to 100% ATK.
   cost: 1
+  ultCost: 0
   cooldown: 0
   atkRange: 0
   rangeType: 0

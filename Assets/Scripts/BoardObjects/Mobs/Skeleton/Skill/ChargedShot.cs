@@ -14,6 +14,7 @@ public class ChargedShot : MobSkill
         cost = data.cost;
         cooldown = data.cooldown;
         critValue = (owner as Skeleton).critValue + 1;
+        costDesc = "Cost: " + GameUtils.NBSP + cost + GameUtils.NBSP + " Star";
 
 
     }

@@ -7,12 +7,22 @@ public class SkillDisplay : MonoBehaviour
 {
     public BoardMob data;
     public MobSkill skill;
-    public TextMeshProUGUI nameText, descText;
-    public GameObject displayUi;
+    public TextMeshProUGUI nameText, descText, nameDetail, descDetail, costDetail;
+    public GameObject displayUi, detailUi;
     public Sprite[] sprite; //0: normal, 1: selected
     public Image img;
     public Player player;
     public bool isSelected;
+    public UiManager menu;
+
+    public void Start()
+    {
+        menu = UiManager.Instance;
+        nameDetail = menu.nameDetail;
+        descDetail = menu.descDetail;
+        costDetail = menu.costDetail;
+        detailUi = menu.detailUi;
+    }
 
 
     public void UpdateUI()
@@ -54,6 +64,18 @@ public class SkillDisplay : MonoBehaviour
         img.sprite = sprite[0];
         if(skill != null) skill.OnUnselected();
     }
+
+    public void OpenDetail()
+    {
+        if(!menu.detailOpen) detailUi.SetActive(true);
+        nameDetail.text = skill.skillName;
+        descDetail.text = skill.skillDesc;
+        costDetail.text = skill.costDesc;
+        menu.detailOpen = true;
+        // costDetail.text;
+    }
+    
+
 
 
 

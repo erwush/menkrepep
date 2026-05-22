@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Phantom_Haunt
   m_EditorClassIdentifier: 
   skillName: Haunt
-  skillDesc: damage and haunt target
+  skillDesc: Deals damage equal to 100% ATK and inflict Haunted which will makes
+    them unable to deal more than 5 damages. Remove the debuff after 4 turns.
   cost: 3
+  ultCost: 0
   cooldown: 8
   atkRange: 0
   rangeType: 0
