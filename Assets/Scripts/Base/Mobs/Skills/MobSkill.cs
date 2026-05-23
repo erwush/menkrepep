@@ -28,11 +28,11 @@ public abstract class MobSkill
         int range = data.atkRange + owner.atkRange;
         if (data.rangeType == RangeType.Single)
         {
-            owner.validTiles = GameUtils.GetValidTiles(owner.currentTile, data.atkDir, range, true);
+            owner.validTiles = GameUtils.GetValidTargets(owner.currentTile, data.atkDir, range, true);
         }
         else if (data.rangeType == RangeType.Area)
         {
-            owner.validTiles = GameUtils.GetAreaTiles(owner.currentTile, range, true);
+            owner.validTiles = GameUtils.GetAreaTiles(owner.currentTile, range, true, true);
         }
         owner.HighlightTarget();
     }

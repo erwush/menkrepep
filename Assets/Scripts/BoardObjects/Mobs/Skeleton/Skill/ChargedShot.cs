@@ -31,7 +31,7 @@ public class ChargedShot : MobSkill
                 {
                     dmg *= critValue;
                 }
-                dmg = GameUtils.CalculateMobDamage(owner, target);
+                dmg = GameUtils.CalculateMobDamage(dmg, owner, target);
                 target.ChangeHealth(-dmg);
                 owner.owner.isTargeting = false;
                 owner.owner.RefreshButton();

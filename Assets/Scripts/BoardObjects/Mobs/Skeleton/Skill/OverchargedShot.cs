@@ -28,12 +28,12 @@ public class OverchargedShot : MobSkill
                 owner.owner.ChangeStar(-cost);
                 owner.owner.ChangeUltStar(-ultCost);
                 int dice = Random.Range(1, 10);
-                float dmg = owner.finalAtk;
+                float dmg = owner.finalAtk * 7.5f;
                 if ((owner as Skeleton ).validRolls.Contains(dice))
                 {
                     dmg *= critValue;
                 }
-                dmg = GameUtils.CalculateMobDamage(owner, target, true);
+                dmg = GameUtils.CalculateMobDamage(dmg, owner, target, true);
                 target.ChangeHealth(-dmg);
                 owner.owner.isTargeting = false;
                 owner.owner.RefreshButton();

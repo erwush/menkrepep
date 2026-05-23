@@ -91,7 +91,8 @@ public abstract class BoardMob : BoardObject
     {
         if (validTarget.Contains(target))
         {
-            float dmg = Utils.CalculateMobDamage(this, target);
+            float dmg = finalAtk;
+            dmg = Utils.CalculateMobDamage(dmg, this, target);
             target.ChangeHealth(-dmg);
         }
     }
@@ -174,7 +175,6 @@ public abstract class BoardMob : BoardObject
             {
                 if (owner.selectedObj != gameObject && owner.activeUnits.Contains(owner.selectedObj)) owner.selectedObj.GetComponent<BoardObject>().UnselectThis();
                 owner.selectedObj = gameObject;
-
                 owner.SelectMobSkill(this);
             }
             else if (owner.actState == ActionState.Place && owner.selectedObj.GetComponent<BoardObject>().type == UnitType.Item) owner.selectedObj.GetComponent<Item>().SetItem(this);
@@ -184,10 +184,6 @@ public abstract class BoardMob : BoardObject
             //? kalau unitnya beda owner dengna turn sekarang berarti pengen nyerang dan bukan select
             if (turn.activePlayer.actState == ActionState.Attack && turn.activePlayer.selectedObj != null)
             {
-
-                
-                
-                
                     turn.activePlayer.selectedSkill.ApplyEffect(this);
                     turn.activePlayer.selectedObj.GetComponent<BoardMob>().FinishAttack();
                 

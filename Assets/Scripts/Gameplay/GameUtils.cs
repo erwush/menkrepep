@@ -55,7 +55,7 @@ public static class GameUtils
         return validTiles;
     }
 
-    public static List<Tile> GetValidTargets(Tile currentTile, Vector2Int[] directions, int range, bool highlight)
+    public static List<Tile> GetValidTargets(Tile currentTile, Vector2Int[] directions, int range, bool highlight, bool ignoreOccupied = false)
     {
         BoardManager board = BoardManager.Instance;
         List<Tile> validTiles = new List<Tile>();
@@ -74,7 +74,7 @@ public static class GameUtils
                 {
                     validTiles.Add(tile);
                     if (highlight) tile.isHighlighted = true;
-                    if (tile.isOccupied) break;
+                    if (tile.isOccupied && !ignoreOccupied) break;
                 }
 
 
@@ -89,9 +89,9 @@ public static class GameUtils
         return validTiles;
     }
     
-    public static float CalculateMobDamage(BoardMob source, BoardMob target, bool ignoreArmor = false)
+    public static float CalculateMobDamage(float dmg, BoardMob source, BoardMob target, bool ignoreArmor = false)
     {
-        float damage = source.finalAtk;
+        float damage = dmg;
         if(!ignoreArmor) damage -= target.armor;
         foreach (var status in source.statusEffects)
         {

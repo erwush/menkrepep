@@ -58,9 +58,8 @@ public class Skeleton : BoardMob
             {
                 dmg *= critValue;
             }
-            dmg = Utils.CalculateMobDamage(this, target);
+            dmg = Utils.CalculateMobDamage(dmg, this, target);
             target.ChangeHealth(-dmg);
-            owner.EndAction();
 
             owner.selectedTile = null;
             ResetTiles();

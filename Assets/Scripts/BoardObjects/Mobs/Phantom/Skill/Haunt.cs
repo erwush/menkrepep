@@ -26,8 +26,9 @@ public class Haunt : MobSkill
         {
             if (duration <= 0 && owner.owner.star >= cost)
             {
-                float demeg = GameUtils.CalculateMobDamage(owner, target);
-                target.ChangeHealth(-demeg);
+                float dmg = owner.finalAtk;
+                dmg = GameUtils.CalculateMobDamage(dmg, owner, target);
+                target.ChangeHealth(-dmg);
                 owner.owner.ChangeStar(-cost);
                 target.ApplyEffect(new Haunted(hauntDur, target), owner);
                 duration = cooldown - owner.cdReduction;
