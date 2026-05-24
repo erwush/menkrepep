@@ -3,7 +3,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ItemData", menuName = "Item")]
 public class ItemData : ObjectData
 {
-    public string itemName, itemDesc;
+
+    public string itemName;
+    
+    [TextArea(3, 10)]public string itemDesc;
 
 
 

@@ -4,7 +4,8 @@ using UnityEngine;
 public class SkillData : ScriptableObject
 {
 
-    public string skillName, skillDesc;
+    public string skillName; 
+    [TextArea(3, 10)] public string skillDesc;
     public int cost, ultCost, cooldown;
     public int atkRange;
     public RangeType rangeType;
