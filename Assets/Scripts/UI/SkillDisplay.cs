@@ -14,10 +14,12 @@ public class SkillDisplay : MonoBehaviour
     public Player player;
     public bool isSelected;
     public UiManager menu;
+    public ExplainSystem explain;
 
     public void Start()
     {
         menu = UiManager.Instance;
+        explain = ExplainSystem.Instance;
         nameDetail = menu.nameDetail;
         descDetail = menu.descDetail;
         costDetail = menu.costDetail;
@@ -73,6 +75,11 @@ public class SkillDisplay : MonoBehaviour
         costDetail.text = skill.costDesc;
         menu.detailOpen = true;
         // costDetail.text;
+    }
+
+    public void ShowExplanation()
+    {
+        
     }
     
 

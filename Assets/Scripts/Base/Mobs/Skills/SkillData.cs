@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "SkillData", menuName = "Skill")]
 public class SkillData : ScriptableObject
@@ -9,6 +10,7 @@ public class SkillData : ScriptableObject
     public int cost, ultCost, cooldown;
     public int atkRange;
     public RangeType rangeType;
+    public List<ExplainData> explanation = new List<ExplainData>();
     public Vector2Int[] atkDir = new Vector2Int[]{
         new (0, 1),   // atas
         new (0, -1),  // bawah
