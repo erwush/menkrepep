@@ -33,13 +33,14 @@ public class Player : MonoBehaviour
         displays = new Dictionary<BoardMob, UnitDisplay>();
         RefreshDisplay();
     }
-    
+
     public void Awake()
     {
         menu = UiManager.Instance;
     }
 
-    public void ConfirmAttack(){
+    public void ConfirmAttack()
+    {
         if (actState == ActionState.Attack)
         {
             if (isTargeting)
@@ -83,14 +84,15 @@ public class Player : MonoBehaviour
         {
             confirmBtn.interactable = true;
             confirmBtn.GetComponent<Image>().color = new Vector4(1, 1, 1, 1);
-        } else
+        }
+        else
         {
             confirmBtn.interactable = false;
             confirmBtn.GetComponent<Image>().color = new Vector4(1, 1, 1, 0.5f);
         }
     }
 
-    
+
 
 
     public void EndAction()
@@ -127,7 +129,7 @@ public class Player : MonoBehaviour
     public void RegisterUnit(GameObject obj)
     {
         activeUnits.Add(obj);
-        
+
         // Debug.Log(obj.name);
         BoardObject unit = obj.GetComponent<BoardObject>();
         if (unit is BoardMob mob)
@@ -162,23 +164,26 @@ public class Player : MonoBehaviour
         menu.selectedDisplay.Clear();
         foreach (var skill in mob.skills)
         {
-            SkillDisplay disp = Instantiate(skillDisplay, skillParent.transform).GetComponent<SkillDisplay>();
-            disp.Setup(skill);
-            menu.selectedDisplay.Add(disp);
+            if (skill.data.skillType == SkillType.Active)
+            {
+                SkillDisplay disp = Instantiate(skillDisplay, skillParent.transform).GetComponent<SkillDisplay>();
+                disp.Setup(skill);
+                menu.selectedDisplay.Add(disp);
+            }
         }
         menu.selectedDisplay[0].SelectSkill();
     }
 
-    
+
 
     public void UnselectMob()
     {
-        foreach (var disp in menu.selectedDisplay) Destroy(disp.gameObject); 
+        foreach (var disp in menu.selectedDisplay) Destroy(disp.gameObject);
         menu.selectedDisplay.Clear();
-        
+
     }
-    
-    
+
+
 
     public void ChangeStar(int amount)
     {
@@ -186,7 +191,7 @@ public class Player : MonoBehaviour
         if (star > maxStar) star = maxStar;
         if (star < 0) star = 0;
     }
-    
+
     public void ChangeUltStar(int amount)
     {
         ultStar += amount;
@@ -194,7 +199,7 @@ public class Player : MonoBehaviour
         if (ultStar < 0) ultStar = 0;
     }
 
-    
+
 }
 
 public enum ActionState

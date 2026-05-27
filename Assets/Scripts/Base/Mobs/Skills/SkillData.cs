@@ -7,8 +7,8 @@ public class SkillData : ScriptableObject
 
     public string skillName; 
     [TextArea(3, 10)] public string skillDesc;
-    public int cost, ultCost, cooldown;
-    public int atkRange;
+    public int cost, ultCost, cooldown, atkRange, value;
+    public SkillType skillType;
     public RangeType rangeType;
     public List<ExplainData> explanation = new List<ExplainData>();
     public Vector2Int[] atkDir = new Vector2Int[]{
@@ -22,11 +22,21 @@ public class SkillData : ScriptableObject
         new (-1, 1),  // kiri atas
         new (-1, -1), // kiri bawah
     };
+
+    
+
+    
 }
 
 public enum RangeType
 {
+    Self,
     Single,
     Area,
 
+}
+
+public enum SkillType {
+    Passive,
+    Active,
 }

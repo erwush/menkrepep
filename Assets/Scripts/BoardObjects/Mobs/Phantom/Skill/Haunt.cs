@@ -8,13 +8,20 @@ public class Haunt : MobSkill
     {
         this.owner = owner;
 
-        data = owner.skillData[1];
+        foreach(var data in owner.skillData)
+        {
+            if (data.skillName == "Haunt")
+            {
+                this.data = data;
+                break;
+            }
+        }
         skillName = data.skillName;
         skillDesc = data.skillDesc;
         cost = data.cost;
         cooldown = data.cooldown;
         hauntDur = 4;
-        //? result: Cost: 1 Star
+        //? result: Cost: x Star | Cooldown: x Turns
         costDesc = "Cost: " + GameUtils.NBSP + cost + GameUtils.NBSP + " Star" + " | " +
                     "Cooldown: " + GameUtils.NBSP + cooldown + GameUtils.NBSP + "Turns";
 

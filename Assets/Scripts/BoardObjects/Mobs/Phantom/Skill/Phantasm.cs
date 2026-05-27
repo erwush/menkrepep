@@ -6,12 +6,20 @@ public class Phantasm : MobSkill
     public Phantasm(BoardMob owner)
     {
         this.owner = owner;
-        data = owner.skillData[3];
+        foreach(var data in owner.skillData)
+        {
+            if (data.skillName == "Phantasm")
+            {
+                this.data = data;
+                break;
+            }
+        }
         skillName = data.skillName;
         skillDesc = data.skillDesc;
         cost = data.cost;
         ultCost = data.ultCost;
         cooldown = data.cooldown;
+        //? result: Cost: x Star | Ult: x Ult Star
         costDesc = "Cost: " + GameUtils.NBSP + cost + GameUtils.NBSP + " Star" + " | " +
                     "Ult: " + GameUtils.NBSP + ultCost + GameUtils.NBSP + " Ult Star";
     }

@@ -10,21 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dfc0dceb96a934b4194fecb100cecec9, type: 3}
-  m_Name: Phantom_Haunt
+  m_Name: Skeleton_Ranged
   m_EditorClassIdentifier: 
-  skillName: Haunt
-  skillDesc: Deals damage equal to 100% ATK and inflict Haunted which will makes
-    them unable to deal more than 5 damages. Remove the debuff after 4 turns.
-  cost: 3
+  skillName: Ranged
+  skillDesc: Have an attack range of 3
+  cost: 0
   ultCost: 0
-  cooldown: 8
+  cooldown: 0
   atkRange: 0
-  value: 0
-  skillType: 1
-  rangeType: 1
+  value: 3
+  skillType: 0
+  rangeType: 0
   explanation: []
-  atkDir:
-  - {x: 0, y: 1}
-  - {x: 0, y: -1}
-  - {x: 1, y: 0}
-  - {x: -1, y: 0}
+  atkDir: []

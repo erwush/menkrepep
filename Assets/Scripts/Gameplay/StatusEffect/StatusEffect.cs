@@ -6,7 +6,7 @@ public class StatusEffect
     public string statusName;
     [TextArea(3, 10)] public string statusDesc;
     public BoardObject source, owner;
-    public int turnDuration;
+    public int startDuration, turnDuration, effectLevel;
     public EffectTag effectTag;
 
     public virtual void OnTurnStart() { }

@@ -8,12 +8,20 @@ public class ChargedShot : MobSkill
     {
         this.owner = owner;
 
-        data = owner.skillData[1];
+        foreach (var data in owner.skillData)
+        {
+            if (data.skillName == "Charged Shot")
+            {
+                this.data = data;
+                break;
+            }
+        }
         skillName = data.skillName;
         skillDesc = data.skillDesc;
         cost = data.cost;
         cooldown = data.cooldown;
         critValue = (owner as Skeleton).critValue + 1;
+        //? result: Cost: x Star
         costDesc = "Cost: " + GameUtils.NBSP + cost + GameUtils.NBSP + " Star";
 
 
@@ -25,13 +33,8 @@ public class ChargedShot : MobSkill
             if (owner.owner.star >= cost)
             {
                 owner.owner.ChangeStar(-cost);
-                int dice = Random.Range(1, 10);
                 float dmg = owner.finalAtk * 1.75f;
-                if ((owner as Skeleton ).validRolls.Contains(dice))
-                {
-                    dmg *= critValue;
-                }
-                dmg = GameUtils.CalculateMobDamage(dmg, owner, target);
+                dmg = GameUtils.CalculateMobDamage(dmg, owner, target, false, 1);
                 target.ChangeHealth(-dmg);
                 owner.owner.isTargeting = false;
                 owner.owner.RefreshButton();

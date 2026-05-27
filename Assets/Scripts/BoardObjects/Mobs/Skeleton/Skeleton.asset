@@ -19,13 +19,15 @@ MonoBehaviour:
   maxHp: 20
   atk: 3
   armor: 0
-  atkRange: 3
+  atkRange: 0
   moveRange: 1
   speed: 0
   moveCost: 1
   sprite: {fileID: 21300000, guid: 4586413ff75e2264daaa815b778b4061, type: 3}
   category: 0
   skillData:
+  - {fileID: 11400000, guid: 5a02eb7485952114093b464fbb1e82a2, type: 2}
+  - {fileID: 11400000, guid: 918605c616dd0234aab00b6ab18fa519, type: 2}
   - {fileID: 11400000, guid: fa041e2126db61d4286ed13ac866d307, type: 2}
   - {fileID: 11400000, guid: 2adb63656051b7d4998fb24942add47f, type: 2}
   - {fileID: 11400000, guid: 214aec2d36cbbe54392181cc9733e5ed, type: 2}

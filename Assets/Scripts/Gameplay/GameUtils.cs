@@ -89,14 +89,14 @@ public static class GameUtils
         return validTiles;
     }
     
-    public static float CalculateMobDamage(float dmg, BoardMob source, BoardMob target, bool ignoreArmor = false)
+    public static float CalculateMobDamage(float dmg, BoardMob source, BoardMob target, bool ignoreArmor = false, float value = 0)
     {
         float damage = dmg;
-        if(!ignoreArmor) damage -= target.armor;
-        foreach (var status in source.statusEffects)
-        {
-            damage = status.ModifyValue(ModifyType.DamageDealt, damage);
-        }
+        foreach (var skill in source.skills) damage = skill.ModifyValue(ModifyType.DamageDealt, damage);
+        foreach (var status in source.statusEffects)  damage = status.ModifyValue(ModifyType.DamageDealt, damage);
+        if (!ignoreArmor) damage -= target.armor;
+        foreach (var skill in target.skills) damage = skill.ModifyValue(ModifyType.DamageTaken, damage);
+        foreach (var status in target.statusEffects) damage = status.ModifyValue(ModifyType.DamageTaken, damage);
         return damage;
     }
 }

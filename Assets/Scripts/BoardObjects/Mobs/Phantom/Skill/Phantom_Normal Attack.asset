@@ -10,26 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dfc0dceb96a934b4194fecb100cecec9, type: 3}
-  m_Name: Phantom_Phantasm
+  m_Name: Phantom_Normal Attack
   m_EditorClassIdentifier: 
-  skillName: Phantasm
-  skillDesc: For 20 turns, Membrane Skin will no longer reduce Phantom's ATK and
-    its damage reduction is now 75% instead 50%.<br>Haunted inflicted from Haunts
-    have its duration increased by 2 turns. Also gain +1 Cooldown Reduction.
-  cost: 6
-  ultCost: 20
+  skillName: Normal Attack
+  skillDesc: Deals damage equal to 100% ATK.
+  cost: 1
+  ultCost: 0
   cooldown: 0
   atkRange: 0
-  value: 0
   skillType: 1
-  rangeType: 0
+  rangeType: 1
   explanation: []
   atkDir:
   - {x: 0, y: 1}
   - {x: 0, y: -1}
   - {x: 1, y: 0}
   - {x: -1, y: 0}
-  - {x: 1, y: 1}
-  - {x: 1, y: -1}
-  - {x: -1, y: 1}
-  - {x: -1, y: -1}

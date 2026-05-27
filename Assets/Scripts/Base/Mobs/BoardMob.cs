@@ -55,6 +55,11 @@ public abstract class BoardMob : BoardObject
         Mathf.Round(amount);
         if (amount < 0)
         {
+            foreach (var skill in skills)
+            {
+                amount = skill.ModifyValue(ModifyType.DamageTaken, amount); 
+            }
+            
             foreach (var status in statusEffects)
             {
                 amount = status.ModifyValue(ModifyType.DamageTaken, amount);
@@ -69,7 +74,7 @@ public abstract class BoardMob : BoardObject
     {
         atk = Data.atk;
         finalAtk = atk + bonusAtk;
-        finalSpd = (spd + bonusSpd)-moveCounter;
+        finalSpd = (spd + bonusSpd) - moveCounter;
 
     }
 
@@ -82,9 +87,9 @@ public abstract class BoardMob : BoardObject
     {
         if (Immunities.Contains(effect.effectTag)) return;
         statusEffects.Add(effect);
-        effect.ApplyEffect(this);
         effect.owner = this;
         effect.source = source;
+        effect.ApplyEffect(this);
     }
 
     public virtual void Attack(BoardMob target)
@@ -184,9 +189,9 @@ public abstract class BoardMob : BoardObject
             //? kalau unitnya beda owner dengna turn sekarang berarti pengen nyerang dan bukan select
             if (turn.activePlayer.actState == ActionState.Attack && turn.activePlayer.selectedObj != null)
             {
-                    turn.activePlayer.selectedSkill.ApplyEffect(this);
-                    turn.activePlayer.selectedObj.GetComponent<BoardMob>().FinishAttack();
-                
+                turn.activePlayer.selectedSkill.ApplyEffect(this);
+                turn.activePlayer.selectedObj.GetComponent<BoardMob>().FinishAttack();
+
 
             }
         }
@@ -199,12 +204,12 @@ public abstract class BoardMob : BoardObject
                 validTarget.Add(tile.activeObj);
                 tile.activeObj.ToggleHighlight();
             }
-        
+
     }
 
     public override void UnselectThis()
     {
-        if(owner.selectedSkill != null) owner.selectedSkill.OnUnselected();
+        if (owner.selectedSkill != null) owner.selectedSkill.OnUnselected();
         owner.UnselectMob();
         ResetTiles();
         owner.selectedObj = null;

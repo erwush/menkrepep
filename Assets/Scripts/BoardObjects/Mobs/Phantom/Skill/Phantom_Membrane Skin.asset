@@ -10,17 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dfc0dceb96a934b4194fecb100cecec9, type: 3}
-  m_Name: Phantom_Normal Attac
+  m_Name: Phantom_Membrane Skin
   m_EditorClassIdentifier: 
-  skillName: Normal Attack
-  skillDesc: Deals damage equal to 100% ATK.
-  cost: 1
+  skillName: Membrane Skin
+  skillDesc: If Phantom took a damage that is more than its Max HP, reduce the damage
+    by 50% rounded down. Gain Weakness IV for 3 turns when this effect is triggered.
+    Repeated trigger reset the duration.
+  cost: 0
   ultCost: 0
   cooldown: 0
   atkRange: 0
+  value: 0
+  skillType: 0
   rangeType: 0
+  explanation: []
   atkDir:
   - {x: 0, y: 1}
   - {x: 0, y: -1}
   - {x: 1, y: 0}
   - {x: -1, y: 0}
+  - {x: 1, y: 1}
+  - {x: 1, y: -1}
+  - {x: -1, y: 1}
+  - {x: -1, y: -1}

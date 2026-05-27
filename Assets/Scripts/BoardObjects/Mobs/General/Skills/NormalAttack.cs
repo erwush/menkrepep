@@ -6,7 +6,14 @@ public class NormalAttack : MobSkill
     public NormalAttack(BoardMob owner)
     {
         this.owner = owner;
-        data = owner.skillData[0];
+        foreach(var data in owner.skillData)
+        {
+            if (data.skillName == "Normal Attack")
+            {
+                this.data = data;
+                break;
+            }
+        }
         skillName = data.skillName;
         skillDesc = data.skillDesc;
         cost = data.cost;

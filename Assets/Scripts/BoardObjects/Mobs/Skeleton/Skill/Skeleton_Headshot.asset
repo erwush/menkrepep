@@ -10,18 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dfc0dceb96a934b4194fecb100cecec9, type: 3}
-  m_Name: Phantom_Phantasm
+  m_Name: Skeleton_Headshot
   m_EditorClassIdentifier: 
-  skillName: Phantasm
-  skillDesc: For 20 turns, Membrane Skin will no longer reduce Phantom's ATK and
-    its damage reduction is now 75% instead 50%.<br>Haunted inflicted from Haunts
-    have its duration increased by 2 turns. Also gain +1 Cooldown Reduction.
-  cost: 6
-  ultCost: 20
+  skillName: Headshot
+  skillDesc: Everytime Skeleton deals damage, roll a dice. If its 1 or 9. The damage
+    is tripled.
+  cost: 0
+  ultCost: 0
   cooldown: 0
   atkRange: 0
-  value: 0
-  skillType: 1
+  value: 3
+  skillType: 0
   rangeType: 0
   explanation: []
   atkDir:

@@ -41,30 +41,32 @@ public class Skeleton : BoardMob
     public override void Awake()
     {
         base.Awake();
+        skills.Add(new Ranged(this));
+        skills.Add(new Headshot(this));
         skills.Add(new NormalAttack(this));
         skills.Add(new ChargedShot(this));
         skills.Add(new OverchargedShot(this));
         validRolls.Add(1);
         validRolls.Add(9);
-        critValue = 3;
+        // critValue = 3;
     }
-    public override void Attack(BoardMob target)
-    {
-        if (validTarget.Contains(target))
-        {
-            int dice = Random.Range(1, 10);
-            float dmg = finalAtk;
-            if (validRolls.Contains(dice))
-            {
-                dmg *= critValue;
-            }
-            dmg = Utils.CalculateMobDamage(dmg, this, target);
-            target.ChangeHealth(-dmg);
+    // public override void Attack(BoardMob target)
+    // {
+    //     if (validTarget.Contains(target))
+    //     {
+    //         int dice = Random.Range(1, 10);
+    //         float dmg = finalAtk;
+    //         if (validRolls.Contains(dice))
+    //         {
+    //             dmg *= critValue;
+    //         }
+    //         dmg = Utils.CalculateMobDamage(dmg, this, target);
+    //         target.ChangeHealth(-dmg);
 
-            owner.selectedTile = null;
-            ResetTiles();
-        }
-    }
+    //         owner.selectedTile = null;
+    //         ResetTiles();
+    //     }
+    // }
 
 
 
