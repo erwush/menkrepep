@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Phantom_Membrane Skin
   m_EditorClassIdentifier: 
   skillName: Membrane Skin
-  skillDesc: If Phantom took a damage that is more than its Max HP, reduce the damage
-    by 50% rounded down. Gain Weakness IV for 3 turns when this effect is triggered.
-    Repeated trigger reset the duration.
+  skillDesc: Jika Phantom menerima Damage yang lebih besar dari Max HP dirinya, Damage
+    tersebut akan dikurangi sebesar 50% (dibulatkan ke bawah). Jika efek ini terpicu,
+    Phantom akan mendapatkan <b><u>Weakness</u></b> IV selama 2 giliran pengguna.
+    Pemicuan berulang akan mengembalikan durasi.
   cost: 0
   ultCost: 0
   cooldown: 0
@@ -23,7 +24,8 @@ MonoBehaviour:
   value: 0
   skillType: 0
   rangeType: 0
-  explanation: []
+  explanation:
+  - {fileID: 11400000, guid: 236aede6cecbd8949bfe58aa1e375040, type: 2}
   atkDir:
   - {x: 0, y: 1}
   - {x: 0, y: -1}

@@ -21,9 +21,9 @@ public class OverchargedShot : MobSkill
         cost = data.cost;
         ultCost = data.ultCost;
         cooldown = data.cooldown;
-        //? result: Cost: x Star | Ult: x Ult Star
-        costDesc = "Cost: " + GameUtils.NBSP + cost + GameUtils.NBSP + " Star" + " | " +
-                    "Ult: " + GameUtils.NBSP + ultCost + GameUtils.NBSP + " Ult Star";
+        //? result: Cost: x Star | Ult: x Star
+        costDesc = "Cost: " + GameUtils.NBSP + cost + GameUtils.NBSP + " Shard" + " | " +
+                    "Ult: " + GameUtils.NBSP + ultCost + GameUtils.NBSP + " Star";
 
 
     }
@@ -48,11 +48,11 @@ public class OverchargedShot : MobSkill
     }
 
 
-    public override void OnTurnFinish()
+    public override void OnAnyTurnEnd()
     {
-        if (duration > 0)
+        if (curCooldown > 0)
         {
-            duration--;
+            curCooldown--;
         }
     }
 }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Phantom_Flying
   m_EditorClassIdentifier: 
   skillName: Flying
-  skillDesc: Gain +1 Spd.
+  skillDesc: Memiliki +1 <b><u>SPD</u></b>.
   cost: 0
   ultCost: 0
   cooldown: 0
@@ -21,7 +21,8 @@ MonoBehaviour:
   value: 1
   skillType: 0
   rangeType: 0
-  explanation: []
+  explanation:
+  - {fileID: 11400000, guid: 16aad8f723bb07643975a7a57f7232fb, type: 2}
   atkDir:
   - {x: 0, y: 1}
   - {x: 0, y: -1}

@@ -120,8 +120,8 @@ public class Player : MonoBehaviour
                 disp.Value.UpdateUI();
             }
         }
-        starText.text = star.ToString();
-        ultText.text = ultStar.ToString();
+        starText.text = $"{star}<size=75%>/{maxStar}</size>";
+        ultText.text = $"{ultStar}<br><size=75%>/{maxUltStar}</size>";
         nameText.text = playerName;
         RefreshButton();
     }
@@ -164,14 +164,22 @@ public class Player : MonoBehaviour
         menu.selectedDisplay.Clear();
         foreach (var skill in mob.skills)
         {
-            if (skill.data.skillType == SkillType.Active)
-            {
                 SkillDisplay disp = Instantiate(skillDisplay, skillParent.transform).GetComponent<SkillDisplay>();
                 disp.Setup(skill);
                 menu.selectedDisplay.Add(disp);
-            }
+            // if (skill.data.skillType == SkillType.Active)
+            // {
+            // }
         }
-        menu.selectedDisplay[0].SelectSkill();
+        foreach(var disp in menu.selectedDisplay)
+        {
+            if (disp.skill.data.skillType == SkillType.Active)
+            {
+                disp.SelectSkill();
+                break;
+            }
+
+        }
     }
 
 

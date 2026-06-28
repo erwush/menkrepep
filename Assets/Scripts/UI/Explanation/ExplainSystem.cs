@@ -30,10 +30,26 @@ public class ExplainSystem : MonoBehaviour
             activeObj.Add(obj);
         }
     }
-    
+
     public void CloseExplain()
     {
+
         explainUi.SetActive(false);
+    }
+
+    public void SetupExplain(SkillData data)
+    {
+        foreach (var obj in activeObj) Destroy(obj);
+        activeExplain.Clear();
+        activeObj.Clear();
+        foreach (var exp in data.explanation) activeExplain.Add(exp);
+    }
+    
+    public void ResetExplain()
+    {
+        foreach (var obj in activeObj) Destroy(obj);
+        activeExplain.Clear();
+        activeObj.Clear();
     }
 
 }

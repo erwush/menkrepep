@@ -22,7 +22,7 @@ public class Haunt : MobSkill
         cooldown = data.cooldown;
         hauntDur = 4;
         //? result: Cost: x Star | Cooldown: x Turns
-        costDesc = "Cost: " + GameUtils.NBSP + cost + GameUtils.NBSP + " Star" + " | " +
+        costDesc = "Cost: " + GameUtils.NBSP + cost + GameUtils.NBSP + " Shard" + " | " +
                     "Cooldown: " + GameUtils.NBSP + cooldown + GameUtils.NBSP + "Turns";
 
 
@@ -31,14 +31,14 @@ public class Haunt : MobSkill
     {
         if (owner.validTarget.Contains(target))
         {
-            if (duration <= 0 && owner.owner.star >= cost)
+            if (curCooldown <= 0 && owner.owner.star >= cost)
             {
                 float dmg = owner.finalAtk;
                 dmg = GameUtils.CalculateMobDamage(dmg, owner, target);
                 target.ChangeHealth(-dmg);
                 owner.owner.ChangeStar(-cost);
                 target.ApplyEffect(new Haunted(hauntDur, target), owner);
-                duration = cooldown - owner.cdReduction;
+                curCooldown = cooldown - owner.cdReduction;
 
 
             }
@@ -50,11 +50,11 @@ public class Haunt : MobSkill
     }
 
 
-    public override void OnTurnFinish()
+    public override void OnAnyTurnEnd()
     {
-        if (duration > 0)
+        if (curCooldown > 0)
         {
-            duration--;
+            curCooldown--;
         }
     }
 

@@ -5,22 +5,18 @@ public class Weakness : StatusEffect
 
 
     public BoardMob Owner => owner as BoardMob;
-    public bool isReducing;
+    // public bool isReducing;
     
 
-    public Weakness(int duration, int level)
+    public Weakness(int duration, int level, DurationType durType)
     {
         startDuration = duration;
         turnDuration = duration;
         effectLevel = level;
         effectTag = EffectTag.Debuff;
+        durationType = durType;
     }
 
-    public override void OnTurnStart()
-    {
-        if (turnDuration > 0) turnDuration--;
-        if (turnDuration <= 0) RemoveEffect();
-    }
 
 
 
@@ -40,6 +36,9 @@ public class Weakness : StatusEffect
     {
         turnDuration = startDuration;
     }
+    
+    
+    
     
 
 }

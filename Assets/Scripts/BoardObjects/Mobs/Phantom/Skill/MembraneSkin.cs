@@ -36,7 +36,7 @@ public class MembraneSkin : MobSkill
                 Mathf.Ceil(value *= phantom.isPhantasm ? 0.25f : 0.5f);
                 if (!phantom.isPhantasm)
                 {
-                    Weakness weakness = new Weakness(3, 4);
+                    Weakness weakness = new Weakness(2, 4, DurationType.SelfTurnStart);
                     if (!phantom.statusEffects.Contains(weakness)) owner.ApplyEffect(weakness, this.owner);
                     else weakness.ResetEffect();
                 }

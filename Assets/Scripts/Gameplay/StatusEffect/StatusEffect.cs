@@ -8,10 +8,44 @@ public class StatusEffect
     public BoardObject source, owner;
     public int startDuration, turnDuration, effectLevel;
     public EffectTag effectTag;
+    public DurationType durationType;
 
-    public virtual void OnTurnStart() { }
-    public virtual void OnTurnEnd() { }
-    public virtual void OnTurnFinish() {}
+    public virtual void OnSelfTurnStart()
+    {
+        if (durationType == DurationType.SelfTurnStart)
+        {
+            if (turnDuration > 0) turnDuration--;
+            if (turnDuration <= 0) RemoveEffect();
+        }
+    }
+
+    public virtual void OnSelfTurnEnd()
+    {
+        if (durationType == DurationType.SelfTurnEnd)
+        {
+            if (turnDuration > 0) turnDuration--;
+            if (turnDuration <= 0) RemoveEffect();
+        }
+    }
+
+    public virtual void OnAnyTurnStart()
+    {
+        if (durationType == DurationType.AnyTurnStart)
+        {
+            if (turnDuration > 0) turnDuration--;
+            if (turnDuration <= 0) RemoveEffect();
+        }
+    }
+
+
+    public virtual void OnAnyTurnEnd()
+    {
+        if (durationType == DurationType.AnyTurnEnd)
+        {
+            if (turnDuration > 0) turnDuration--;
+            if (turnDuration <= 0) RemoveEffect();
+        }
+    }
     public virtual void ApplyEffect(BoardMob target) { }
     public virtual void OnActionDone() { }
 
@@ -22,12 +56,21 @@ public class StatusEffect
 
     public virtual void ResetEffect() { }
     public virtual float ModifyValue(ModifyType type, float value) { return value; }
-    
+
 }
 
 public enum ModifyType
 {
     DamageDealt,
     DamageTaken,
+
+}
+
+public enum DurationType
+{
+    SelfTurnStart,
+    SelfTurnEnd,
+    AnyTurnStart,
+    AnyTurnEnd,
 
 }

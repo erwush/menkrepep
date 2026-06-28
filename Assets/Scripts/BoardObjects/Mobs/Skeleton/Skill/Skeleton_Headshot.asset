@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Skeleton_Headshot
   m_EditorClassIdentifier: 
   skillName: Headshot
-  skillDesc: Everytime Skeleton deals damage, roll a dice. If its 1 or 9. The damage
-    is tripled.
+  skillDesc: Setiap kali Skeleton mengakibatkan damage, segera lempar dadu. Jika
+    hasilnya adalah 1 atau 9, damage yang diakibatkan adalah Critical yang akan dikali
+    3.
   cost: 0
   ultCost: 0
   cooldown: 0

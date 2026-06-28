@@ -13,15 +13,19 @@ MonoBehaviour:
   m_Name: Skeleton_Overcharged Shot
   m_EditorClassIdentifier: 
   skillName: Overcharged Shot
-  skillDesc: Deal 750% attack damage. has +1 attack range. This attack ignore armor.
+  skillDesc: Mengakibatkan Damage sebesar 750% ATK. Serangan ini akan mengabaikan
+    <b><u>DEF</u></b> dan memiliki +1 <b><u>ATK Range</u></b>
   cost: 6
   ultCost: 20
   cooldown: 0
   atkRange: 1
   value: 0
+  isUltimate: 1
   skillType: 1
   rangeType: 1
-  explanation: []
+  explanation:
+  - {fileID: 11400000, guid: 10426157cfd2d56488b4ba5e8925deb8, type: 2}
+  - {fileID: 11400000, guid: 51159a580c0b7d74283b2775c9e96978, type: 2}
   atkDir:
   - {x: 0, y: 1}
   - {x: 0, y: -1}

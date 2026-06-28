@@ -28,7 +28,7 @@ public class Insomnia : MobSkill
 
     }
 
-    public override void OnTurnStart()
+    public override void OnSelfTurnStart()
     {
         if (doNothing)
         {
@@ -36,14 +36,14 @@ public class Insomnia : MobSkill
             if ((owner as Phantom).isPhantasm) owner.owner.ChangeUltStar(1);
         }
         costCounter = owner.owner.star;
-        base.OnTurnStart();
+        base.OnSelfTurnStart();
     }
 
-    public override void OnTurnEnd()
+    public override void OnSelfTurnEnd()
     {
          if (costCounter == owner.owner.star) doNothing = true;
         else doNothing = false;
-        base.OnTurnEnd();
+        base.OnSelfTurnEnd();
     }
 
 }

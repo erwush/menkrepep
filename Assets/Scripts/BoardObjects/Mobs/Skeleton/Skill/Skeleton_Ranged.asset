@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Skeleton_Ranged
   m_EditorClassIdentifier: 
   skillName: Ranged
-  skillDesc: Have an attack range of 3
+  skillDesc: Memiliki +3 <b><u>ATK Range</u></b>
   cost: 0
   ultCost: 0
   cooldown: 0
@@ -21,5 +21,6 @@ MonoBehaviour:
   value: 3
   skillType: 0
   rangeType: 0
-  explanation: []
+  explanation:
+  - {fileID: 11400000, guid: 10426157cfd2d56488b4ba5e8925deb8, type: 2}
   atkDir: []

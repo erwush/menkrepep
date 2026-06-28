@@ -9,10 +9,11 @@ public class UiManager : MonoBehaviour
 
     public static UiManager Instance;
     public TurnManager turn = TurnManager.Instance;
+    public ExplainSystem explain = ExplainSystem.Instance;
     public GameObject displayPanel, detailUi;
     public TextMeshProUGUI nameDetail, descDetail, costDetail;
     public List<SkillDisplay> selectedDisplay;
-    public bool detailOpen;
+    public bool detailOpen, explainOpen;
 
     public Dictionary<string, bool> displayUi = new Dictionary<string, bool>();
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -21,6 +22,7 @@ public class UiManager : MonoBehaviour
         selectedDisplay = new List<SkillDisplay>();
         displayUi.Add("isRotated", false);
         displayUi.Add("isOpen", true);
+        explain= ExplainSystem.Instance;
 
     }
 
@@ -64,6 +66,13 @@ public class UiManager : MonoBehaviour
     public void CloseDetail()
     {
         detailUi.SetActive(false);
+        explain.CloseExplain();
         detailOpen = false;
+    }
+
+    public void ToggleExplain()
+    {
+        if(explainOpen) explain.CloseExplain();
+        if(explain.activeExplain.Count > 0) explain.ShowExplain();
     }
 }

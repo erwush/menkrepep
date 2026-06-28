@@ -13,7 +13,7 @@
 //         effectTag = EffectTag.Buff;
 //     }
 
-//     public override void OnTurnStart()
+//     public override void OnSelfTurnStart()
 //     {
 //         if (turnDuration > 0) turnDuration--;
 //         if (turnDuration <= 0) RemoveEffect();

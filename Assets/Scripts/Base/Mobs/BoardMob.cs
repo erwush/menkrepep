@@ -7,7 +7,7 @@ public abstract class BoardMob : BoardObject
 {
 
     public float maxHp, hp, bonusAtk, atk, finalAtk, spd, bonusSpd, finalSpd, armor, bonusArmor, finalArmor;
-    public int atkRange, moveRange, moveCounter, cdReduction, moveCost;
+    public int atkRange, moveRange, moveCounter, cdReduction, moveCost, costReduction;
     //?moveCounter to count how many speed is used each turn
     public List<Tile> validTiles = new List<Tile>();
     public List<BoardObject> validTarget = new List<BoardObject>();
@@ -223,27 +223,34 @@ public abstract class BoardMob : BoardObject
         base.OnActionDone();
     }
 
-    public override void OnTurnStart()
+    public override void OnSelfTurnStart()
     {
-        if (statusEffects.Count > 0) for (int i = statusEffects.Count - 1; i >= 0; i--) statusEffects[i].OnTurnStart();
-        if (skills.Count > 0) foreach (var skill in skills) skill.OnTurnStart();
-        base.OnTurnStart();
+        if (statusEffects.Count > 0) for (int i = statusEffects.Count - 1; i >= 0; i--) statusEffects[i].OnSelfTurnStart();
+        if (skills.Count > 0) foreach (var skill in skills) skill.OnSelfTurnStart();
+        base.OnSelfTurnStart();
     }
 
-    public override void OnTurnEnd()
+    public override void OnSelfTurnEnd()
     {
-        if (statusEffects.Count > 0) for (int i = statusEffects.Count - 1; i >= 0; i--) statusEffects[i].OnTurnEnd();
-        if (skills.Count > 0) foreach (var skill in skills) skill.OnTurnEnd();
+        if (statusEffects.Count > 0) for (int i = statusEffects.Count - 1; i >= 0; i--) statusEffects[i].OnSelfTurnEnd();
+        if (skills.Count > 0) foreach (var skill in skills) skill.OnSelfTurnEnd();
         moveCounter = 0;
         finalSpd = (spd + bonusSpd);
-        base.OnTurnEnd();
+        base.OnSelfTurnEnd();
     }
 
-    public override void OnTurnFinish()
+    public override void OnAnyTurnStart()
     {
-        if (statusEffects.Count > 0) for (int i = statusEffects.Count - 1; i >= 0; i--) statusEffects[i].OnTurnFinish();
-        if (skills.Count > 0) foreach (var skill in skills) skill.OnTurnFinish();
-        base.OnTurnFinish();
+        if (statusEffects.Count > 0) for (int i = statusEffects.Count - 1; i >= 0; i--) statusEffects[i].OnAnyTurnStart();
+        if (skills.Count > 0) foreach (var skill in skills) skill.OnAnyTurnStart();
+        base.OnAnyTurnStart();
+    }
+
+    public override void OnAnyTurnEnd()
+    {
+        if (statusEffects.Count > 0) for (int i = statusEffects.Count - 1; i >= 0; i--) statusEffects[i].OnAnyTurnEnd();
+        if (skills.Count > 0) foreach (var skill in skills) skill.OnAnyTurnEnd();
+        base.OnAnyTurnEnd();
     }
 
 

@@ -4,7 +4,8 @@ public abstract class MobSkill
 {
 
     public BoardMob owner;
-    public int cost, ultCost, cooldown, duration;
+    //?cur = current
+    public int cost, ultCost, cooldown, curCooldown;
     public string skillName;
     [TextArea(3, 10)] public string skillDesc, costDesc;
     public SkillData data;
@@ -14,9 +15,10 @@ public abstract class MobSkill
 
 
 
-    public virtual void OnTurnStart() { }
-    public virtual void OnTurnEnd() { }
-    public virtual void OnTurnFinish() { }
+    public virtual void OnSelfTurnStart() { }
+    public virtual void OnSelfTurnEnd() { }
+    public virtual void OnAnyTurnStart() { }
+    public virtual void OnAnyTurnEnd() { }
     public virtual void ApplyEffect(BoardMob target) { }
     public virtual void OnActionDone() { }
     public virtual void OnDamageTaken(float amount) { }

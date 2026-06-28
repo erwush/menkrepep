@@ -21,7 +21,7 @@ public class SupersonicFlight : MobSkill
         cost = data.cost;
         cooldown = data.cooldown;
         //? result: Cost: x Star | Cooldown: x Turns
-        costDesc = "Cost: " + GameUtils.NBSP + cost + GameUtils.NBSP + " Star" + " | " +
+        costDesc = "Cost: " + GameUtils.NBSP + cost + GameUtils.NBSP + " Shard" + " | " +
                     "Cooldown: " + GameUtils.NBSP + cooldown + GameUtils.NBSP + "Turns";
     }
 
@@ -39,11 +39,11 @@ public class SupersonicFlight : MobSkill
 
     public override void ApplyEffect(BoardMob target)
     {
-        if (duration <= 0 && owner.owner.star >= cost)
+        if (curCooldown <= 0 && owner.owner.star >= cost)
         {
             owner.owner.ChangeStar(-cost);
             owner.bonusSpd += 3;
-            duration = cooldown - owner.cdReduction;
+            curCooldown = cooldown - owner.cdReduction;
             used = true;
             owner.owner.isTargeting = false;
             owner.owner.RefreshButton();
@@ -55,7 +55,7 @@ public class SupersonicFlight : MobSkill
         owner.bonusSpd -= 3;
     }
 
-    public override void OnTurnEnd()
+    public override void OnSelfTurnEnd()
     {
         if (used)
         {
@@ -64,11 +64,11 @@ public class SupersonicFlight : MobSkill
         }
     }
 
-    public override void OnTurnFinish()
+    public override void OnAnyTurnEnd()
     {
-        if (duration > 0)
+        if (curCooldown > 0)
         {
-            duration--;
+            curCooldown--;
         }
     }
 

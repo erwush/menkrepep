@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Phantom_Insomnia
   m_EditorClassIdentifier: 
   skillName: Insomnia
-  skillDesc: If user Star is the same as it is when the user's turn started, get
-    1 Star at the start of the next user's turn.
+  skillDesc: Jika Shard yang dimiliki di akhir giliran sama dengan ketika mengawali
+    giliran, segera mendapatkan 1 Shard di awal giliran selanjutnya.
   cost: 0
   ultCost: 0
   cooldown: 0

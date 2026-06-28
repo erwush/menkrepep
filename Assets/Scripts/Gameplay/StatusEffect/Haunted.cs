@@ -21,7 +21,7 @@ public class Haunted : StatusEffect
         return value;
     }
 
-    public override void OnTurnFinish()
+    public override void OnAnyTurnEnd()
     {
         turnDuration--;
         if(turnDuration <= 0) RemoveEffect();

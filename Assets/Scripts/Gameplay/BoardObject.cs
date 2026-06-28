@@ -80,13 +80,13 @@ public abstract class BoardObject : MonoBehaviour
     }
 
     //*ON-(CONDITION) EFFECT
-    public virtual void OnTurnEnd()
+    public virtual void OnSelfTurnEnd()
     {
         
         foreach(var player in TurnManager.Instance.players) player.RefreshDisplay();
     }
 
-    public virtual void OnTurnStart()
+    public virtual void OnSelfTurnStart()
     {
         
         foreach(var player in TurnManager.Instance.players) player.RefreshDisplay();
@@ -97,11 +97,18 @@ public abstract class BoardObject : MonoBehaviour
 
         foreach (var player in TurnManager.Instance.players) player.RefreshDisplay();
     }
-    
-    public virtual void OnTurnFinish()
+
+    public virtual void OnAnyTurnStart()
     {
         foreach (var player in TurnManager.Instance.players) player.RefreshDisplay();
     }
+
+    public virtual void OnAnyTurnEnd()
+    {
+        foreach (var player in TurnManager.Instance.players) player.RefreshDisplay();
+    }
+    
+
 
 
 }

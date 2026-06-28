@@ -19,9 +19,9 @@ public class Phantasm : MobSkill
         cost = data.cost;
         ultCost = data.ultCost;
         cooldown = data.cooldown;
-        //? result: Cost: x Star | Ult: x Ult Star
-        costDesc = "Cost: " + GameUtils.NBSP + cost + GameUtils.NBSP + " Star" + " | " +
-                    "Ult: " + GameUtils.NBSP + ultCost + GameUtils.NBSP + " Ult Star";
+        //? result: Cost: x Star | Ult: x Star
+        costDesc = "Cost: " + GameUtils.NBSP + cost + GameUtils.NBSP + " Shard" + " | " +
+                    "Ult: " + GameUtils.NBSP + ultCost + GameUtils.NBSP + " Star";
     }
 
     public override void OnSelected()
@@ -49,7 +49,7 @@ public class Phantasm : MobSkill
             {
                 if (skill is Haunt haunt) haunt.hauntDur += 2;
             }
-            duration = 20;
+            curCooldown = 20;
             owner.canUlt = false;
             owner.owner.isTargeting = false;
             owner.owner.RefreshButton();
@@ -57,14 +57,14 @@ public class Phantasm : MobSkill
     }
 
 
-    public override void OnTurnFinish()
+    public override void OnAnyTurnEnd()
     {
       
-        if (duration > 0 && (owner as Phantom).isPhantasm)
+        if (curCooldown > 0 && (owner as Phantom).isPhantasm)
         {
-            duration--;
-              Debug.Log("duration: " + duration);
-            if (duration <= 0) RemoveEffect(owner);
+            curCooldown--;
+              Debug.Log("curCooldown: " + curCooldown);
+            if (curCooldown <= 0) RemoveEffect(owner);
         }
 
     }

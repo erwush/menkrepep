@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Phantom_Supersonic Flight
   m_EditorClassIdentifier: 
   skillName: Supersonic Flight
-  skillDesc: Gain 3 SPD that will be removed at the end of current user's turn.
+  skillDesc: Mendapatkan 3 <b><u>SPD</u></b> yang akan hilang di akhir giliran saat
+    ini.
   cost: 2
   ultCost: 0
   cooldown: 8
@@ -21,7 +22,8 @@ MonoBehaviour:
   value: 0
   skillType: 1
   rangeType: 0
-  explanation: []
+  explanation:
+  - {fileID: 11400000, guid: 16aad8f723bb07643975a7a57f7232fb, type: 2}
   atkDir:
   - {x: 0, y: 1}
   - {x: 0, y: -1}

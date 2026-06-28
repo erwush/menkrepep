@@ -13,7 +13,7 @@ public class Campfire : BoardBlock
 
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public override void OnTurnStart()
+    public override void OnSelfTurnStart()
     {
         List<BoardMob> currentTargets = new();
         foreach (var tile in targetTiles)
@@ -41,7 +41,7 @@ public class Campfire : BoardBlock
 
         }
         foreach (var mob in currentTargets) mob.ChangeHealth(5);
-        base.OnTurnStart();
+        base.OnSelfTurnStart();
     }
     
 }

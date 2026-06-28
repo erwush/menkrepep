@@ -8,6 +8,7 @@ public class SkillData : ScriptableObject
     public string skillName; 
     [TextArea(3, 10)] public string skillDesc;
     public int cost, ultCost, cooldown, atkRange, value;
+    public bool isUltimate;
     public SkillType skillType;
     public RangeType rangeType;
     public List<ExplainData> explanation = new List<ExplainData>();

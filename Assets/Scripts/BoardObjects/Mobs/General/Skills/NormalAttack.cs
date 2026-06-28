@@ -19,7 +19,7 @@ public class NormalAttack : MobSkill
         cost = data.cost;
         cooldown = data.cooldown;
         //? result: Cost: 1 Star
-        costDesc = "Cost: " + GameUtils.NBSP + cost + GameUtils.NBSP + " Star";
+        costDesc = "Cost: " + GameUtils.NBSP + cost + GameUtils.NBSP + " Shard";
     }
     public override void ApplyEffect(BoardMob target)
     {
@@ -29,7 +29,7 @@ public class NormalAttack : MobSkill
     public override void RefreshCost()
     {
         //? result: Cost: 1 Star
-        costDesc = "Cost: " + GameUtils.NBSP + cost + GameUtils.NBSP + " Star";
+        costDesc = "Cost: " + GameUtils.NBSP + cost + GameUtils.NBSP + " Shard";
     }
 
 }

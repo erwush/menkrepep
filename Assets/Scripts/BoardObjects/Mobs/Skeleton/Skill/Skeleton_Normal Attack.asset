@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Skeleton_Normal Attack
   m_EditorClassIdentifier: 
   skillName: Normal Attack
-  skillDesc: Deal 100% damage with a chance to deal critical damage
+  skillDesc: Mengakibatkan Damage sebesar 100% ATK.
   cost: 1
   ultCost: 0
   cooldown: 0

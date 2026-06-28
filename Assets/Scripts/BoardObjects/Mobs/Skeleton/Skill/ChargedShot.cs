@@ -22,7 +22,7 @@ public class ChargedShot : MobSkill
         cooldown = data.cooldown;
         critValue = (owner as Skeleton).critValue + 1;
         //? result: Cost: x Star
-        costDesc = "Cost: " + GameUtils.NBSP + cost + GameUtils.NBSP + " Star";
+        costDesc = "Cost: " + GameUtils.NBSP + cost + GameUtils.NBSP + " Shard";
 
 
     }
@@ -43,11 +43,11 @@ public class ChargedShot : MobSkill
     }
 
 
-    public override void OnTurnFinish()
+    public override void OnAnyTurnEnd()
     {
-        if (duration > 0)
+        if (curCooldown > 0)
         {
-            duration--;
+            curCooldown--;
         }
     }
 }

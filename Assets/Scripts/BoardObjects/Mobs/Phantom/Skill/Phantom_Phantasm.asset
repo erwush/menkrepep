@@ -13,17 +13,22 @@ MonoBehaviour:
   m_Name: Phantom_Phantasm
   m_EditorClassIdentifier: 
   skillName: Phantasm
-  skillDesc: For 20 turns, Membrane Skin will no longer reduce Phantom's ATK and
-    its damage reduction is now 75% instead 50%.<br>Haunted inflicted from Haunts
-    have its duration increased by 2 turns. Also gain +1 Cooldown Reduction.
+  skillDesc: Selama 20 giliran, Membrane Skin tidak lagi memberikan <b><u>Weakness</u></b>
+    ketika terpicu dan Pengurangan Damage yang diberikan menjadi 75%. Durasi dari
+    <b><u>Haunted</u></b> yang diakibatkan oleh Haunts juga bertambah 2. Mendapatkan
+    +1 CD Reduction.
   cost: 6
   ultCost: 20
   cooldown: 0
   atkRange: 0
   value: 0
+  isUltimate: 1
   skillType: 1
   rangeType: 0
-  explanation: []
+  explanation:
+  - {fileID: 11400000, guid: 236aede6cecbd8949bfe58aa1e375040, type: 2}
+  - {fileID: 11400000, guid: f6ec25ef5ff0c8647a9d98986ca8a4ac, type: 2}
+  - {fileID: 11400000, guid: a9b76ff6901a2934d846d26bfdf5e1ab, type: 2}
   atkDir:
   - {x: 0, y: 1}
   - {x: 0, y: -1}
