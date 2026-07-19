@@ -10,8 +10,9 @@ public class Player : MonoBehaviour
     public MobSkill selectedSkill;
     public string playerName;
     public Tile selectedTile;
+    public ObjectManager inventory;
 
-    public List<GameObject> activeUnits;
+    // public List<GameObject> inventory.activeUnits;
     public ActionState actState;
     public ActionState prevState;
     public Button[] actBtn;
@@ -59,7 +60,7 @@ public class Player : MonoBehaviour
             prevState = actState;
             actState = newState;
             if (prevState == ActionState.Attack) UnselectMob();
-            if (activeUnits.Contains(selectedObj) && (prevState == ActionState.Move || prevState == ActionState.Attack)) selectedObj.GetComponent<BoardObject>().SelectThis();
+            if (inventory.activeUnits.Contains(selectedObj) && (prevState == ActionState.Move || prevState == ActionState.Attack)) selectedObj.GetComponent<BoardObject>().SelectThis();
             for (int i = 0; i < actBtn.Length; i++)
             {
                 if (actBtn[i].name.Equals(actState.ToString()))
@@ -99,7 +100,7 @@ public class Player : MonoBehaviour
     {
 
         ChangeState("Idle");
-        foreach (var unit in activeUnits)
+        foreach (var unit in inventory.activeUnits)
         {
             unit.GetComponent<BoardObject>().UnselectThis();
 
@@ -128,7 +129,7 @@ public class Player : MonoBehaviour
 
     public void RegisterUnit(GameObject obj)
     {
-        activeUnits.Add(obj);
+        inventory.activeUnits.Add(obj);
 
         // Debug.Log(obj.name);
         BoardObject unit = obj.GetComponent<BoardObject>();

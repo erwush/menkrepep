@@ -31,7 +31,7 @@ public abstract class BoardBlock : BoardObject
         effectRange = Data.effectRange;
         cost = Data.cost;
         board = BoardManager.Instance;
-        // owner.activeUnits.Add(this.gameObject);
+        // owner.inventory.activeUnits.Add(this.gameObject);
         turn = TurnManager.Instance;
     }
 

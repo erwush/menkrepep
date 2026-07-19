@@ -38,21 +38,21 @@ public class TurnManager : MonoBehaviour
         //*NOTE: Nah aku cuman kepikiran tpi kekyna bakal ada bug dmn suatu efek ketrigger 2x karen ada di anyturnend sama selfturnend dsb
         currentIndex++;
         if (currentIndex >= players.Length) currentIndex = 0;
-        foreach(var unit in activePlayer.activeUnits) unit.GetComponent<BoardObject>().OnSelfTurnEnd();
+        foreach(var unit in activePlayer.inventory.activeUnits) unit.GetComponent<BoardObject>().OnSelfTurnEnd();
         foreach(var player in players)
         {
 
             player.ChangeStar(1);
             player.ChangeUltStar(1);
             player.EndAction();
-            foreach(var unit in player.activeUnits) unit.GetComponent<BoardObject>().OnAnyTurnEnd();
+            foreach(var unit in player.inventory.activeUnits) unit.GetComponent<BoardObject>().OnAnyTurnEnd();
             player.selectedObj = null;
             player.selectedTile = null;  
         };
 
         activePlayer = players[currentIndex];
-        foreach (var unit in activePlayer.activeUnits) unit.GetComponent<BoardObject>().OnSelfTurnStart();
-        foreach(var unit in activePlayer.activeUnits) unit.GetComponent<BoardObject>().OnAnyTurnStart();
+        foreach (var unit in activePlayer.inventory.activeUnits) unit.GetComponent<BoardObject>().OnSelfTurnStart();
+        foreach(var unit in activePlayer.inventory.activeUnits) unit.GetComponent<BoardObject>().OnAnyTurnStart();
         foreach (var tile in board.tiles) tile.player = activePlayer;
         if(menu.selectedDisplay.Count > 0) foreach(var disp in menu.selectedDisplay)
             {

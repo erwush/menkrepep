@@ -23,7 +23,7 @@ public abstract class BoardMob : BoardObject
     {
         canUlt = true;
         owner = TurnManager.Instance.activePlayer;
-        // owner.activeUnits.Add(this.gameObject);
+        // owner.inventory.activeUnits.Add(this.gameObject);
 
         // owner.EndAction();
         finalSpd = spd + bonusSpd;
@@ -171,14 +171,14 @@ public abstract class BoardMob : BoardObject
             if (statusEffects.Count > 0) foreach (var status in statusEffects) Debug.Log("status: " + status);
             if (owner.actState == ActionState.Move)
             {
-                if (owner.selectedObj != gameObject && owner.activeUnits.Contains(owner.selectedObj)) owner.selectedObj.GetComponent<BoardObject>().UnselectThis();
+                if (owner.selectedObj != gameObject && owner.inventory.activeUnits.Contains(owner.selectedObj)) owner.selectedObj.GetComponent<BoardObject>().UnselectThis();
                 owner.selectedObj = gameObject;
                 validTiles = Utils.GetValidTiles(currentTile, Data.moveDir, moveRange, true);
 
             }
             else if (owner.actState == ActionState.Attack)
             {
-                if (owner.selectedObj != gameObject && owner.activeUnits.Contains(owner.selectedObj)) owner.selectedObj.GetComponent<BoardObject>().UnselectThis();
+                if (owner.selectedObj != gameObject && owner.inventory.activeUnits.Contains(owner.selectedObj)) owner.selectedObj.GetComponent<BoardObject>().UnselectThis();
                 owner.selectedObj = gameObject;
                 owner.SelectMobSkill(this);
             }
