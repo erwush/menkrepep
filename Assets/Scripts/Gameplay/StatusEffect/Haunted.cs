@@ -3,7 +3,7 @@ using UnityEngine;
 public class Haunted : StatusEffect
 {
 
-     public Haunted(int dur, BoardMob owner)
+    public Haunted(int dur, BoardMob owner)
     {
         this.owner = owner;
         turnDuration = dur;

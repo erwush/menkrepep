@@ -6,7 +6,7 @@ using Utils = GameUtils;
 public abstract class BoardMob : BoardObject
 {
 
-    public float maxHp, hp, bonusAtk, atk, finalAtk, spd, bonusSpd, finalSpd, armor, bonusArmor, finalArmor;
+    [HideInInspector]public float maxHp, hp, bonusAtk, atk, finalAtk, spd, bonusSpd, finalSpd, armor, bonusArmor, finalArmor;
     public int atkRange, moveRange, moveCounter, cdReduction, moveCost, costReduction;
     //?moveCounter to count how many speed is used each turn
     public List<Tile> validTiles = new List<Tile>();

@@ -18,16 +18,19 @@ public class ExplainSystem : MonoBehaviour
 
     public void ShowExplain()
     {
-        explainUi.SetActive(true);
-        foreach (var obj in activeObj)
+        if (activeExplain.Count > 0)
         {
-            Destroy(obj);
-        }
-        foreach (var explain in activeExplain)
-        {
-            GameObject obj = Instantiate(explanation, explainParent.transform);
-            obj.GetComponent<Explanation>().Setup(explain);
-            activeObj.Add(obj);
+            explainUi.SetActive(true);
+            foreach (var obj in activeObj)
+            {
+                Destroy(obj);
+            }
+            foreach (var explain in activeExplain)
+            {
+                GameObject obj = Instantiate(explanation, explainParent.transform);
+                obj.GetComponent<Explanation>().Setup(explain);
+                activeObj.Add(obj);
+            }
         }
     }
 
@@ -44,7 +47,7 @@ public class ExplainSystem : MonoBehaviour
         activeObj.Clear();
         foreach (var exp in data.explanation) activeExplain.Add(exp);
     }
-    
+
     public void ResetExplain()
     {
         foreach (var obj in activeObj) Destroy(obj);

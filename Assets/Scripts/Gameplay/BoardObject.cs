@@ -19,11 +19,13 @@ public abstract class BoardObject : MonoBehaviour
     public ObjectData data;
     public List<StatusEffect> statusEffects = new List<StatusEffect>();
     public List<EffectTag> Immunities;
+    
+   
 
     public virtual void Awake()
     {
-         new List<StatusEffect>();
-        if(data != null) cost = data.cost;
+        new List<StatusEffect>();
+        if (data != null) cost = data.cost;
         board = BoardManager.Instance;
         turn = TurnManager.Instance;
         menu = UiManager.Instance;
@@ -75,21 +77,21 @@ public abstract class BoardObject : MonoBehaviour
 
     public virtual void ApplyEffect(BoardObject target)
     {
-        
-        foreach(var player in TurnManager.Instance.players) player.RefreshDisplay();
+
+        foreach (var player in TurnManager.Instance.players) player.RefreshDisplay();
     }
 
     //*ON-(CONDITION) EFFECT
     public virtual void OnSelfTurnEnd()
     {
-        
-        foreach(var player in TurnManager.Instance.players) player.RefreshDisplay();
+
+        foreach (var player in TurnManager.Instance.players) player.RefreshDisplay();
     }
 
     public virtual void OnSelfTurnStart()
     {
-        
-        foreach(var player in TurnManager.Instance.players) player.RefreshDisplay();
+
+        foreach (var player in TurnManager.Instance.players) player.RefreshDisplay();
     }
 
     public virtual void OnActionDone()
@@ -107,7 +109,7 @@ public abstract class BoardObject : MonoBehaviour
     {
         foreach (var player in TurnManager.Instance.players) player.RefreshDisplay();
     }
-    
+
 
 
 
@@ -126,4 +128,11 @@ public enum EffectTag
     Block,
     Debuff,
     Buff,
+}
+
+public enum Container
+{
+    Deck,
+    Hand,
+    Discard
 }

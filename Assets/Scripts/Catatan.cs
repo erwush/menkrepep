@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Catatan : MonoBehaviour
+public class Catatan
 {
 
     //* Perbedaan OnAnyTurnEnd sama OnSelfTurnEnd

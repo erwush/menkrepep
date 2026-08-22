@@ -17,7 +17,7 @@ public abstract class Item : BoardObject
 
     public virtual void OnHeld()
     {
-       
+        
     }
     
     public virtual void OnThrown()

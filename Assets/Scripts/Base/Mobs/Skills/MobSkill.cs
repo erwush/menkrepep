@@ -1,5 +1,7 @@
 using UnityEngine;
 
+
+
 public abstract class MobSkill
 {
 
@@ -22,7 +24,7 @@ public abstract class MobSkill
     public virtual void ApplyEffect(BoardMob target) { }
     public virtual void OnActionDone() { }
     public virtual void OnDamageTaken(float amount) { }
-    public virtual void OnDamageDealt(float amount) {}
+    public virtual void OnDamageDealt(float amount) { }
     public virtual void OnHealthChange(float amount) { }
 
     public virtual float ModifyValue(ModifyType type, float value = 0, float additonalValue = 0) { return value; }
