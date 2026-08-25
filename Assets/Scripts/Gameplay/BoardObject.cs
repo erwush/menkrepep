@@ -20,7 +20,6 @@ public abstract class BoardObject : MonoBehaviour
     public List<StatusEffect> statusEffects = new List<StatusEffect>();
     public List<EffectTag> Immunities;
     
-   
 
     public virtual void Awake()
     {

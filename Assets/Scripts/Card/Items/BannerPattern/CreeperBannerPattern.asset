@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecb8bbdfc8d4b6a4e9417a64c021a9d8, type: 3}
+  m_Name: CreeperBannerPattern
+  m_EditorClassIdentifier: 
+  objName: Creeper Charge Banner Pattern
+  icon: {fileID: 21300000, guid: f365345f013f092c6acbd99d2c8f34cb, type: 3}
+  cost: 1
+  itemName: CreeperBannerPattern
+  itemDesc: 'Ketika diberikan ke Block Loom, akan memberikan efek berikut dalam radius
+    2 blok:
+
+    Ketika mob manapun dikalahkan ketika dalam radius, akan memberikan
+    DMG sebesar 20% Max HP mob yang dikalahkan terhadap mob yang berjarak 1 blok
+    dengannya.'

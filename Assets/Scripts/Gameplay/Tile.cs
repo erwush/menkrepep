@@ -38,19 +38,22 @@ public class Tile : MonoBehaviour
 
     public void TileSelect()
     {
-        if (player.actState == ActionState.Move)
+        if (player.actState == ActionState.Move && player.selectedObj != null)
         {
-
-            if (!isOccupied && player.selectedObj != null && player.actState == ActionState.Move)
-            {
-                if (player.selectedObj.GetComponent<BoardObject>().type == UnitType.Mob)
+            if (player.selectedObj.GetComponent<BoardObject>().type != UnitType.Mob)
+                return;
+            if (isOccupied)
+                return;
+            BoardMob mob = player.selectedObj.GetComponent<BoardObject>() as BoardMob;
+            if (mob.validTiles.Contains(this))
+                if (player.star >= player.selectedObj.GetComponent<BoardMob>().moveCost)
                 {
                     isOccupied = true;
                     activeObj = player.selectedObj.GetComponent<BoardObject>();
                     player.selectedTile = this;
                     player.selectedObj.GetComponent<BoardMob>().Move();
                 }
-            }
+
         }
         else if (player.actState == ActionState.Place)
         {

@@ -1,0 +1,22 @@
+using UnityEngine;
+
+public abstract class Item : BoardObject
+{
+    public int amount;
+    public BoardObject holder;
+    public ItemData Data => data as ItemData;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+
+
+
+    public virtual void SetItem(BoardBlock target) { }
+
+    public virtual void SetItem(BoardMob target) { }
+
+    public virtual void OnHeld() { }
+
+    public virtual void OnThrown() { }
+
+    public virtual void UseItem() { }
+}

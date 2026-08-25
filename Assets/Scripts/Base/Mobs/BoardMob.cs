@@ -1,9 +1,10 @@
 using Unity.Mathematics;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Utils = GameUtils;
 
-public abstract class BoardMob : BoardObject
+public abstract class BoardMob : BoardObject, IDamageable
 {
 
     [HideInInspector]public float maxHp, hp, bonusAtk, atk, finalAtk, spd, bonusSpd, finalSpd, armor, bonusArmor, finalArmor;
@@ -17,6 +18,7 @@ public abstract class BoardMob : BoardObject
 
     public SkillData[] skillData;
     public bool canUlt;
+    public event Action<IDamageable> OnDeath;
 
 
     public virtual void Start()
@@ -67,7 +69,11 @@ public abstract class BoardMob : BoardObject
         }
         hp += amount;
         if (hp > maxHp) hp = maxHp;
-        if (hp < 0) hp = 0;
+        if (hp < 0)
+        {
+            hp = 0;
+            Die();
+        }
     }
 
     public virtual void Recalculate()
@@ -81,6 +87,11 @@ public abstract class BoardMob : BoardObject
     public void ResetStats()
     {
 
+    }
+
+    public virtual void Die()
+    {
+        OnDeath?.Invoke(this);
     }
 
     public void ApplyEffect(StatusEffect effect, BoardObject source)

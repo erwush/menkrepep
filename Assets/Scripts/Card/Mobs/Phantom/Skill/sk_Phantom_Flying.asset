@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfc0dceb96a934b4194fecb100cecec9, type: 3}
+  m_Name: sk_Phantom_Flying
+  m_EditorClassIdentifier: 
+  skillName: Flying
+  skillDesc: Memiliki +1 <b><u>SPD</u></b>.
+  cost: 0
+  ultCost: 0
+  cooldown: 0
+  atkRange: 0
+  value: 1
+  isUltimate: 0
+  skillType: 0
+  rangeType: 0
+  explanation:
+  - {fileID: 11400000, guid: 16aad8f723bb07643975a7a57f7232fb, type: 2}
+  atkDir:
+  - {x: 0, y: 1}
+  - {x: 0, y: -1}
+  - {x: 1, y: 0}
+  - {x: -1, y: 0}
+  - {x: 1, y: 1}
+  - {x: 1, y: -1}
+  - {x: -1, y: 1}
+  - {x: -1, y: -1}
+  desc:
+    description: Memiliki +1 <b><u>SPD</u></b>.
+    explanation:
+    - {fileID: 11400000, guid: 16aad8f723bb07643975a7a57f7232fb, type: 2}

@@ -24,6 +24,8 @@ public class SkillData : ScriptableObject
         new (-1, -1), // kiri bawah
     };
 
+    public Description desc;
+
     
 
     

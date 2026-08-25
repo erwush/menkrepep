@@ -6,6 +6,9 @@ public static class GameUtils
 {
     //?nbsp  = non breaking space, bair textnya gk kepisah pindah baris. kalau pindah bakaln 1 kalimat
     public const string NBSP = "\u00A0";
+
+
+    //?Funcion yang biasa akan digunakan untuk mengambil tile yang valid, biasnaya untuk gerak
     public static List<Tile> GetValidTiles(Tile currentTile, Vector2Int[] directions, int range, bool hightlight, bool ignoreOccupied = false)
     {
         BoardManager board = BoardManager.Instance;
@@ -76,8 +79,6 @@ public static class GameUtils
                     if (highlight) tile.isHighlighted = true;
                     if (tile.isOccupied && !ignoreOccupied) break;
                 }
-
-
             }
         }
 

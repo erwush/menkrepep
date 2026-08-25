@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class TurnManager : MonoBehaviour
 {
@@ -8,6 +9,16 @@ public class TurnManager : MonoBehaviour
     public Player activePlayer;
     public int currentIndex;
     public BoardManager board;
+
+
+
+    [Header("Action Event")]
+    public Action OnActionDone;
+    public Action OnAnyTurnStart;
+    public Action OnAnyTurnEnd;
+    public Action OnSelfTurnStart;
+    public Action OnSelfTurnEnd;
+
 
 
 
