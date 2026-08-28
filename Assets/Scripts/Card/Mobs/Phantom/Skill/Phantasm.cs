@@ -15,7 +15,7 @@ public class Phantasm : MobSkill
             }
         }
         skillName = data.skillName;
-        skillDesc = data.skillDesc;
+        skillDesc = data.desc.description;
         cost = data.cost;
         ultCost = data.ultCost;
         cooldown = data.cooldown;

@@ -7,8 +7,8 @@ public class Loom : BoardBlock
 {
 
     public BannerPattern item;
-    public Action<BoardMob> applyBuff;
-    public Action<BoardMob> removeBuff;
+    public Action<BoardMob> applyEffect;
+    public Action<BoardMob> removeEffect;
     public override void Start()
     {
         effectRange = Data.effectRange;
@@ -35,7 +35,7 @@ public class Loom : BoardBlock
                 if (!targetUnits.Contains(mob))
                 {
                     targetUnits.Add(mob);
-                    applyBuff(mob);
+                    applyEffect(mob);
                     mob.Recalculate();
 
                 }
@@ -50,7 +50,7 @@ public class Loom : BoardBlock
 
                 if (!currentTargets.Contains(mob))
                 {
-                    removeBuff(mob);
+                    removeEffect(mob);
                     mob.Recalculate();
                     targetUnits.RemoveAt(i);
                 }

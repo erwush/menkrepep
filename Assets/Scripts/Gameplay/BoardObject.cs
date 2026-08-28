@@ -2,15 +2,14 @@ using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
 
-public abstract class BoardObject : MonoBehaviour
+public abstract class BoardObject : MonoBehaviour, IPlayable
 {
 
     public Tile tile;
     public Tile currentTile;
-    public int cost;
 
     public bool isHightlight;
-    public Player owner;
+    public Player owner { get; set; }
     public Material[] Mat; //0 = default, 1 = hightlighted
     public BoardManager board;
     public TurnManager turn;
@@ -24,7 +23,7 @@ public abstract class BoardObject : MonoBehaviour
     public virtual void Awake()
     {
         new List<StatusEffect>();
-        if (data != null) cost = data.cost;
+        
         board = BoardManager.Instance;
         turn = TurnManager.Instance;
         menu = UiManager.Instance;

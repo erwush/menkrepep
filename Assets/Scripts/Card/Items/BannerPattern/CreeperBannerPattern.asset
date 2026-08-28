@@ -16,9 +16,11 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: f365345f013f092c6acbd99d2c8f34cb, type: 3}
   cost: 1
   itemName: CreeperBannerPattern
-  itemDesc: 'Ketika diberikan ke Block Loom, akan memberikan efek berikut dalam radius
-    2 blok:
+  decs:
+    description: 'Ketika diberikan ke Block Loom, akan memberikan efek berikut dalam
+      radius 2 blok:
 
-    Ketika mob manapun dikalahkan ketika dalam radius, akan memberikan
-    DMG sebesar 20% Max HP mob yang dikalahkan terhadap mob yang berjarak 1 blok
-    dengannya.'
+      Ketika mob manapun dikalahkan ketika dalam radius, akan
+      memberikan DMG sebesar 20% Max HP mob yang dikalahkan terhadap mob yang berjarak
+      1 blok dengannya.'
+    explanation: []

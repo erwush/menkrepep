@@ -5,8 +5,9 @@ public class ItemData : ObjectData
 {
 
     public string itemName;
+    public Description decs;
     
-    [TextArea(3, 10)]public string itemDesc;
+    
 
 
 

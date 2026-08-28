@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 4856643391415786254}
   - component: {fileID: 5497403303693140155}
   - component: {fileID: 1564281547279482444}
-  - component: {fileID: -6739365518421840211}
+  - component: {fileID: 4663611590777828486}
   m_Layer: 0
-  m_Name: Smithing_Table 1
+  m_Name: Loom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -302,12 +302,12 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: faf9684a89e3dbb4bb28722ba4946639, type: 2}
-  - {fileID: 2100000, guid: 23274b8a07d890d4fb79ebd4e0eec45f, type: 2}
-  - {fileID: 2100000, guid: 6313f63ee929301439a2e340ba968a84, type: 2}
-  - {fileID: 2100000, guid: 20ad589f2b58a4a4dacdbfcc61f3ab07, type: 2}
-  - {fileID: 2100000, guid: 20ad589f2b58a4a4dacdbfcc61f3ab07, type: 2}
-  - {fileID: 2100000, guid: 6313f63ee929301439a2e340ba968a84, type: 2}
+  - {fileID: 2100000, guid: 19a45cd840bcade0796e27e94820854f, type: 2}
+  - {fileID: 2100000, guid: 1ab864c25973aa1ae99d2b65440d5d07, type: 2}
+  - {fileID: 2100000, guid: 910f627d8c924511083e33931c458e27, type: 2}
+  - {fileID: 2100000, guid: caf1c55e93ed967568a839b673911bbc, type: 2}
+  - {fileID: 2100000, guid: caf1c55e93ed967568a839b673911bbc, type: 2}
+  - {fileID: 2100000, guid: caf1c55e93ed967568a839b673911bbc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -320,7 +320,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 2
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -376,8 +376,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: -6739365518421840211}
-          m_TargetAssemblyTypeName: SmithingTable, Assembly-CSharp
+        - m_Target: {fileID: 4663611590777828486}
+          m_TargetAssemblyTypeName: Loom, Assembly-CSharp
           m_MethodName: WhenHoverEnter
           m_Mode: 1
           m_Arguments:
@@ -392,8 +392,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: -6739365518421840211}
-          m_TargetAssemblyTypeName: SmithingTable, Assembly-CSharp
+        - m_Target: {fileID: 4663611590777828486}
+          m_TargetAssemblyTypeName: Loom, Assembly-CSharp
           m_MethodName: WhenHoverExit
           m_Mode: 1
           m_Arguments:
@@ -408,8 +408,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: -6739365518421840211}
-          m_TargetAssemblyTypeName: SmithingTable, Assembly-CSharp
+        - m_Target: {fileID: 4663611590777828486}
+          m_TargetAssemblyTypeName: Loom, Assembly-CSharp
           m_MethodName: SelectThis
           m_Mode: 1
           m_Arguments:
@@ -420,7 +420,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!114 &-6739365518421840211
+--- !u!114 &4663611590777828486
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -429,11 +429,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1126415364271853445}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90d3aa4aae2e8cd498393ffb6dc139dd, type: 3}
+  m_Script: {fileID: 11500000, guid: 86c0bfe9aa4d4e5f6999f2c17b486ceb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tile: {fileID: 0}
   currentTile: {fileID: 0}
+  cost: 0
   isHightlight: 0
   owner: {fileID: 0}
   Mat:
@@ -441,6 +442,11 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 5bcdd2dc2a40a684ba9154649c3e04bd, type: 2}
   board: {fileID: 0}
   turn: {fileID: 0}
-  data: {fileID: 11400000, guid: cd0057f39ab9cc14ea8e6f63ca5583f4, type: 2}
+  menu: {fileID: 0}
+  type: 0
+  data: {fileID: 11400000, guid: bb3c19b3aa7f5fff1b761190739e6647, type: 2}
+  Immunities: 
   effectRange: 0
   targetTiles: []
+  targetUnits: []
+  item: {fileID: 0}

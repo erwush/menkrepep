@@ -17,7 +17,7 @@ public class MembraneSkin : MobSkill
             }
         }
         skillName = data.skillName;
-        skillDesc = data.skillDesc;
+        skillDesc = data.desc.description;
         cost = data.cost;
         cooldown = data.cooldown;
     }

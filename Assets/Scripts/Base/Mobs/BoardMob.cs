@@ -36,7 +36,6 @@ public abstract class BoardMob : BoardObject, IDamageable
     public override void Awake()
     {
         base.Awake();
-        cost = Data.cost;
         turn = TurnManager.Instance;
         board = BoardManager.Instance;
         hp = Data.maxHp;

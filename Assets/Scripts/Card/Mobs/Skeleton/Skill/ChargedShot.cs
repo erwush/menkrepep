@@ -17,7 +17,7 @@ public class ChargedShot : MobSkill
             }
         }
         skillName = data.skillName;
-        skillDesc = data.skillDesc;
+        skillDesc = data.desc.description;
         cost = data.cost;
         cooldown = data.cooldown;
         critValue = (owner as Skeleton).critValue + 1;

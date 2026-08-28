@@ -17,7 +17,7 @@ public class SupersonicFlight : MobSkill
             }
         }
         skillName = data.skillName;
-        skillDesc = data.skillDesc;
+        skillDesc = data.desc.description;
         cost = data.cost;
         cooldown = data.cooldown;
         //? result: Cost: x Star | Cooldown: x Turns

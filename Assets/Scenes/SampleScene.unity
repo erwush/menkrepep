@@ -1705,7 +1705,7 @@ MonoBehaviour:
         m_MethodName: SelectObject
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1126415364271853445, guid: 5eb712a7502a0ae4ebe18557f175b6cf, type: 3}
+          m_ObjectArgument: {fileID: 1126415364271853445, guid: 4b82a56abbbf091138539bd6b137a4bd, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -7735,7 +7735,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3ff304e173e79054e9a11862b74d3fc6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c27c58ada77f832ee915377913dbeb46, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1

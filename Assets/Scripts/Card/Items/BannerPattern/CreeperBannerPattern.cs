@@ -15,7 +15,7 @@ public class CreeperBannerPattern : BannerPattern
 
         BoardMob mob = target as BoardMob;
         List<Tile> tiles = GameUtils.GetAreaTiles(mob.currentTile, 1, false);
-        foreach(var tile in tiles)
+        foreach (var tile in tiles)
         {
             if (tile.isOccupied && tile.activeObj is BoardMob)
             {
@@ -24,6 +24,11 @@ public class CreeperBannerPattern : BannerPattern
             }
         }
 
+    }
+    
+    public override void RemoveEffect(IDamageable target)
+    {
+        target.OnDeath -= TriggerEffect;
     }
 
 }

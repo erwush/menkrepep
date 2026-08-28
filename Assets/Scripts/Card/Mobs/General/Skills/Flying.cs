@@ -15,7 +15,7 @@ public class Flying : MobSkill
             }
         }
         skillName = data.skillName;
-        skillDesc = data.skillDesc;
+        skillDesc = data.desc.description;
         owner.bonusSpd = data.value;
         
     }

@@ -14,7 +14,7 @@ public class Headshot : MobSkill
             }
         }
         skillName = data.skillName;
-        skillDesc = data.skillDesc;
+        skillDesc = data.desc.description;
         cost = data.cost;
         cooldown = data.cooldown;
         Skeleton skeleton = owner as Skeleton;

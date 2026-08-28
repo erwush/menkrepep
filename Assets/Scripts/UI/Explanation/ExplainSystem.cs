@@ -45,7 +45,7 @@ public class ExplainSystem : MonoBehaviour
         foreach (var obj in activeObj) Destroy(obj);
         activeExplain.Clear();
         activeObj.Clear();
-        foreach (var exp in data.explanation) activeExplain.Add(exp);
+        foreach (var exp in data.desc.explanation) activeExplain.Add(exp);
     }
 
     public void ResetExplain()

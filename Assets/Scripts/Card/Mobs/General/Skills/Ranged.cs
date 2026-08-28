@@ -3,7 +3,7 @@ using UnityEngine;
 public class Ranged : MobSkill
 {
     
-      public Ranged(BoardMob owner)
+    public Ranged(BoardMob owner)
     {
         this.owner = owner;
         foreach(var data in owner.skillData)
@@ -15,7 +15,7 @@ public class Ranged : MobSkill
             }
         }
         skillName = data.skillName;
-        skillDesc = data.skillDesc;
+        skillDesc = data.desc.description;
         owner.atkRange = data.value;
         
     }
