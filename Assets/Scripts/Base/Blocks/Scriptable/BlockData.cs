@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "BlockData", menuName = "Block")]
 public class BlockData : ObjectData
 {
-    public string blockName;
+    public string BlockID => objectID;
     public int effectRange;
 
     public Vector2Int[] effectDir = new Vector2Int[]{
@@ -21,7 +21,8 @@ public class BlockData : ObjectData
 
     private void OnValidate()
     {
-        blockName = name;
+        objectID = name;
+        type = UnitType.Block;
     }
 
 

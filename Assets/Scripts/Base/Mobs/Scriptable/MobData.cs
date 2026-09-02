@@ -3,11 +3,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "MobData", menuName = "Mob")]
 public class MobData : ObjectData
 {
-    public string mobName;
     public float maxHp, atk, armor;
     public int atkRange, moveRange, speed, moveCost;
     public Sprite sprite;
     public Category category;
+    public string MobID => objectID;
     public SkillData[] skillData;
     public Vector2Int[] moveDir = new Vector2Int[]{
         new (0, 1),   // atas
@@ -34,7 +34,8 @@ public class MobData : ObjectData
 
     private void OnValidate()
     {
-        mobName = name;
+        objectID = name;
+        type = UnitType.Mob;
     }
 
 

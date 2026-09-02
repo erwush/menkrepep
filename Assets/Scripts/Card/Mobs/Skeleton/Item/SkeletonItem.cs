@@ -1,8 +1,14 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class SkeletonItem : Item
+public class SkeletonItem : ItemCard
 {
+
+    public SkeletonItem(BoardMob target)
+    {
+        data = BoardManager.Instance.GetItemData("SkeletonItem");
+        InitializeItem(target);
+    }
 
 
     public override void SetItem(BoardMob target)
@@ -17,13 +23,10 @@ public class SkeletonItem : Item
         int dice = Random.Range(1, 10);
         if (dice == 9)
         {
-
-            SkeletonItem item = target.AddComponent<SkeletonItem>();
-            item.data = Data;
-            item.type = UnitType.Item;
-            item.holder = target;
-            target.heldItem = item;
-            item.OnHeld();
+            holder = target;
+            target.heldItem = this;
+            owner = holder.owner;
+            OnHeld();
         }
         target.owner.selectedObj = null;
 

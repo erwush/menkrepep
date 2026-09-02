@@ -2,8 +2,14 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 
-public class ZombieItem : Item
+public class ZombieItem : ItemCard
 {
+
+    public ZombieItem(BoardMob target)
+    {
+        data = BoardManager.Instance.GetItemData("ZombieItem");
+        InitializeItem(target);
+    }
 
     public override void SetItem(BoardMob target)
     {
@@ -19,12 +25,10 @@ public class ZombieItem : Item
         if (dice == 9)
         {
 
-            ZombieItem item = target.AddComponent<ZombieItem>();
-            item.data = Data;
-            item.type = UnitType.Item;
-            item.holder = target;
-            target.heldItem = item;
-            item.OnHeld();
+            holder = target;
+            target.heldItem = this;
+            owner = holder.owner;
+            OnHeld();
         }
 
 

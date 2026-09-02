@@ -4,8 +4,8 @@ using UnityEngine;
 public class ItemData : ObjectData
 {
 
-    public string itemName;
     public Description decs;
+    public  string itemID => objectID;
     
     
 
@@ -14,7 +14,8 @@ public class ItemData : ObjectData
 
     void OnValidate()
     {
-        itemName = name;
+        objectID = name;
+        type = UnitType.Item;
     }
 }
 

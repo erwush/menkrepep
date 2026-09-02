@@ -6,7 +6,8 @@ public class BoardManager : MonoBehaviour
     public static BoardManager Instance;
     public int width;
     public int height;
-
+    //*item db berisi SO(Scriptable Object) yang merupakan data2 untuk item
+    public ItemDatabase itemDb;
     public GameObject[] tilePrefab;
     public GameObject tileParent;
 
@@ -17,11 +18,18 @@ public class BoardManager : MonoBehaviour
         CreateBoard();
     }
 
+    public ItemData GetItemData(string id)
+    {
+        return itemDb.GetByID(id);
+        
+    }
+
 
 
     void Awake()
     {
         Instance = this;
+        CardFactory.Initialize();
     }
 
     void CreateBoard()

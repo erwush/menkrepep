@@ -1,8 +1,16 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PhantomItem : Item
+public class PhantomItem : ItemCard
 {
+
+    public PhantomItem(BoardMob target)
+    {
+        data = BoardManager.Instance.GetItemData("PhantomItem");
+        InitializeItem(target);
+    }
+
+
     public override void SetItem(BoardMob target)
     {
         if (target.heldItem != null) return;
@@ -15,12 +23,10 @@ public class PhantomItem : Item
         int dice = Random.Range(1, 10);
         if (dice == 9)
         {
-            PhantomItem item = target.AddComponent<PhantomItem>();
-            item.data = Data;
-            item.type = UnitType.Item;
-            item.holder = target;
-            target.heldItem = item;
-            item.OnHeld();
+            holder = target;
+            target.heldItem = this;
+            owner = holder.owner;
+            OnHeld();
         }
         target.owner.selectedObj = null;
         target.owner.EndAction();

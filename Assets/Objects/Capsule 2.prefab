@@ -127,9 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tile: {fileID: 0}
   currentTile: {fileID: 0}
-  cost: 0
   isHightlight: 0
-  owner: {fileID: 0}
   Mat:
   - {fileID: 2100000, guid: 581c0266423bc3943b96ea08ca113eb0, type: 2}
   - {fileID: 2100000, guid: 5bcdd2dc2a40a684ba9154649c3e04bd, type: 2}
@@ -147,20 +145,22 @@ MonoBehaviour:
   spd: 0
   bonusSpd: 0
   finalSpd: 0
+  armor: 0
+  bonusArmor: 0
+  finalArmor: 0
   atkRange: 0
   moveRange: 0
   moveCounter: 0
   cdReduction: 0
+  moveCost: 0
+  costReduction: 0
   validTiles: []
   validTarget: []
-  heldItem: {fileID: 0}
   skillData:
   - {fileID: 11400000, guid: 3a7c4abd78868eb46825880a4db28e33, type: 2}
   - {fileID: 11400000, guid: 0e6db262b0edf864e8e476227b7eeed1, type: 2}
   - {fileID: 11400000, guid: c2d40aa59fe65454086fc4ce1de09c56, type: 2}
   canUlt: 0
-  costCounter: 0
-  doNothing: 0
   isPhantasm: 0
 --- !u!114 &4391234817484042943
 MonoBehaviour:

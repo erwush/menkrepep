@@ -15,7 +15,13 @@ public abstract class ItemCard : IPlayable
     public Material[] Mat; //0 = default, 1 = hightlighted
     public UnitType type;
 
-    
+
+    public void InitializeItem(BoardMob target)
+    {
+        
+        type = data.type;
+        owner = target.owner;
+    }    
 
 
 

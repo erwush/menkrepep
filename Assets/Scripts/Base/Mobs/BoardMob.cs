@@ -7,18 +7,32 @@ using Utils = GameUtils;
 public abstract class BoardMob : BoardObject, IDamageable
 {
 
-    [HideInInspector]public float maxHp, hp, bonusAtk, atk, finalAtk, spd, bonusSpd, finalSpd, armor, bonusArmor, finalArmor;
+    [HideInInspector] public float maxHp, bonusAtk, atk, spd, bonusSpd, finalSpd, armor, bonusArmor, finalArmor;
     public int atkRange, moveRange, moveCounter, cdReduction, moveCost, costReduction;
     //?moveCounter to count how many speed is used each turn
     public List<Tile> validTiles = new List<Tile>();
     public List<BoardObject> validTarget = new List<BoardObject>();
     public MobData Data => data as MobData;
-    public Item heldItem;
+    public ItemCard heldItem;
     public List<MobSkill> skills = new List<MobSkill>();
 
     public SkillData[] skillData;
     public bool canUlt;
     public event Action<IDamageable> OnDeath;
+
+    #region Properties
+    public float hp
+    {
+        get => hp;
+        set => hp = Mathf.Clamp(value, 0, maxHp); 
+    }
+
+    public float finalAtk
+    {
+        get => atk + bonusAtk; 
+        set => finalAtk = atk + bonusAtk;
+    }
+    #endregion
 
 
     public virtual void Start()
@@ -58,9 +72,9 @@ public abstract class BoardMob : BoardObject, IDamageable
         {
             foreach (var skill in skills)
             {
-                amount = skill.ModifyValue(ModifyType.DamageTaken, amount); 
+                amount = skill.ModifyValue(ModifyType.DamageTaken, amount);
             }
-            
+
             foreach (var status in statusEffects)
             {
                 amount = status.ModifyValue(ModifyType.DamageTaken, amount);
@@ -78,7 +92,6 @@ public abstract class BoardMob : BoardObject, IDamageable
     public virtual void Recalculate()
     {
         atk = Data.atk;
-        finalAtk = atk + bonusAtk;
         finalSpd = (spd + bonusSpd) - moveCounter;
 
     }
@@ -210,10 +223,10 @@ public abstract class BoardMob : BoardObject, IDamageable
     public virtual void HighlightTarget()
     {
         foreach (var tile in validTiles) if (tile.isOccupied)
-            {
-                validTarget.Add(tile.activeObj);
-                tile.activeObj.ToggleHighlight();
-            }
+        {
+            validTarget.Add(tile.activeObj);
+            tile.activeObj.ToggleHighlight();
+        }
 
     }
 
